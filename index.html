@@ -53,7 +53,7 @@
         .hamburguesa-dgb { cursor: pointer; padding: 5px; font-size: 20px; }
         .menu-desplegable-dgb { display: none; background-color: var(--gob-oro); width: 100%; padding: 10px 30px 20px; border-top: 1px solid rgba(255,255,255,0.2); }
         .menu-desplegable-dgb.show { display: block; }
-        .menu-desplegable-dgb a { display: block; color: white; text-decoration: none; padding: 15px 0; font-size: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); cursor: pointer; }
+        .menu-desplegable-dgb a { display: block; color: white; text-decoration: none; padding: 15px 0; font-size: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
 
         /* PORTADA */
         .header-image-container { width: 100%; background: #fff; border-bottom: 1px solid #ddd; }
@@ -70,30 +70,27 @@
         main { flex: 1; max-width: 900px; margin: 30px auto; padding: 0 15px; width: 100%; }
         .search-outer-box { background: #ffffff; border: 2px solid #D4C19C; border-radius: 10px; padding: 30px; max-width: 550px; margin: 0 auto 20px; text-align: center; }
         input[type="text"] { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 18px; margin-bottom: 15px; font-family: 'Lora', serif; text-align: center; }
-        .btn-new { width: 100%; padding: 14px; border: none; border-radius: 4px; font-size: 20px; cursor: pointer; margin-bottom: 10px; color: white; font-family: 'Montserrat'; font-weight: 500; }
+        
+        .btn-new { width: 100%; padding: 14px; border: none; border-radius: 4px; font-size: 20px; cursor: pointer; margin-bottom: 10px; color: white; font-family: 'Montserrat'; font-weight: 500; text-decoration: none; display: block; }
         .btn-buscar { background-color: var(--btn-buscar-verde); }
         .btn-limpiar { background-color: var(--btn-limpiar-gris); }
-        .link-ubica { display: block; margin-top: 10px; color: var(--gob-oro); text-decoration: underline; font-size: 16px; cursor: pointer; }
+        .btn-ayuda { background-color: transparent; color: var(--gob-oro); border: 1px solid var(--gob-oro); font-size: 16px; margin-top: 5px; }
+        .btn-ayuda:hover { background-color: rgba(157, 132, 62, 0.1); }
 
         .info-box-blue-search { background-color: var(--bg-info-azul); border: 1px solid var(--border-info-azul); color: var(--texto-info-azul); padding: 20px; border-radius: 4px; max-width: 550px; margin: 20px auto; display: flex; align-items: center; gap: 15px; font-size: 14px; }
 
         /* RESULTADOS */
         #resultado { display: none; margin-top: 40px; background: white; padding: 35px; border-radius: 8px; border-left: 8px solid var(--estatus-verde); text-align: left; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
         .info-item { border-bottom: 1px solid #eee; padding: 12px 0; display: flex; flex-direction: column; }
-        .info-label { font-weight: 700; color: #333; font-size: 13px; text-transform: uppercase; }
+        .info-label { font-weight: 700; color: #333; font-size: 13px; text-transform: uppercase; margin-bottom: 2px; }
         .info-value { font-family: 'Lora', serif; color: #444; font-size: 17px; }
+        
         .cards-flex-container { display: flex; justify-content: center; gap: 15px; margin: 25px 0; flex-wrap: wrap; }
         .card-box { flex: 1; min-width: 220px; padding: 25px 15px; border-radius: 4px; border: 1px solid; text-align: center; }
         .card-verde { background: #E3F2E1; border-color: #B7D9B1; color: #3D7A34; }
         .card-azul { background: #D9F0F7; border-color: #ADE1F0; color: #316B8C; }
 
-        /* LEYENDA AZUL RESULTADOS */
-        .leyenda-atencion-azul { 
-            margin-top: 30px; padding: 20px; border-radius: 4px; 
-            background-color: var(--bg-info-azul); border: 1px solid var(--border-info-azul); 
-            color: var(--texto-info-azul); line-height: 1.6; 
-            font-family: 'Montserrat', sans-serif; font-size: 14px; 
-        }
+        .leyenda-atencion-azul { margin-top: 30px; padding: 20px; border-radius: 4px; background-color: var(--bg-info-azul); border: 1px solid var(--border-info-azul); color: var(--texto-info-azul); line-height: 1.6; font-family: 'Montserrat', sans-serif; font-size: 14px; }
 
         /* FOOTER */
         footer { background: var(--sep-rojo-obscuro); color: white; padding: 50px 30px 20px; margin-top: 50px; }
@@ -142,7 +139,7 @@
         <input type="text" id="folioInput" placeholder="Ingrese el folio" onkeypress="if(event.key==='Enter') buscar()">
         <button class="btn-new btn-buscar" onclick="buscar()">Buscar</button>
         <button class="btn-new btn-limpiar" onclick="limpiar()">Restablecer</button>
-        <span class="link-ubica">Ubica el folio en tu certificado</span>
+        <a href="https://www.gob.mx/sep/articulos/sabes-como-validar-tu-certificado-electronico-de-bachillerato" target="_blank" class="btn-new btn-ayuda">Ubica el folio en tu certificado</a>
     </div>
 
     <div class="info-box-blue-search">
@@ -176,7 +173,6 @@
         <div class="footer-col">
             <h4>Enlaces</h4>
             <a href="https://participa.gob.mx">Participa</a>
-            <a href="https://www.gob.mx/publicaciones">Publicaciones</a>
             <a href="https://www.gob.mx/terminos">Términos y Condiciones</a>
             <a href="https://www.gob.mx/privacidad">Aviso de Privacidad</a>
         </div>
@@ -188,7 +184,6 @@
         <div class="footer-col">
             <h4>Contacto</h4>
             <a href="mailto:controlescolar.estatal@sems.sidgbe.gob.mx">Soporte Técnico</a>
-            <a href="https://www.gob.mx/atencion">Denuncias</a>
         </div>
     </div>
     <div class="footer-bottom">SEP | DGB | MÉXICO 2026</div>
@@ -219,19 +214,24 @@
         if (typeof baseDatos !== 'undefined' && baseDatos[inputFolio]) {
             const data = baseDatos[inputFolio];
             let listHTML = "";
+            
+            // CORRECCIÓN: Muestra todos los datos excepto promedio y estatus
             for (let clave in data) {
-                if (!['PROMEDIO', 'PROMEDIO_TEXTO', 'ESTATUS'].includes(clave.toUpperCase())) {
+                const cU = clave.toUpperCase();
+                if (cU !== 'PROMEDIO' && cU !== 'PROMEDIO_TEXTO' && cU !== 'ESTATUS') {
                     listHTML += `<div class="info-item">
                         <span class="info-label">${clave.replace(/_/g, ' ')}:</span>
                         <span class="info-value">${data[clave]}</span>
                     </div>`;
                 }
             }
+            
             document.getElementById('infoDetalle').innerHTML = listHTML;
             document.getElementById('tarjetasContainer').innerHTML = `
                 <div class="card-box card-verde">
                     <b>PROMEDIO:</b><br>
-                    <span style="font-size:26px; font-weight:700;">${data.PROMEDIO || '0.0'}</span>
+                    <span style="font-size:26px; font-weight:700;">${data.PROMEDIO || '0.0'}</span><br>
+                    <span style="font-size:12px; font-style:italic;">${data.PROMEDIO_TEXTO || ''}</span>
                 </div>
                 <div class="card-box card-azul">
                     <b>ESTATUS:</b><br>
