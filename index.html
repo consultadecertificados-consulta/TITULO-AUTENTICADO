@@ -118,11 +118,19 @@
         .card-verde { background: var(--bg-verde-tarjeta); border-color: var(--border-verde-tarjeta); color: var(--texto-verde-tarjeta); }
         .card-azul { background: var(--bg-azul-tarjeta); border-color: var(--border-azul-tarjeta); color: var(--texto-azul-tarjeta); }
         
-        .leyenda-atencion { 
-            margin-top: 30px; border: 1px solid #ddd; padding: 20px; border-radius: 6px;
-            background-color: #fcfcfc; line-height: 1.6;
+        /* LEYENDA CON FONDO AZUL (ESTILO TARJETA AZUL) */
+        .leyenda-atencion-azul { 
+            margin-top: 30px; 
+            padding: 20px; 
+            border-radius: 4px; 
+            background-color: var(--bg-azul-tarjeta); 
+            border: 1px solid var(--border-azul-tarjeta);
+            color: var(--texto-azul-tarjeta);
+            line-height: 1.6;
+            font-family: 'Lora', serif;
+            font-size: 15px;
         }
-        .leyenda-atencion strong { color: var(--sep-rojo-obscuro); font-family: 'Montserrat'; }
+        .leyenda-atencion-azul strong { font-family: 'Montserrat'; font-weight: 700; }
 
         /* FOOTER */
         footer { background: var(--sep-rojo-obscuro); color: white; padding: 50px 30px 20px; font-family: 'Montserrat'; margin-top: 50px; }
@@ -187,7 +195,7 @@
         <div id="infoDetalle"></div>
         <div class="cards-flex-container" id="tarjetasContainer"></div>
         
-        <div class="leyenda-atencion">
+        <div class="leyenda-atencion-azul">
             <strong>¡Atención!</strong> La información de los certificados que se muestran en este portal, es el resultado de la integración de información que envían las autoridades educativas de los estados y de la Ciudad de México.
         </div>
     </div>
