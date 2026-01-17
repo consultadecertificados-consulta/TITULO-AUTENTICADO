@@ -56,18 +56,20 @@
         .nav-menu.show { display: block; }
         .nav-menu a { color: white; padding: 12px 20px; text-decoration: none; display: block; font-size: 14px; border-bottom: 1px solid rgba(255,255,255,0.1); }
 
+        /* BARRA DGB */
         .barra-dgb { background-color: var(--gob-oro); padding: 12px 30px; display: flex; justify-content: space-between; align-items: center; color: white; }
         .dgb-brand { font-size: 20px; font-weight: 600; }
+        .hamburguesa-dgb { cursor: pointer; padding: 5px; }
         
         .menu-desplegable-dgb { display: none; background-color: var(--gob-oro); width: 100%; padding: 10px 30px 20px; border-top: 1px solid rgba(255,255,255,0.2); }
         .menu-desplegable-dgb.show { display: block; }
         .menu-desplegable-dgb a { display: block; color: white; text-decoration: none; padding: 15px 0; font-size: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
 
-        /* PORTADA */
+        /* PORTADA COMPLETA */
         .header-image-container { width: 100%; background: #fff; border-bottom: 1px solid #ddd; }
         .header-image-container img { width: 100%; height: auto; display: block; object-fit: contain; }
 
-        /* ACCESIBILIDAD PANEL */
+        /* ACCESIBILIDAD */
         .acc-trigger { position: fixed; left: 0; top: 50%; transform: translateY(-50%); background: rgba(117, 117, 117, 0.4); color: #FFFFFF; padding: 15px 10px; border-radius: 0 8px 8px 0; cursor: pointer; z-index: 10001; }
         .acc-panel-sidebar { position: fixed; left: -320px; top: 0; width: 280px; height: 100vh; background: #fff; z-index: 10002; transition: 0.4s; padding: 25px; box-shadow: 5px 0 20px rgba(0,0,0,0.4); }
         .acc-panel-sidebar.active { left: 0; }
@@ -84,8 +86,8 @@
         /* BUSCADOR */
         .search-container { background: #ffffff; border-top: 5px solid var(--sep-rojo-obscuro); border-radius: 8px; padding: 40px 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; }
         input[type="text"] { width: 100%; max-width: 500px; padding: 15px; border: 2px solid #ddd; border-radius: 6px; font-size: 18px; margin-bottom: 25px; text-align: center; font-family: 'Lora', serif; font-weight: bold; }
-        .btn-buscar { background: var(--sep-rojo-obscuro); color: white; padding: 12px 30px; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; margin: 5px; }
-        .btn-limpiar { background: var(--gob-gris-limpiar); color: white; padding: 12px 30px; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; margin: 5px; }
+        .btn-buscar { background: var(--sep-rojo-obscuro); color: white; padding: 12px 30px; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; margin: 5px; transition: 0.3s; }
+        .btn-limpiar { background: var(--gob-gris-limpiar); color: white; padding: 12px 30px; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; margin: 5px; transition: 0.3s; }
 
         /* RESULTADOS */
         #resultado { display: none; margin-top: 40px; background: white; padding: 35px; border-radius: 8px; border-left: 8px solid var(--estatus-verde); text-align: left; }
@@ -98,14 +100,7 @@
         .card-verde { background: var(--bg-verde-tarjeta); border-color: var(--border-verde-tarjeta); color: var(--texto-verde-tarjeta); }
         .card-azul { background: var(--bg-azul-tarjeta); border-color: var(--border-azul-tarjeta); color: var(--texto-azul-tarjeta); }
         
-        /* LEYENDA ACTUALIZADA CON MONTSERRAT */
-        .leyenda-atencion-azul { 
-            margin-top: 30px; padding: 20px; border-radius: 4px; 
-            background-color: var(--bg-azul-tarjeta); border: 1px solid var(--border-azul-tarjeta); 
-            color: var(--texto-azul-tarjeta); line-height: 1.6; 
-            font-family: 'Montserrat', sans-serif; /* Unificada */
-            font-size: 14px; 
-        }
+        .leyenda-atencion-azul { margin-top: 30px; padding: 20px; border-radius: 4px; background-color: var(--bg-azul-tarjeta); border: 1px solid var(--border-azul-tarjeta); color: var(--texto-azul-tarjeta); line-height: 1.6; font-family: 'Montserrat', sans-serif; font-size: 14px; }
 
         /* FOOTER */
         footer { background: var(--sep-rojo-obscuro); color: white; padding: 50px 30px 20px; margin-top: 50px; }
@@ -135,7 +130,9 @@
 
     <div class="barra-dgb">
         <div class="dgb-brand">DGB</div>
-        <div class="hamburguesa-dgb" onclick="toggleDgbMenu()"><i class="fas fa-bars"></i></div>
+        <div class="hamburguesa-dgb" onclick="toggleDgbMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
     </div>
     <div id="menuDgb" class="menu-desplegable-dgb">
         <a href="#">¿Quiénes somos?</a>
