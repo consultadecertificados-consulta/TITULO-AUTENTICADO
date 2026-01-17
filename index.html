@@ -39,7 +39,6 @@
             color: #333;
         }
 
-        /* HEADER Y NAVEGACIÓN */
         .sticky-nav-container { position: sticky; top: 0; z-index: 1000; width: 100%; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         nav.gob-header { background-color: var(--sep-rojo-obscuro); padding: 12px 30px; display: flex; justify-content: space-between; align-items: center; }
         .logo-gob { height: 32px; }
@@ -55,21 +54,20 @@
         .menu-desplegable-dgb.show { display: block; }
         .menu-desplegable-dgb a { display: block; color: white; text-decoration: none; padding: 15px 0; font-size: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
 
-        /* LOGO: MITAD DE ANCHO, TODO LO LARGO SIN ESPACIO */
-        .header-image-container { width: 100%; background: #fff; line-height: 0; margin: 0; padding: 0; }
+        /* LOGO: 50% ANCHO, LLENA TODO EL ALTO SIN ESPACIOS */
+        .header-image-container { width: 100%; background: #fff; line-height: 0; margin: 0; padding: 0; display: block; }
         .header-image-container img { width: 50%; height: auto; display: block; margin: 0; }
 
-        /* ACCESIBILIDAD */
         .acc-trigger { position: fixed; left: 0; top: 50%; transform: translateY(-50%); background: rgba(117, 117, 117, 0.4); color: #FFFFFF; padding: 15px 10px; border-radius: 0 8px 8px 0; cursor: pointer; z-index: 10001; }
         .acc-panel-sidebar { position: fixed; left: -320px; top: 0; width: 280px; height: 100vh; background: #fff; z-index: 10002; transition: 0.4s; padding: 25px; box-shadow: 5px 0 20px rgba(0,0,0,0.4); }
         .acc-panel-sidebar.active { left: 0; }
         .acc-header { font-weight: 700; margin-bottom: 20px; border-bottom: 2px solid var(--gob-oro); padding-bottom: 10px; display: flex; justify-content: space-between; color: #333; }
         .acc-item { display: block; width: 100%; padding: 12px; margin-bottom: 10px; background: #f0f0f0; border-radius: 6px; cursor: pointer; text-align: center; font-weight: 600; border: 1px solid #ddd; color: #333; }
 
-        /* LEYENDA ARRIBA DEL BUSCADOR */
-        .leyenda-sep {
+        /* LEYENDA DISEÑADA */
+        .leyenda-sep-superior {
             max-width: 900px;
-            margin: 30px auto 10px;
+            margin: 30px auto 15px;
             padding-bottom: 10px;
             text-align: center;
             font-size: 20px;
@@ -87,6 +85,7 @@
         .btn-limpiar { background-color: var(--btn-limpiar-gris); }
         .btn-ayuda { background-color: transparent; color: var(--gob-oro); border: 1px solid var(--gob-oro); font-size: 16px; margin-top: 5px; }
 
+        /* RESULTADOS COMPLETOS */
         #resultado { display: none; margin-top: 40px; background: white; padding: 35px; border-radius: 8px; border-left: 8px solid var(--estatus-verde); text-align: left; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
         .info-item { border-bottom: 1px solid #eee; padding: 12px 0; display: flex; flex-direction: column; }
         .info-label { font-weight: 700; color: #333; font-size: 13px; text-transform: uppercase; margin-bottom: 2px; }
@@ -97,7 +96,7 @@
         .card-verde { background: #E3F2E1; border-color: #B7D9B1; color: #3D7A34; }
         .card-azul { background: #D9F0F7; border-color: #ADE1F0; color: #316B8C; }
 
-        /* FOOTER COMPLETO */
+        /* FOOTER */
         footer { background: var(--sep-rojo-obscuro); color: white; padding: 50px 30px 20px; margin-top: 50px; }
         .footer-container { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
         .footer-col h4 { margin-bottom: 20px; font-size: 16px; border-bottom: 1px solid var(--gob-oro); padding-bottom: 10px; display: inline-block; font-weight: 600; }
@@ -139,7 +138,7 @@
     <button class="acc-item" onclick="resetAcc()">Restablecer</button>
 </div>
 
-<div class="leyenda-sep">Subsecretaría de Educación Media Superior y Superior</div>
+<div class="leyenda-sep-superior">Subsecretaría de Educación Media Superior y Superior</div>
 
 <main>
     <div class="search-outer-box">
@@ -208,8 +207,10 @@
         if (typeof baseDatos !== 'undefined' && baseDatos[inputFolio]) {
             const data = baseDatos[inputFolio];
             let listHTML = "";
+            // Bucle completo para mostrar TODA la información
             for (let clave in data) {
-                if (!['PROMEDIO', 'PROMEDIO_TEXTO', 'ESTATUS'].includes(clave.toUpperCase())) {
+                const keyUpper = clave.toUpperCase();
+                if (!['PROMEDIO', 'PROMEDIO_TEXTO', 'ESTATUS'].includes(keyUpper)) {
                     listHTML += `<div class="info-item"><span class="info-label">${clave.replace(/_/g, ' ')}:</span><span class="info-value">${data[clave]}</span></div>`;
                 }
             }
