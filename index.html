@@ -7,6 +7,7 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     
     <style>
         :root {
@@ -14,9 +15,6 @@
             --gob-oro: #9D843E;   
             --btn-buscar-verde: #285848;
             --btn-limpiar-gris: #767676;
-            --bg-info-azul: #D9EDF7;
-            --border-info-azul: #BCE8F1;
-            --texto-info-azul: #31708F;
         }
 
         .grayscale-mode { filter: grayscale(100%); }
@@ -24,78 +22,60 @@
         .high-contrast * { background-color: #000 !important; color: #fff100 !important; border-color: #fff100 !important; }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; background-color: #f4f4f4; color: #333; display: flex; flex-direction: column; min-height: 100vh; }
 
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #f4f4f4;
-            background-image: url("https://www.gob.mx/cms/uploads/image/file/485750/background.png");
-            background-repeat: repeat;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            color: #333;
-        }
-
-        /* HEADER Y NAVEGACIÓN */
-        .sticky-nav-container { position: sticky; top: 0; z-index: 1000; width: 100%; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        /* HEADER */
+        .sticky-nav-container { position: sticky; top: 0; z-index: 1000; width: 100%; }
         nav.gob-header { background-color: var(--sep-rojo-obscuro); padding: 12px 30px; display: flex; justify-content: space-between; align-items: center; }
         .header-left-group { display: flex; align-items: center; gap: 20px; }
         .logo-gob { height: 32px; }
-        .acc-inline-trigger { color: white; cursor: pointer; font-size: 20px; opacity: 0.8; }
+        .acc-inline-trigger { color: white; cursor: pointer; font-size: 20px; }
         .menu-icon { color: white; font-size: 24px; cursor: pointer; }
         
-        .nav-menu { display: none; position: absolute; right: 30px; top: 50px; background: var(--sep-rojo-obscuro); min-width: 200px; border-radius: 4px; }
+        .nav-menu { display: none; position: absolute; right: 30px; top: 50px; background: var(--sep-rojo-obscuro); min-width: 200px; padding: 10px; border-radius: 4px; }
         .nav-menu.show { display: block; }
-        .nav-menu a { color: white; padding: 12px 20px; text-decoration: none; display: block; font-size: 14px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .nav-menu a { color: white; text-decoration: none; display: block; padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); }
 
         .barra-dgb { background-color: var(--gob-oro); padding: 12px 30px; display: flex; justify-content: space-between; align-items: center; color: white; }
-        .dgb-brand { font-size: 18px; font-weight: 500; }
-        .hamburguesa-dgb { cursor: pointer; font-size: 20px; }
-        .menu-desplegable-dgb { display: none; background-color: var(--gob-oro); width: 100%; padding: 10px 30px; border-top: 1px solid rgba(255,255,255,0.2); }
+        .menu-desplegable-dgb { display: none; background-color: var(--gob-oro); padding: 10px 30px; }
         .menu-desplegable-dgb.show { display: block; }
-        .menu-desplegable-dgb a { display: block; color: white; text-decoration: none; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .menu-desplegable-dgb a { color: white; text-decoration: none; display: block; padding: 10px 0; }
 
-        /* SECCIÓN PORTADA */
-        .header-image-container { width: 100%; background: #fff; border-bottom: 1px solid #ddd; }
-        .header-image-container img { width: 100%; height: auto; display: block; }
-        .leyenda-superior { max-width: 900px; margin: 20px auto; padding: 0 15px 15px; text-align: center; font-size: 20px; font-weight: 600; color: #4D4D4D; text-transform: uppercase; border-bottom: 2px solid var(--gob-oro); }
+        /* IMAGEN Y LEYENDA */
+        .header-image-container { width: 100%; background: #fff; text-align: center; }
+        .header-image-container img { max-width: 100%; height: auto; }
+        .leyenda-superior { max-width: 900px; margin: 20px auto; text-align: center; font-size: 18px; font-weight: 600; color: #4D4D4D; text-transform: uppercase; border-bottom: 2px solid var(--gob-oro); padding-bottom: 15px; }
 
         /* ACCESIBILIDAD */
         .acc-panel-sidebar { position: fixed; left: -320px; top: 0; width: 280px; height: 100vh; background: #fff; z-index: 10002; transition: 0.4s; padding: 25px; box-shadow: 5px 0 20px rgba(0,0,0,0.4); }
         .acc-panel-sidebar.active { left: 0; }
-        .acc-header { font-weight: 600; margin-bottom: 20px; border-bottom: 1px solid #ccc; padding-bottom: 10px; display: flex; justify-content: space-between; }
-        .acc-item { display: block; width: 100%; padding: 10px; margin-bottom: 10px; background: #f9f9f9; border: 1px solid #ddd; border-radius: 4px; cursor: pointer; font-weight: 500; }
+        .acc-item { display: block; width: 100%; padding: 10px; margin-bottom: 10px; cursor: pointer; }
 
-        /* CONTENIDO PRINCIPAL */
+        /* RESULTADOS */
         main { flex: 1; max-width: 900px; margin: 0 auto 40px; padding: 0 15px; width: 100%; }
-        .search-outer-box { background: #fff; border: 1px solid #D4C19C; border-radius: 8px; padding: 30px; margin-top: 20px; text-align: center; }
-        input[type="text"] { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px; margin-bottom: 15px; }
-        .row-buttons { display: flex; gap: 10px; margin-bottom: 10px; }
-        .btn-new { flex: 1; padding: 12px; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; color: white; font-weight: 500; }
+        .search-outer-box { background: #fff; border: 1px solid #D4C19C; border-radius: 8px; padding: 30px; text-align: center; }
+        .row-buttons { display: flex; gap: 10px; margin-top: 15px; }
+        .btn-new { flex: 1; padding: 12px; border: none; border-radius: 4px; color: white; cursor: pointer; font-weight: 500; }
         .btn-buscar { background-color: var(--btn-buscar-verde); }
         .btn-limpiar { background-color: var(--btn-limpiar-gris); }
 
-        /* ESTILO DE RESULTADOS (ACTUALIZADO) */
         #resultado { display: none; margin-top: 40px; background: white; padding: 30px; border-radius: 8px; }
-        .titulo-detalle { font-size: 22px; font-weight: 400; margin-bottom: 5px; }
-        .linea-oro-corta { width: 40px; height: 4px; background: var(--gob-oro); margin-bottom: 25px; }
-        
-        .info-item { margin-bottom: 18px; line-height: 1.4; }
-        .info-label { font-weight: 600; color: #333; font-size: 15px; display: block; margin-bottom: 2px; }
-        .info-value { color: #666; font-size: 15px; font-weight: 400; }
+        .info-item { margin-bottom: 15px; }
+        .info-label { font-weight: 600; color: #333; font-size: 15px; display: block; }
+        .info-value { color: #666; font-size: 15px; }
         
         .cards-flex-container { display: flex; gap: 15px; margin: 25px 0; flex-wrap: wrap; }
-        .card-box { flex: 1; min-width: 180px; padding: 20px; border-radius: 4px; text-align: center; border: 1px solid #eee; }
-        .card-verde { background: #E9F4E9; border-color: #D1E7D1; color: #285848; }
-        .card-azul { background: #E1F1F7; border-color: #D1E9F2; color: #31708F; }
+        .card-box { flex: 1; min-width: 180px; padding: 20px; border-radius: 4px; text-align: center; border: 1px solid #ddd; }
+        .card-verde { background: #E9F4E9; color: #285848; }
+        .card-azul { background: #E1F1F7; color: #31708F; }
 
-        .leyenda-atencion-azul { margin-top: 25px; padding: 20px; background: var(--bg-info-azul); border: 1px solid var(--border-info-azul); color: var(--texto-info-azul); font-size: 13px; border-radius: 4px; line-height: 1.5; }
+        #qrcode { margin: 20px auto; display: flex; justify-content: center; }
 
-        /* FOOTER */
-        footer { background: var(--sep-rojo-obscuro); color: white; padding: 40px 30px; margin-top: auto; }
-        .footer-container { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; }
-        .footer-col h4 { margin-bottom: 15px; font-size: 15px; border-bottom: 1px solid var(--gob-oro); padding-bottom: 5px; display: inline-block; }
-        .footer-col a { color: white; text-decoration: none; display: block; margin-bottom: 10px; font-size: 13px; opacity: 0.8; }
+        /* FOOTER COMPLETO */
+        footer { background: var(--sep-rojo-obscuro); color: white; padding: 40px 30px; }
+        .footer-container { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 30px; }
+        .footer-col a { color: white; text-decoration: none; display: block; margin-bottom: 8px; font-size: 13px; opacity: 0.8; }
+        .social-links { margin-top: 15px; display: flex; gap: 15px; font-size: 20px; }
 
         @media (max-width: 600px) { .row-buttons { flex-direction: column; } }
     </style>
@@ -115,8 +95,8 @@
         </div>
     </nav>
     <div class="barra-dgb">
-        <div class="dgb-brand">DGB</div>
-        <div class="hamburguesa-dgb" onclick="toggleDgbMenu()"><i class="fas fa-bars"></i></div>
+        <span>DGB</span>
+        <i class="fas fa-bars" onclick="toggleDgbMenu()" style="cursor:pointer"></i>
     </div>
     <div id="menuDgb" class="menu-desplegable-dgb">
         <a href="#">¿Quiénes somos?</a>
@@ -129,15 +109,13 @@
 <div class="leyenda-superior">Subsecretaría de Educación Media Superior y Superior</div>
 
 <div id="accPanel" class="acc-panel-sidebar">
-    <div class="acc-header"><span>Accesibilidad</span><span onclick="toggleAccPanel()" style="cursor:pointer;">&times;</span></div>
-    <button class="acc-item" onclick="toggleGrayscale()">Gris</button>
-    <button class="acc-item" onclick="toggleContrast()">Contraste</button>
-    <button class="acc-item" onclick="resetAcc()">Reset</button>
+    <div class="acc-item" onclick="toggleGrayscale()">Escala de grises</div>
+    <button class="acc-item" onclick="resetAcc()">Restablecer</button>
 </div>
 
 <main>
     <div class="search-outer-box">
-        <input type="text" id="folioInput" placeholder="Ingrese el folio" onkeypress="if(event.key==='Enter') buscar()">
+        <input type="text" id="folioInput" placeholder="Ingrese el folio">
         <div class="row-buttons">
             <button class="btn-new btn-buscar" onclick="buscar()">Buscar</button>
             <button class="btn-new btn-limpiar" onclick="limpiar()">Restablecer</button>
@@ -145,12 +123,27 @@
     </div>
 
     <div id="resultado">
-        <h2 class="titulo-detalle">Detalle del documento</h2>
-        <div class="linea-oro-corta"></div>
+        <h2 style="font-weight:400">Detalle del documento</h2>
+        <div style="width:40px; height:4px; background:var(--gob-oro); margin: 10px 0 25px;"></div>
+        
         <div id="infoDetalle"></div>
-        <div class="cards-flex-container" id="tarjetasContainer"></div>
+        
+        <div class="cards-flex-container">
+            <div class="card-box card-verde">
+                <strong>Resultado obtenido:</strong>
+                <div id="valCalificacion" style="font-size:22px; margin:10px 0;"></div>
+                <small id="valCalTexto"></small>
+            </div>
+            <div class="card-box card-azul">
+                <strong>Estatus del documento:</strong>
+                <div id="valEstatus" style="font-size:20px; margin:10px 0;"></div>
+            </div>
+        </div>
+
+        <div id="qrcode"></div>
+        
         <div class="leyenda-atencion-azul">
-            <strong>¡Atención!</strong> La información de los certificados que se muestran en este portal es resultado de la integración enviada por las autoridades educativas competentes.
+            <strong>¡Atención!</strong> La información mostrada es resultado de la integración enviada por las autoridades educativas.
         </div>
     </div>
 </main>
@@ -158,17 +151,21 @@
 <footer>
     <div class="footer-container">
         <div class="footer-col">
-            <img src="https://framework-gb.cdn.gob.mx/landing/img/logoheader.svg" width="130" style="filter: brightness(0) invert(1);">
+            <img src="https://framework-gb.cdn.gob.mx/landing/img/logoheader.svg" width="120" style="filter: brightness(0) invert(1);">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
         </div>
         <div class="footer-col">
             <h4>Enlaces</h4>
             <a href="#">Participa</a>
             <a href="#">Publicaciones</a>
-            <a href="#">Aviso de Privacidad</a>
+            <a href="#">Términos y Condiciones</a>
         </div>
         <div class="footer-col">
             <h4>Contacto</h4>
-            <a href="mailto:soporte@sems.gob.mx">Soporte Técnico</a>
+            <a href="#">Soporte Técnico</a>
             <a href="#">Atención Ciudadana</a>
         </div>
     </div>
@@ -179,55 +176,37 @@
     function toggleMenu() { document.getElementById('navMenu').classList.toggle('show'); }
     function toggleDgbMenu() { document.getElementById('menuDgb').classList.toggle('show'); }
     function toggleAccPanel() { document.getElementById('accPanel').classList.toggle('active'); }
+    function resetAcc() { document.body.classList.remove('grayscale-mode'); }
     function toggleGrayscale() { document.body.classList.toggle('grayscale-mode'); }
-    function toggleContrast() { document.body.classList.toggle('high-contrast'); }
-    function resetAcc() { document.body.classList.remove('grayscale-mode', 'high-contrast'); }
 
     function limpiar() {
         document.getElementById('folioInput').value = "";
         document.getElementById('resultado').style.display = 'none';
+        document.getElementById('qrcode').innerHTML = "";
     }
 
     function buscar() {
-        const inputFolio = document.getElementById('folioInput').value.trim().toUpperCase();
-        const resDiv = document.getElementById('resultado');
-        
-        if (typeof baseDatos !== 'undefined' && baseDatos[inputFolio]) {
-            const data = baseDatos[inputFolio];
-            let listHTML = "";
-            
-            // Mostrar TODO el contenido de la base de datos
-            for (let clave in data) {
-                const valor = data[clave];
-                const keyUpper = clave.toUpperCase();
-                
-                // Estos tres van en tarjetas separadas abajo
-                if (!['PROMEDIO', 'PROMEDIO_TEXTO', 'ESTATUS'].includes(keyUpper)) {
-                    listHTML += `
-                        <div class="info-item">
-                            <span class="info-label">${clave.replace(/_/g, ' ')}:</span>
-                            <span class="info-value">${valor}</span>
-                        </div>`;
+        const folio = document.getElementById('folioInput').value.trim().toUpperCase();
+        if (typeof baseDatos !== 'undefined' && baseDatos[folio]) {
+            const data = baseDatos[folio];
+            let html = "";
+            for (let k in data) {
+                if (!['CALIFICACION', 'CALIFICACION_TEXTO', 'ESTATUS', 'PROMEDIO'].includes(k.toUpperCase())) {
+                    html += `<div class="info-item"><span class="info-label">${k.replace(/_/g,' ')}:</span><span class="info-value">${data[k]}</span></div>`;
                 }
             }
-
-            document.getElementById('infoDetalle').innerHTML = listHTML;
-            document.getElementById('tarjetasContainer').innerHTML = `
-                <div class="card-box card-verde">
-                    <span class="info-label">Resultado obtenido:</span>
-                    <div style="font-size:20px; font-weight:600; margin-top:5px;">${data.PROMEDIO || '0.0'}</div>
-                    <small>${data.PROMEDIO_TEXTO || ''}</small>
-                </div>
-                <div class="card-box card-azul">
-                    <span class="info-label">Estatus del documento:</span>
-                    <div style="font-size:18px; font-weight:600; margin-top:5px;">${data.ESTATUS || 'Registrado'}</div>
-                </div>`;
+            document.getElementById('infoDetalle').innerHTML = html;
+            // Ajuste de nombres según tu base de datos (puedes cambiar CALIFICACION por PROMEDIO si así se llama en tu js)
+            document.getElementById('valCalificacion').innerText = data.CALIFICACION || data.PROMEDIO || "0.0";
+            document.getElementById('valCalTexto').innerText = data.CALIFICACION_TEXTO || data.PROMEDIO_TEXTO || "";
+            document.getElementById('valEstatus').innerText = data.ESTATUS || "REGISTRADO";
             
-            resDiv.style.display = 'block';
-            resDiv.scrollIntoView({ behavior: 'smooth' });
-        } else if (inputFolio !== "") {
-            alert("Folio no encontrado");
-        }
+            // Generar QR
+            document.getElementById('qrcode').innerHTML = "";
+            new QRCode(document.getElementById("qrcode"), { text: window.location.href + "?folio=" + folio, width: 128, height: 128 });
+            
+            document.getElementById('resultado').style.display = 'block';
+        } else { alert("No se encontró el folio"); }
     }
 </script>
 </body>
