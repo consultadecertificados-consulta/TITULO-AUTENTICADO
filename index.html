@@ -12,6 +12,7 @@
         :root {
             --sep-rojo-obscuro: #4B1021; 
             --gob-oro: #9D843E;   
+            --gob-gris-limpiar: #757575;
             --estatus-verde: #235E3F;
             --bg-verde-tarjeta: #E3F2E1;
             --border-verde-tarjeta: #B7D9B1;
@@ -105,10 +106,14 @@
             border-radius: 6px; font-size: 18px; margin-bottom: 25px; text-align: center;
             font-family: 'Lora', serif;
         }
+
+        /* BOTONES */
+        .botones-flex { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
         .btn-buscar { background: var(--sep-rojo-obscuro); color: white; padding: 12px 30px; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; font-family: 'Montserrat'; }
+        .btn-limpiar { background: var(--gob-gris-limpiar); color: white; padding: 12px 30px; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; font-family: 'Montserrat'; }
 
         /* RESULTADOS */
-        #resultado { display: none; margin-top: 40px; background: white; padding: 35px; border-radius: 8px; border-left: 8px solid var(--estatus-verde); }
+        #resultado { display: none; margin-top: 40px; background: white; padding: 35px; border-radius: 8px; border-left: 8px solid var(--estatus-verde); text-align: left; }
         .info-item { border-bottom: 1px solid #eee; padding: 12px 0; display: flex; flex-direction: column; }
         .info-label { font-weight: 700; color: #333; font-size: 14px; font-family: 'Montserrat'; text-transform: uppercase; margin-bottom: 2px; }
         .info-value { font-family: 'Lora', serif; color: #555; font-size: 16px; }
@@ -118,17 +123,10 @@
         .card-verde { background: var(--bg-verde-tarjeta); border-color: var(--border-verde-tarjeta); color: var(--texto-verde-tarjeta); }
         .card-azul { background: var(--bg-azul-tarjeta); border-color: var(--border-azul-tarjeta); color: var(--texto-azul-tarjeta); }
         
-        /* LEYENDA CON FONDO AZUL (ESTILO TARJETA AZUL) */
         .leyenda-atencion-azul { 
-            margin-top: 30px; 
-            padding: 20px; 
-            border-radius: 4px; 
-            background-color: var(--bg-azul-tarjeta); 
-            border: 1px solid var(--border-azul-tarjeta);
-            color: var(--texto-azul-tarjeta);
-            line-height: 1.6;
-            font-family: 'Lora', serif;
-            font-size: 15px;
+            margin-top: 30px; padding: 20px; border-radius: 4px; 
+            background-color: var(--bg-azul-tarjeta); border: 1px solid var(--border-azul-tarjeta);
+            color: var(--texto-azul-tarjeta); line-height: 1.6; font-family: 'Lora', serif; font-size: 15px;
         }
         .leyenda-atencion-azul strong { font-family: 'Montserrat'; font-weight: 700; }
 
@@ -181,8 +179,11 @@
 
     <div class="search-container">
         <input type="text" id="folioInput" placeholder="INGRESE EL FOLIO DE CONTROL" onkeypress="if(event.key==='Enter') buscar()">
-        <br><br>
-        <button class="btn-buscar" onclick="buscar()">CONSULTAR</button>
+        <br>
+        <div class="botones-flex">
+            <button class="btn-buscar" onclick="buscar()">CONSULTAR</button>
+            <button class="btn-limpiar" onclick="limpiar()">LIMPIAR</button>
+        </div>
     </div>
 
     <div id="errorContainer">
@@ -240,6 +241,12 @@
     function toggleContrast() { document.body.classList.toggle('high-contrast'); }
     function toggleText() { document.body.classList.toggle('text-size-lg'); }
     function resetAcc() { document.body.classList.remove('grayscale-mode', 'high-contrast', 'text-size-lg'); }
+
+    function limpiar() {
+        document.getElementById('folioInput').value = "";
+        document.getElementById('resultado').style.display = 'none';
+        document.getElementById('errorContainer').style.display = 'none';
+    }
 
     function buscar() {
         const inputFolio = document.getElementById('folioInput').value.trim().toUpperCase();
