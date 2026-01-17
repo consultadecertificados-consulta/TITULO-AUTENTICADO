@@ -54,11 +54,21 @@
         .menu-desplegable-dgb.show { display: block; }
         .menu-desplegable-dgb a { display: block; color: white; text-decoration: none; padding: 15px 0; font-size: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
 
-        /* AJUSTE LOGO: REDUCIR LO LARGO (ALTO) SIN AFECTAR ANCHO */
-        .header-image-container { width: 100%; background: #fff; border-bottom: 1px solid #ddd; text-align: center; }
-        .header-image-container img { width: 100%; max-height: 80px; display: block; object-fit: contain; }
+        /* CAMBIO SOLICITADO: REDUCIR LARGO (ALTO) SIN AFECTAR ANCHO */
+        .header-image-container { 
+            width: 100%; 
+            background: #fff; 
+            display: flex; 
+            justify-content: flex-start; /* Alineado a la izquierda como el original */
+            align-items: stretch;
+        }
+        .header-image-container img { 
+            height: 70px; /* Aquí ajustas qué tan "largo" o alto quieres que sea el logo */
+            width: auto;   /* Esto evita que se reduzca el ancho */
+            display: block; 
+        }
 
-        /* LEYENDA ARRIBA DEL BUSCADOR */
+        /* LEYENDA ARRIBA DEL BUSCADOR - SE MANTIENE IGUAL */
         .leyenda-superior {
             max-width: 900px;
             margin: 20px auto 0;
