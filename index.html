@@ -54,30 +54,23 @@
         .menu-desplegable-dgb.show { display: block; }
         .menu-desplegable-dgb a { display: block; color: white; text-decoration: none; padding: 15px 0; font-size: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
 
-        /* CAMBIO SOLICITADO: REDUCIR LARGO (ALTO) SIN AFECTAR ANCHO */
-        .header-image-container { 
-            width: 100%; 
-            background: #fff; 
-            display: flex; 
-            justify-content: flex-start; /* Alineado a la izquierda como el original */
-            align-items: stretch;
-        }
-        .header-image-container img { 
-            height: 70px; /* Aquí ajustas qué tan "largo" o alto quieres que sea el logo */
-            width: auto;   /* Esto evita que se reduzca el ancho */
-            display: block; 
-        }
+        /* LOGO CONSERVADO COMO TU ORIGINAL */
+        .header-image-container { width: 100%; background: #fff; border-bottom: 1px solid #ddd; }
+        .header-image-container img { width: 100%; height: auto; display: block; object-fit: contain; }
 
-        /* LEYENDA ARRIBA DEL BUSCADOR - SE MANTIENE IGUAL */
+        /* LEYENDA REDISEÑADA Y MÁS GRANDE */
         .leyenda-superior {
             max-width: 900px;
-            margin: 20px auto 0;
-            padding: 0 15px;
+            margin: 40px auto 10px;
+            padding: 0 15px 15px;
             text-align: center;
-            font-size: 18px;
+            font-size: 24px; /* Aumentado */
             font-weight: 700;
-            color: var(--sep-rojo-obscuro);
+            color: #4D4D4D;
             text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 3px solid var(--gob-oro); /* Línea más gruesa dorada */
+            line-height: 1.2;
         }
 
         .acc-trigger { position: fixed; left: 0; top: 50%; transform: translateY(-50%); background: rgba(117, 117, 117, 0.4); color: #FFFFFF; padding: 15px 10px; border-radius: 0 8px 8px 0; cursor: pointer; z-index: 10001; }
