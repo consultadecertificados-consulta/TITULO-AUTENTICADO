@@ -42,52 +42,65 @@
             flex-direction: column;
         }
 
-        /* HEADER GOB (MENÚ SUPERIOR) */
+        /* NAVEGACIÓN PEGADA (STICKY) */
+        .sticky-nav-container {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+
+        /* HEADER GOB (MENÚ 1) */
         nav.gob-header {
             background-color: var(--sep-rojo-obscuro);
             padding: 12px 30px; 
             display: flex; justify-content: space-between; align-items: center;
-            position: sticky; top: 0; z-index: 1000;
         }
         .logo-gob { height: 32px; }
-        .menu-container { position: relative; }
         .menu-icon { color: white; font-size: 24px; cursor: pointer; }
-        
-        /* DESPLEGABLE GOB */
         .nav-menu {
-            display: none; position: absolute; right: 0; top: 45px;
-            background: var(--sep-rojo-obscuro); min-width: 220px; 
-            border-radius: 4px; box-shadow: 0 8px 16px rgba(0,0,0,0.3); z-index: 1001;
+            display: none; position: absolute; right: 30px; top: 50px;
+            background: var(--sep-rojo-obscuro); min-width: 200px; 
+            border-radius: 4px; box-shadow: 0 8px 16px rgba(0,0,0,0.3);
         }
         .nav-menu.show { display: block; }
         .nav-menu a {
-            color: white; padding: 14px 20px; text-decoration: none;
+            color: white; padding: 12px 20px; text-decoration: none;
             display: block; font-family: 'Montserrat'; font-size: 14px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        /* BARRA DGB DORADA */
+        /* BARRA DGB (MENÚ 2) */
         .barra-dgb {
             background-color: var(--gob-oro);
-            padding: 15px 30px;
+            padding: 12px 30px;
             display: flex; justify-content: space-between; align-items: center;
-            color: white; z-index: 999;
+            color: white;
         }
-        .dgb-brand { font-family: 'Montserrat'; font-size: 22px; font-weight: 400; }
-        .hamburguesa-dgb { font-size: 24px; cursor: pointer; }
-
-        /* DESPLEGABLE DGB */
+        .dgb-brand { font-family: 'Montserrat'; font-size: 20px; font-weight: 600; }
         .menu-desplegable-dgb {
             display: none; background-color: var(--gob-oro); width: 100%;
             padding: 10px 30px 20px; border-top: 1px solid rgba(255,255,255,0.2);
         }
         .menu-desplegable-dgb.show { display: block; }
         .menu-desplegable-dgb a {
-            display: block; color: white; text-decoration: none; padding: 15px 0;
-            font-family: 'Montserrat'; font-size: 16px; border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: block; color: white; text-decoration: none; padding: 12px 0;
+            font-family: 'Montserrat'; font-size: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        /* ACCESIBILIDAD GRIS TRANSPARENTE */
+        /* LOGO.PNG CONTAINER */
+        .header-image-container { 
+            width: 100%; 
+            background: #fff; 
+            border-bottom: 1px solid #ddd;
+        }
+        .header-image-container img { 
+            max-width: 100%; 
+            height: auto; 
+            display: block; 
+        }
+
+        /* ACCESIBILIDAD FLOTANTE */
         .acc-trigger {
             position: fixed; left: 0; top: 50%; transform: translateY(-50%);
             background: rgba(117, 117, 117, 0.4); color: #FFFFFF; 
@@ -103,17 +116,16 @@
         .acc-header { font-weight: 700; margin-bottom: 20px; border-bottom: 2px solid var(--gob-oro); padding-bottom: 10px; display: flex; justify-content: space-between; color: #333; }
         .acc-item { display: block; width: 100%; padding: 12px; margin-bottom: 10px; background: #f0f0f0; border-radius: 6px; cursor: pointer; text-align: center; font-weight: 600; color: #333; border: 1px solid #ddd; }
 
-        /* CONTENIDO PRINCIPAL */
+        /* CONTENIDO */
         main { flex: 1; max-width: 900px; margin: 30px auto; padding: 0 15px; width: 100%; }
         .titulos-sep { text-align: center; margin-bottom: 30px; }
         .titulos-sep h2 { font-family: 'Montserrat'; color: #000; font-weight: 700; font-size: 1.8rem; }
         .linea-decorativa { width: 60px; height: 4px; background: var(--gob-oro); margin: 15px auto; }
 
-        /* BUSCADOR */
         .search-container {
             background: #ffffff; border-top: 5px solid var(--sep-rojo-obscuro);
             border-radius: 8px; padding: 40px 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            text-align: center; margin-bottom: 20px;
+            text-align: center;
         }
         input[type="text"] {
             width: 100%; max-width: 500px; padding: 15px; border: 2px solid #ddd; 
@@ -127,7 +139,7 @@
         /* RESULTADOS */
         #resultado { display: none; margin-top: 40px; background: white; padding: 35px; border-radius: 8px; border-left: 8px solid var(--estatus-verde); text-align: left; }
         .info-item { border-bottom: 1px solid #eee; padding: 12px 0; display: flex; flex-direction: column; }
-        .info-label { font-weight: 700; color: #333; font-size: 14px; font-family: 'Montserrat'; text-transform: uppercase; margin-bottom: 2px; }
+        .info-label { font-weight: 700; color: #333; font-size: 14px; font-family: 'Montserrat'; text-transform: uppercase; }
         .info-value { font-family: 'Lora', serif; color: #555; font-size: 16px; }
 
         .cards-flex-container { display: flex; justify-content: center; gap: 15px; margin: 25px 0; flex-wrap: wrap; }
@@ -141,64 +153,61 @@
             color: var(--texto-azul-tarjeta); line-height: 1.6; font-family: 'Lora', serif; font-size: 15px;
         }
 
-        /* FOOTER ORIGINAL REPARADO */
+        /* FOOTER */
         footer { background: var(--sep-rojo-obscuro); color: white; padding: 50px 30px 20px; font-family: 'Montserrat'; margin-top: 50px; }
         .footer-container { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
         .footer-col h4 { margin-bottom: 20px; font-size: 16px; border-bottom: 1px solid var(--gob-oro); padding-bottom: 10px; display: inline-block; }
         .footer-col a { color: white; text-decoration: none; display: block; margin-bottom: 10px; font-size: 13px; opacity: 0.8; }
         .social-links { display: flex; gap: 15px; margin-top: 15px; }
-        .social-links a { color: white; font-size: 22px; display: inline; opacity: 1; }
+        .social-links a { color: white; font-size: 22px; }
         .footer-bottom { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 11px; }
 
         #errorContainer { display: none; background-color: var(--error-bg); border: 2px solid var(--error-rojo); padding: 20px; margin-top: 20px; text-align: center; }
-
-        @media (max-width: 600px) {
-            .search-container { padding: 25px 15px; }
-            .titulos-sep h2 { font-size: 1.4rem; }
-            .card-box { min-width: 100%; }
-        }
     </style>
 </head>
 <body>
+
+<div class="sticky-nav-container">
+    <nav class="gob-header">
+        <a href="https://www.gob.mx"><img class="logo-gob" src="https://framework-gb.cdn.gob.mx/landing/img/logoheader.svg"></a>
+        <div class="menu-container">
+            <i class="fas fa-bars menu-icon" onclick="toggleMenu()"></i>
+            <div id="navMenu" class="nav-menu">
+                <a href="https://www.gob.mx/tramites">Trámites</a>
+                <a href="https://www.gob.mx/gobierno">Gobierno</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="barra-dgb">
+        <div class="dgb-brand">DGB</div>
+        <div class="hamburguesa-dgb" onclick="toggleDgbMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+    </div>
+    <div id="menuDgb" class="menu-desplegable-dgb">
+        <a href="#">¿Quiénes somos?</a>
+        <a href="#">Consultas</a>
+        <a href="#">Estadística educativa</a>
+        <a href="#">Indicadores educativos</a>
+        <a href="#">Datos abiertos</a>
+        <a href="#">Aviso de Privacidad</a>
+    </div>
+</div>
+
+<div class="header-image-container">
+    <img src="logo.png" alt="SEP">
+</div>
 
 <div class="acc-trigger" onclick="toggleAccPanel()"><i class="fas fa-universal-access fa-2x"></i></div>
 <div id="accPanel" class="acc-panel-sidebar">
     <div class="acc-header">
         <span>Accesibilidad</span>
-        <span onclick="toggleAccPanel()" style="cursor:pointer; font-size: 14px;">&times; Cerrar</span>
+        <span onclick="toggleAccPanel()" style="cursor:pointer;">&times; Cerrar</span>
     </div>
     <button class="acc-item" onclick="toggleGrayscale()">Escala de grises</button>
     <button class="acc-item" onclick="toggleContrast()">Alto contraste</button>
-    <button class="acc-item" onclick="toggleText()">Aumentar texto</button>
     <button class="acc-item" onclick="resetAcc()" style="background:#eee;">Restablecer</button>
-</div>
-
-<nav class="gob-header">
-    <a href="https://www.gob.mx"><img class="logo-gob" src="https://framework-gb.cdn.gob.mx/landing/img/logoheader.svg"></a>
-    <div class="menu-container">
-        <i class="fas fa-bars menu-icon" onclick="toggleMenu()"></i>
-        <div id="navMenu" class="nav-menu">
-            <a href="https://www.gob.mx/tramites">Trámites</a>
-            <a href="https://www.gob.mx/gobierno">Gobierno</a>
-            <a href="https://www.gob.mx/busqueda">Buscar</a>
-        </div>
-    </div>
-</nav>
-
-<div class="barra-dgb">
-    <div class="dgb-brand">DGB</div>
-    <div class="hamburguesa-dgb" onclick="toggleDgbMenu()">
-        <i class="fas fa-bars"></i>
-    </div>
-</div>
-
-<div id="menuDgb" class="menu-desplegable-dgb">
-    <a href="#">¿Quiénes somos?</a>
-    <a href="#">Consultas</a>
-    <a href="#">Estadística educativa</a>
-    <a href="#">Indicadores educativos</a>
-    <a href="#">Datos abiertos</a>
-    <a href="#">Aviso de Privacidad</a>
 </div>
 
 <main>
@@ -217,7 +226,6 @@
     </div>
 
     <div id="errorContainer">
-        <h3 style="color:#545454; font-family: 'Montserrat';">Estatus del documento:</h3>
         <p>Folio Inválido</p>
     </div>
 
@@ -226,7 +234,7 @@
         <div id="infoDetalle"></div>
         <div class="cards-flex-container" id="tarjetasContainer"></div>
         <div class="leyenda-atencion-azul">
-            <strong>¡Atención!</strong> La información de los certificados que se muestran en este portal, es el resultado de la integración de información que envían las autoridades educativas de los estados y de la Ciudad de México.
+            <strong>¡Atención!</strong> La información de los certificados que se muestran en este portal, es el resultado de la integración de información enviada por las autoridades educativas.
         </div>
     </div>
 </main>
@@ -236,30 +244,22 @@
         <div class="footer-col">
             <img src="https://framework-gb.cdn.gob.mx/landing/img/logoheader.svg" width="150" style="filter: brightness(0) invert(1);">
             <div class="social-links">
-                <a href="https://www.facebook.com/gobmexico" target="_blank"><i class="fab fa-facebook"></i></a>
-                <a href="https://twitter.com/gobmexico" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.facebook.com/gobmexico"><i class="fab fa-facebook"></i></a>
+                <a href="https://twitter.com/gobmx"><i class="fab fa-twitter"></i></a>
             </div>
         </div>
         <div class="footer-col">
             <h4>Enlaces</h4>
             <a href="https://participa.gob.mx">Participa</a>
-            <a href="https://www.gob.mx/publicaciones">Publicaciones</a>
             <a href="https://www.gob.mx/terminos">Términos y Condiciones</a>
             <a href="https://www.gob.mx/privacidad">Aviso de Privacidad</a>
         </div>
         <div class="footer-col">
-            <h4>¿Qué es gob.mx?</h4>
-            <a href="https://datos.gob.mx">Datos Abiertos</a>
-            <a href="https://www.gob.mx/temas">Temas</a>
-            <a href="https://www.gob.mx/accesibilidad">Accesibilidad</a>
-        </div>
-        <div class="footer-col">
             <h4>Contacto</h4>
             <a href="mailto:controlescolar.estatal@sems.sidgbe.gob.mx">Soporte Técnico</a>
-            <a href="https://www.gob.mx/atencion">Denuncias</a>
         </div>
     </div>
-    <div class="footer-bottom">SEP | DGB | Registro Federal de Educación Media Superior | México 2026</div>
+    <div class="footer-bottom">SEP | DGB | MÉXICO 2026</div>
 </footer>
 
 <script src="folios.js"></script>
@@ -267,11 +267,9 @@
     function toggleMenu() { document.getElementById('navMenu').classList.toggle('show'); }
     function toggleDgbMenu() { document.getElementById('menuDgb').classList.toggle('show'); }
     function toggleAccPanel() { document.getElementById('accPanel').classList.toggle('active'); }
-    
     function toggleGrayscale() { document.body.classList.toggle('grayscale-mode'); }
     function toggleContrast() { document.body.classList.toggle('high-contrast'); }
-    function toggleText() { document.body.classList.toggle('text-size-lg'); }
-    function resetAcc() { document.body.classList.remove('grayscale-mode', 'high-contrast', 'text-size-lg'); }
+    function resetAcc() { document.body.classList.remove('grayscale-mode', 'high-contrast'); }
 
     function limpiar() {
         document.getElementById('folioInput').value = "";
@@ -290,14 +288,14 @@
             const data = baseDatos[inputFolio];
             let listHTML = "";
             for (let clave in data) {
-                if (!['PROMEDIO', 'PROMEDIO_TEXTO', 'ESTATUS', 'promedio', 'promedio_texto', 'estatus'].includes(clave)) {
+                if (!['PROMEDIO', 'PROMEDIO_TEXTO', 'ESTATUS'].includes(clave.toUpperCase())) {
                     listHTML += `<div class="info-item"><span class="info-label">${clave.replace(/_/g, ' ')}:</span><span class="info-value">${data[clave]}</span></div>`;
                 }
             }
             document.getElementById('infoDetalle').innerHTML = listHTML;
             document.getElementById('tarjetasContainer').innerHTML = `
-                <div class="card-box card-verde"><b style="font-family:Montserrat; font-size:14px;">PROMEDIO:</b><br><span style="font-size:24px; font-weight:700; font-family:Montserrat;">${data.PROMEDIO || data.promedio || '0.0'}</span><br><span class="info-value">${data.PROMEDIO_TEXTO || data.promedio_texto || ''}</span></div>
-                <div class="card-box card-azul"><b style="font-family:Montserrat; font-size:14px;">ESTATUS:</b><br><span style="font-size:20px; font-weight:700; font-family:Montserrat;">${data.ESTATUS || data.estatus || 'REGISTRADO'}</span></div>
+                <div class="card-box card-verde"><b>PROMEDIO:</b><br><span style="font-size:24px;">${data.PROMEDIO || '0.0'}</span></div>
+                <div class="card-box card-azul"><b>ESTATUS:</b><br><span>${data.ESTATUS || 'REGISTRADO'}</span></div>
             `;
             resDiv.style.display = 'block';
             resDiv.scrollIntoView({ behavior: 'smooth' });
@@ -314,3 +312,4 @@
 </script>
 </body>
 </html>
+     
