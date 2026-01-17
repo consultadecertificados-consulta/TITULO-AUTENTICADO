@@ -12,7 +12,6 @@
         :root {
             --sep-rojo-obscuro: #4B1021; 
             --gob-oro: #9D843E;   
-            --gob-gris-boton: #757575;
             --estatus-verde: #235E3F;
             --bg-verde-tarjeta: #E3F2E1;
             --border-verde-tarjeta: #B7D9B1;
@@ -66,10 +65,10 @@
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        /* PANEL ACCESIBILIDAD AJUSTADO */
+        /* ICONO ACCESIBILIDAD GRIS TRANSPARENTE */
         .acc-trigger {
             position: fixed; left: 0; top: 50%; transform: translateY(-50%);
-            background: rgba(117, 117, 117, 0.5); /* Gris transparente */
+            background: rgba(117, 117, 117, 0.4); 
             color: #FFFFFF; 
             padding: 15px 10px; border-radius: 0 8px 8px 0; cursor: pointer; z-index: 10001;
         }
@@ -108,7 +107,7 @@
         }
         .btn-buscar { background: var(--sep-rojo-obscuro); color: white; padding: 12px 30px; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; font-family: 'Montserrat'; }
 
-        /* RESULTADOS APEGADOS AL ORIGINAL */
+        /* RESULTADOS */
         #resultado { display: none; margin-top: 40px; background: white; padding: 35px; border-radius: 8px; border-left: 8px solid var(--estatus-verde); }
         .info-item { border-bottom: 1px solid #eee; padding: 12px 0; display: flex; flex-direction: column; }
         .info-label { font-weight: 700; color: #333; font-size: 14px; font-family: 'Montserrat'; text-transform: uppercase; margin-bottom: 2px; }
@@ -118,6 +117,11 @@
         .card-box { flex: 1; min-width: 200px; padding: 25px 15px; border-radius: 4px; border: 1px solid; text-align: center; }
         .card-verde { background: var(--bg-verde-tarjeta); border-color: var(--border-verde-tarjeta); color: var(--texto-verde-tarjeta); }
         .card-azul { background: var(--bg-azul-tarjeta); border-color: var(--border-azul-tarjeta); color: var(--texto-azul-tarjeta); }
+        
+        .leyenda-validacion { 
+            margin-top: 25px; font-size: 13px; color: #777; font-style: italic; 
+            text-align: center; border-top: 1px dashed #ccc; padding-top: 15px; 
+        }
 
         /* FOOTER */
         footer { background: var(--sep-rojo-obscuro); color: white; padding: 50px 30px 20px; font-family: 'Montserrat'; margin-top: 50px; }
@@ -137,7 +141,7 @@
 <div id="accPanel" class="acc-panel-sidebar">
     <div class="acc-header">
         <span>Accesibilidad</span>
-        <span onclick="toggleAccPanel()" style="cursor:pointer">&times; Cerrar</span>
+        <span onclick="toggleAccPanel()" style="cursor:pointer; font-size: 14px;">&times; Cerrar</span>
     </div>
     <button class="acc-item" onclick="toggleGrayscale()">Escala de grises</button>
     <button class="acc-item" onclick="toggleContrast()">Alto contraste</button>
@@ -181,6 +185,9 @@
         <h2 style="font-family:Montserrat; border-bottom: 2px solid var(--gob-oro); padding-bottom: 10px; margin-bottom: 20px;">Detalle del documento</h2>
         <div id="infoDetalle"></div>
         <div class="cards-flex-container" id="tarjetasContainer"></div>
+        <div class="leyenda-validacion">
+            La integridad y autoría del presente documento se podrá verificar a través del código QR o en el portal oficial de certificación.
+        </div>
     </div>
 </main>
 
@@ -252,7 +259,6 @@
         }
     }
 
-    // SOPORTE QR
     window.onload = function() {
         const urlParams = new URLSearchParams(window.location.search);
         const folioUrl = urlParams.get('folio');
