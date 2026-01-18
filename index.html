@@ -17,18 +17,24 @@
         .nav > li { left: 0px !important; margin-left: -100px !important; position: relative; }
         .contenedor { margin-top: 50px; }
         .container-top { margin-top: -33vh; }
-        
-        .img-portada {
-            width: 100%;
-            max-height: 400px;
-            object-fit: cover;
-        }
+        .img-portada { width: 100%; max-height: 400px; object-fit: cover; }
 
-        /* Estilo corregido para la leyenda en color negro */
         .leyenda-negra {
             color: #000000 !important;
             font-weight: bold;
-            text-shadow: none !important; /* Quitamos la sombra para que sea negro limpio */
+            text-shadow: none !important;
+        }
+
+        /* Estilo para mensaje de error */
+        #error-mensaje {
+            display: none;
+            margin-top: 15px;
+            color: #D0021B;
+            font-weight: bold;
+            border: 1px solid #D0021B;
+            padding: 10px;
+            border-radius: 4px;
+            background-color: #f9f2f2;
         }
     </style>
 </head>
@@ -40,17 +46,13 @@
         <nav class="navbar navbar-expand-xl navbar-dark bg-light sub-navbar navbar-fixed-top navbar-top-siged">
             <div class="container">
                 <a class="navbar-brand sub-navbar" href="#">SIGED</a>
-                
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#subNavBarSIGED" 
-                        aria-controls="subNavBarSIGED" aria-expanded="false" aria-label="Mostrar / Ocultar Menú">
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#subNavBarSIGED">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
                 <div class="collapse navbar-collapse" id="subNavBarSIGED">
                     <ul class="navbar-nav">
                         <li class="nav-item"><a class="nav-link subnav-link" href="#">¿Quiénes somos?</a></li>
                         <li class="nav-item"><a class="nav-link subnav-link" href="#consultas">Consultas</a></li>
-                        <li class="nav-item"><a class="nav-link subnav-link" href="#">Estadística</a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link subnav-link dropdown-toggle" href="#" id="navAviso" data-bs-toggle="dropdown">Aviso de Privacidad</a>
                             <div class="dropdown-menu">
@@ -72,7 +74,7 @@
         <div class="row align-items-center">
             <div class="column col-lg-12 hdr_title">
                 <h3 class="leyenda-negra">Sistema de Información y Gestión Educativa</h3>
-                <h2 class="mt-1 leyenda-negra">Consulta de documentos académicos</h2>
+                <h2 class="mt-1 leyenda-negra">Consulta de documentos académicos electrónicos</h2>
             </div>
         </div>
     </div>
@@ -101,14 +103,17 @@
 
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab-01">
-                            <form role="form" id="searchForm" onsubmit="return validate(this)">
+                            <form role="form" id="searchForm" onsubmit="return validateForm(event)">
                                 <div class="form-group">
                                     <label class="control-label" for="folioSEP">Folio Digital:</label>
                                     <input class="form-control" id="folioSEP" name="folioSEP" placeholder="Captura el folio aquí" type="text">
                                 </div>
-                                <input type="hidden" name="tipoEducativo" value="autenticacion">
                                 <button class="btn btn-primary pull-right" type="submit">Buscar</button>
                             </form>
+                            <div id="error-mensaje">
+                                <span class="glyphicon glyphicon-exclamation-sign"></span> 
+                                El folio ingresado no fue encontrado en los registros de SIGED. Por favor, verifique los datos.
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -120,12 +125,14 @@
         <div class="list-info">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-3">
-                        <img src="https://framework-gb.cdn.gob.mx/gm/v3/assets/images/logo-header.svg" alt="Logo Gobierno de México" style="width: 200px;">
+                    <div class="col-sm-4"><h5>Enlaces</h5><ul><li><a href="#">Datos Abiertos</a></li><li><a href="#">Publicaciones</a></li></ul></div>
+                    <div class="col-sm-4"><h5>¿Qué es gob.mx?</h5><ul><li><a href="#">English</a></li><li><a href="#">Temas</a></li></ul></div>
+                    <div class="col-sm-4"><h5>Contacto</h5><ul><li><a href="#">Formulario de contacto</a></li></ul></div>
+                </div>
+                <div class="row text-center" style="margin-top: 30px;">
+                    <div class="col-sm-12">
+                        <img src="https://framework-gb.cdn.gob.mx/gm/v3/assets/images/logo-header.svg" alt="Logo Gobierno de México" style="width: 180px;">
                     </div>
-                    <div class="col-sm-3"><h5>Enlaces</h5><ul><li><a href="#">Datos Abiertos</a></li><li><a href="#">Publicaciones Oficiales</a></li></ul></div>
-                    <div class="col-sm-3"><h5>¿Qué es gob.mx?</h5><ul><li><a href="#">English</a></li><li><a href="#">Temas</a></li></ul></div>
-                    <div class="col-sm-3"><h5>Contacto</h5><ul><li><a href="#">Formulario de contacto</a></li></ul></div>
                 </div>
             </div>
         </div>
@@ -138,13 +145,27 @@
     <script src="folios.js"></script>
 
     <script type="text/javascript">
-        function validate(searchForm) {
-            var _folioSEP = searchForm.folioSEP.value;
-            if (_folioSEP == "" || _folioSEP == null) {
+        function validateForm(event) {
+            event.preventDefault(); // Detiene el envío automático
+            
+            var folioInput = document.getElementById("folioSEP").value;
+            var errorDiv = document.getElementById("error-mensaje");
+
+            if (folioInput === "" || folioInput === null) {
                 alert("Debes capturar un folio.");
+                errorDiv.style.display = "none";
                 return false;
             }
-            return true;
+
+            // Simulación de búsqueda. Aquí podrías integrar la lógica de folios.js
+            // Si el folio no existe (ejemplo: si es "000"), muestra el error.
+            if (folioInput === "000") {
+                errorDiv.style.display = "block";
+            } else {
+                errorDiv.style.display = "none";
+                alert("Buscando folio: " + folioInput);
+                // Aquí iría el redirect real: window.location.href = ...
+            }
         }
     </script>
 </body>
