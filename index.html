@@ -17,11 +17,18 @@
         .nav > li { left: 0px !important; margin-left: -100px !important; position: relative; }
         .contenedor { margin-top: 50px; }
         .container-top { margin-top: -33vh; }
-        /* Estilo para asegurar que tu logo se vea bien en la portada */
+        
         .img-portada {
             width: 100%;
             max-height: 400px;
             object-fit: cover;
+        }
+
+        /* Estilo corregido para la leyenda en color negro */
+        .leyenda-negra {
+            color: #000000 !important;
+            font-weight: bold;
+            text-shadow: none !important; /* Quitamos la sombra para que sea negro limpio */
         }
     </style>
 </head>
@@ -32,10 +39,8 @@
     <header>
         <nav class="navbar navbar-expand-xl navbar-dark bg-light sub-navbar navbar-fixed-top navbar-top-siged">
             <div class="container">
-                <a class="navbar-brand sub-navbar" href="#">
-                    <img src="logo.png" alt="Logo Portada" style="height: 40px; display: inline-block; margin-right: 10px;">
-                    SIGED
-                </a>
+                <a class="navbar-brand sub-navbar" href="#">SIGED</a>
+                
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#subNavBarSIGED" 
                         aria-controls="subNavBarSIGED" aria-expanded="false" aria-label="Mostrar / Ocultar Menú">
                     <span class="navbar-toggler-icon"></span>
@@ -66,8 +71,8 @@
     <div class="container container-top">
         <div class="row align-items-center">
             <div class="column col-lg-12 hdr_title">
-                <h3 style="color: white; text-shadow: 2px 2px 4px #000;">Sistema de Información y Gestión Educativa</h3>
-                <h2 class="mt-1" style="color: white; text-shadow: 2px 2px 4px #000;">Consulta de documentos académicos</h2>
+                <h3 class="leyenda-negra">Sistema de Información y Gestión Educativa</h3>
+                <h2 class="mt-1 leyenda-negra">Consulta de documentos académicos</h2>
             </div>
         </div>
     </div>
@@ -115,7 +120,9 @@
         <div class="list-info">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-3"><img src="https://framework-gb.cdn.gob.mx/gm/v3/assets/images/logo-footer.svg" alt="logo footer"></div>
+                    <div class="col-sm-3">
+                        <img src="https://framework-gb.cdn.gob.mx/gm/v3/assets/images/logo-header.svg" alt="Logo Gobierno de México" style="width: 200px;">
+                    </div>
                     <div class="col-sm-3"><h5>Enlaces</h5><ul><li><a href="#">Datos Abiertos</a></li><li><a href="#">Publicaciones Oficiales</a></li></ul></div>
                     <div class="col-sm-3"><h5>¿Qué es gob.mx?</h5><ul><li><a href="#">English</a></li><li><a href="#">Temas</a></li></ul></div>
                     <div class="col-sm-3"><h5>Contacto</h5><ul><li><a href="#">Formulario de contacto</a></li></ul></div>
@@ -131,14 +138,12 @@
     <script src="folios.js"></script>
 
     <script type="text/javascript">
-        // Función de validación (puedes moverla a folios.js)
         function validate(searchForm) {
             var _folioSEP = searchForm.folioSEP.value;
             if (_folioSEP == "" || _folioSEP == null) {
                 alert("Debes capturar un folio.");
                 return false;
             }
-            alert("Buscando folio: " + _folioSEP);
             return true;
         }
     </script>
