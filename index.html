@@ -24,12 +24,55 @@
             --error-bg: #F9E6E9;
         }
 
-        .grayscale-mode { filter: grayscale(100%); }
+        /* ESTILOS ACCESIBILIDAD SIGED */
         .high-contrast { background: #000 !important; color: #fff100 !important; }
-        .high-contrast * { background-color: #000 !important; color: #fff100 !important; border-color: #fff100 !important; }
+        .high-contrast *:not(.acc-siged-panel *) { background-color: #000 !important; color: #fff100 !important; border-color: #fff100 !important; }
+        .font-lg { font-size: 1.2em !important; }
 
+        .btn-acc-siged {
+            position: fixed;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: var(--sep-rojo-obscuro);
+            color: white;
+            padding: 15px 10px;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            z-index: 10001;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+        }
+
+        .acc-siged-panel {
+            position: fixed;
+            left: -300px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 260px;
+            background: white;
+            z-index: 10002;
+            transition: 0.3s;
+            padding: 20px;
+            box-shadow: 5px 0 15px rgba(0,0,0,0.3);
+            border: 1px solid #ddd;
+            border-radius: 0 10px 10px 0;
+        }
+        .acc-siged-panel.active { left: 0; }
+        .acc-siged-panel h3 { font-size: 16px; margin-bottom: 15px; color: var(--sep-rojo-obscuro); border-bottom: 1px solid #ddd; padding-bottom: 5px; }
+        .acc-siged-btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .acc-siged-item { 
+            background: #f8f9fa; border: 1px solid #ddd; padding: 10px; cursor: pointer; 
+            font-size: 12px; font-weight: bold; border-radius: 4px; text-align: center;
+        }
+        .acc-siged-item:hover { background: #eee; }
+        .acc-siged-item i { display: block; font-size: 18px; margin-bottom: 5px; }
+        .acc-close { position: absolute; right: 10px; top: 10px; cursor: pointer; font-size: 20px; }
+
+        /* RESTO DE TUS ESTILOS ORIGINALES */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body {
             font-family: 'Montserrat', sans-serif;
             background-color: #f4f4f4;
@@ -42,12 +85,9 @@
         }
 
         .sticky-nav-container { position: sticky; top: 0; z-index: 1000; width: 100%; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        
         nav.gob-header { background-color: var(--sep-rojo-obscuro); padding: 12px 30px; display: flex; justify-content: space-between; align-items: center; }
         .header-left-group { display: flex; align-items: center; gap: 20px; }
         .logo-gob { height: 32px; }
-        .acc-inline-trigger { color: white; cursor: pointer; font-size: 20px; opacity: 0.8; transition: 0.3s; }
-        .acc-inline-trigger:hover { opacity: 1; }
         
         .menu-icon { color: white; font-size: 24px; cursor: pointer; }
         .nav-menu { display: none; position: absolute; right: 30px; top: 50px; background: var(--sep-rojo-obscuro); min-width: 200px; border-radius: 4px; box-shadow: 0 8px 16px rgba(0,0,0,0.3); }
@@ -64,26 +104,19 @@
         .header-image-container { width: 100%; background: #fff; border-bottom: 1px solid #ddd; }
         .header-image-container img { width: 100%; height: auto; display: block; object-fit: contain; }
 
-        /* ESTILO ACTUALIZADO SEGÚN TU IMAGEN */
         .leyenda-superior {
             max-width: 900px;
             margin: 40px auto 10px;
             padding: 0 15px 15px;
             text-align: center;
-            font-family: 'Lora', serif; /* Tipo de letra de la imagen */
-            font-size: 32px; /* Tamaño grande como en la imagen */
+            font-family: 'Lora', serif;
+            font-size: 32px;
             font-weight: 600;
             color: #4D4D4D;
-            text-transform: none; /* Permite minúsculas */
             letter-spacing: 0.5px;
             border-bottom: 3px solid var(--gob-oro);
             line-height: 1.2;
         }
-
-        .acc-panel-sidebar { position: fixed; left: -320px; top: 0; width: 280px; height: 100vh; background: #fff; z-index: 10002; transition: 0.4s; padding: 25px; box-shadow: 5px 0 20px rgba(0,0,0,0.4); }
-        .acc-panel-sidebar.active { left: 0; }
-        .acc-header { font-weight: 700; margin-bottom: 20px; border-bottom: 2px solid var(--gob-oro); padding-bottom: 10px; display: flex; justify-content: space-between; color: #333; }
-        .acc-item { display: block; width: 100%; padding: 12px; margin-bottom: 10px; background: #f0f0f0; border-radius: 6px; cursor: pointer; text-align: center; font-weight: 600; border: 1px solid #ddd; color: #333; }
 
         main { flex: 1; max-width: 900px; margin: 10px auto 30px; padding: 0 15px; width: 100%; }
         .search-outer-box { background: #ffffff; border: 2px solid #D4C19C; border-radius: 10px; padding: 30px; max-width: 550px; margin: 0 auto 20px; text-align: center; }
@@ -118,11 +151,26 @@
 </head>
 <body>
 
+<div class="btn-acc-siged" onclick="toggleAccSiged()">
+    <i class="fas fa-universal-access"></i>
+    <span style="font-size: 10px; font-weight: bold; margin-top: 5px;">ACCESIBILIDAD</span>
+</div>
+
+<div id="panelSiged" class="acc-siged-panel">
+    <span class="acc-close" onclick="toggleAccSiged()">&times;</span>
+    <h3>Herramientas de Accesibilidad</h3>
+    <div class="acc-siged-btn-group">
+        <div class="acc-siged-item" onclick="changeFontSize('inc')"><i class="fas fa-font"></i>Aumentar Letra</div>
+        <div class="acc-siged-item" onclick="changeFontSize('dec')"><i class="fas fa-font" style="font-size:12px;"></i>Disminuir Letra</div>
+        <div class="acc-siged-item" onclick="toggleContrast()"><i class="fas fa-adjust"></i>Alto Contraste</div>
+        <div class="acc-siged-item" onclick="resetAcc()"><i class="fas fa-redo"></i>Restablecer</div>
+    </div>
+</div>
+
 <div class="sticky-nav-container">
     <nav class="gob-header">
         <div class="header-left-group">
             <a href="https://www.gob.mx"><img class="logo-gob" src="https://framework-gb.cdn.gob.mx/landing/img/logoheader.svg" alt="Gobierno de México"></a>
-            <i class="fas fa-universal-access acc-inline-trigger" onclick="toggleAccPanel()" title="Opciones de Accesibilidad"></i>
         </div>
         <i class="fas fa-bars menu-icon" onclick="toggleMenu()"></i>
         <div id="navMenu" class="nav-menu">
@@ -145,14 +193,7 @@
 
 <div class="leyenda-superior">Consulta de certificados del bachillerato general</div>
 
-<div id="accPanel" class="acc-panel-sidebar">
-    <div class="acc-header"><span>Accesibilidad</span><span onclick="toggleAccPanel()" style="cursor:pointer;">&times;</span></div>
-    <button class="acc-item" onclick="toggleGrayscale()">Escala de grises</button>
-    <button class="acc-item" onclick="toggleContrast()">Alto contraste</button>
-    <button class="acc-item" onclick="resetAcc()">Restablecer</button>
-</div>
-
-<main>
+<main id="mainContent">
     <div class="search-outer-box">
         <input type="text" id="folioInput" placeholder="Ingrese el folio" onkeypress="if(event.key==='Enter') buscar()">
         <button class="btn-new btn-buscar" onclick="buscar()">Buscar</button>
@@ -212,13 +253,31 @@
 
 <script src="folios.js"></script>
 <script>
+    /* SCRIPTS ORIGINALES PRESERVADOS */
     function toggleMenu() { document.getElementById('navMenu').classList.toggle('show'); }
     function toggleDgbMenu() { document.getElementById('menuDgb').classList.toggle('show'); }
-    function toggleAccPanel() { document.getElementById('accPanel').classList.toggle('active'); }
-    function toggleGrayscale() { document.body.classList.toggle('grayscale-mode'); }
-    function toggleContrast() { document.body.classList.toggle('high-contrast'); }
-    function resetAcc() { document.body.classList.remove('grayscale-mode', 'high-contrast'); }
 
+    /* NUEVOS SCRIPTS ACCESIBILIDAD SIGED */
+    function toggleAccSiged() { document.getElementById('panelSiged').classList.toggle('active'); }
+    
+    function toggleContrast() { 
+        document.body.classList.toggle('high-contrast'); 
+    }
+
+    let fontSize = 100;
+    function changeFontSize(action) {
+        if(action === 'inc' && fontSize < 130) fontSize += 10;
+        if(action === 'dec' && fontSize > 80) fontSize -= 10;
+        document.body.style.fontSize = fontSize + "%";
+    }
+
+    function resetAcc() { 
+        document.body.classList.remove('high-contrast'); 
+        fontSize = 100;
+        document.body.style.fontSize = "100%";
+    }
+
+    /* FUNCIONES DE BÚSQUEDA PRESERVADAS */
     function limpiar() {
         document.getElementById('folioInput').value = "";
         document.getElementById('resultado').style.display = 'none';
