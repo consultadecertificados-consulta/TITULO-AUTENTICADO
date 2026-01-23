@@ -27,7 +27,9 @@
             --error-bg: #F9E6E9;
         }
 
-        /* RESET PARA EVITAR QUE EL FRAMEWORK DEL SEGUNDO HTML AFECTE TUS ESTILOS */
+        /* EVITAR DOBLE MENÚ: Ocultamos el header que inyecta el framework por defecto */
+        header, .sub-navbar { display: none !important; }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
@@ -43,21 +45,13 @@
 
         .sticky-nav-container { position: sticky; top: 0; z-index: 1000; width: 100%; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         
-        nav.gob-header { background-color: var(--sep-rojo-obscuro); padding: 12px 30px; display: flex; justify-content: space-between; align-items: center; }
-        .header-left-group { display: flex; align-items: center; gap: 20px; }
+        /* Tu menú original */
+        nav.gob-header-custom { background-color: var(--sep-rojo-obscuro); padding: 12px 30px; display: flex; justify-content: space-between; align-items: center; }
         .logo-gob { height: 32px; }
-        
         .menu-icon { color: white; font-size: 24px; cursor: pointer; }
-        .nav-menu { display: none; position: absolute; right: 30px; top: 50px; background: var(--sep-rojo-obscuro); min-width: 200px; border-radius: 4px; box-shadow: 0 8px 16px rgba(0,0,0,0.3); }
-        .nav-menu.show { display: block; }
-        .nav-menu a { color: white; padding: 12px 20px; text-decoration: none; display: block; font-size: 14px; border-bottom: 1px solid rgba(255,255,255,0.1); }
 
         .barra-dgb { background-color: var(--gob-oro); padding: 12px 30px; display: flex; justify-content: space-between; align-items: center; color: white; }
         .dgb-brand { font-size: 20px; font-weight: 600; }
-        .hamburguesa-dgb { cursor: pointer; padding: 5px; font-size: 20px; }
-        .menu-desplegable-dgb { display: none; background-color: var(--gob-oro); width: 100%; padding: 10px 30px 20px; border-top: 1px solid rgba(255,255,255,0.2); }
-        .menu-desplegable-dgb.show { display: block; }
-        .menu-desplegable-dgb a { display: block; color: white; text-decoration: none; padding: 15px 0; font-size: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
 
         .header-image-container { width: 100%; background: #fff; border-bottom: 1px solid #ddd; }
         .header-image-container img { width: 100%; height: auto; display: block; object-fit: contain; }
@@ -78,25 +72,24 @@
 
         main { flex: 1; max-width: 900px; margin: 10px auto 30px; padding: 0 15px; width: 100%; }
         .search-outer-box { background: #ffffff; border: 2px solid #D4C19C; border-radius: 10px; padding: 30px; max-width: 550px; margin: 0 auto 20px; text-align: center; }
-        input[type="text"] { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 18px; margin-bottom: 15px; font-family: 'Lora', serif; text-align: center; }
-        .btn-new { width: 100%; padding: 14px; border: none; border-radius: 4px; font-size: 20px; cursor: pointer; margin-bottom: 10px; color: white !important; font-family: 'Montserrat'; font-weight: 500; text-decoration: none; display: block; }
+        input[type="text"] { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 18px; margin-bottom: 15px; text-align: center; }
+        
+        .btn-new { width: 100%; padding: 14px; border: none; border-radius: 4px; font-size: 20px; cursor: pointer; margin-bottom: 10px; color: white !important; font-family: 'Montserrat'; font-weight: 500; display: block; text-decoration: none; }
         .btn-buscar { background-color: var(--btn-buscar-verde); }
         .btn-limpiar { background-color: var(--btn-limpiar-gris); }
-        .btn-ayuda { background-color: transparent; color: var(--gob-oro) !important; border: 1px solid var(--gob-oro); font-size: 16px; margin-top: 5px; }
 
-        #resultado { display: none; margin-top: 40px; background: white; padding: 35px; border-radius: 8px; border-left: 8px solid var(--estatus-verde); text-align: left; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        #resultado { display: none; margin-top: 40px; background: white; padding: 35px; border-radius: 8px; border-left: 8px solid var(--estatus-verde); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
         .info-item { border-bottom: 1px solid #eee; padding: 12px 0; display: flex; flex-direction: column; }
-        .info-label { font-weight: 700; color: #333; font-size: 13px; text-transform: uppercase; margin-bottom: 2px; }
-        .info-value { font-family: 'Lora', serif; color: #444; font-size: 17px; word-break: normal; overflow-wrap: break-word; line-height: 1.4; }
-        
+        .info-label { font-weight: 700; font-size: 13px; text-transform: uppercase; }
+        .info-value { font-family: 'Lora', serif; font-size: 17px; }
+
         .cards-flex-container { display: flex; justify-content: center; gap: 15px; margin: 25px 0; flex-wrap: wrap; }
         .card-box { flex: 1; min-width: 220px; padding: 25px 15px; border-radius: 4px; border: 1px solid; text-align: center; }
         .card-verde { background: #E3F2E1; border-color: #B7D9B1; color: #3D7A34; }
         .card-azul { background: #D9F0F7; border-color: #ADE1F0; color: #316B8C; }
 
-        /* Ajustes finales para que el framework no duplique el header */
-        .sub-navbar { display: none !important; }
-        .main-footer .list-info { display: none !important; }
+        /* Estilo para que el pie de página institucional no oculte contenido */
+        .main-footer { margin-top: auto; }
     </style>
 </head>
 <body>
@@ -104,29 +97,17 @@
 <div id="accessibility-menu"></div>
 
 <div class="sticky-nav-container">
-    <nav class="gob-header">
-        <div class="header-left-group">
-            <a href="https://www.gob.mx"><img class="logo-gob" src="https://framework-gb.cdn.gob.mx/landing/img/logoheader.svg" alt="Gobierno de México"></a>
-        </div>
-        <i class="fas fa-bars menu-icon" onclick="toggleMenu()"></i>
-        <div id="navMenu" class="nav-menu">
-            <a href="https://www.gob.mx/tramites">Trámites</a>
-            <a href="https://www.gob.mx/gobierno">Gobierno</a>
-        </div>
+    <nav class="gob-header-custom">
+        <a href="https://www.gob.mx"><img class="logo-gob" src="https://framework-gb.cdn.gob.mx/landing/img/logoheader.svg" alt="Gobierno de México"></a>
+        <i class="fas fa-bars menu-icon"></i>
     </nav>
     <div class="barra-dgb">
         <div class="dgb-brand">DGB</div>
-        <div class="hamburguesa-dgb" onclick="toggleDgbMenu()"><i class="fas fa-bars"></i></div>
-    </div>
-    <div id="menuDgb" class="menu-desplegable-dgb">
-        <a href="https://www.gob.mx/sep">¿Quiénes somos?</a>
-        <a href="#">Consultas</a>
-        <a href="https://www.gob.mx/privacidad">Aviso de Privacidad</a>
+        <i class="fas fa-bars menu-icon" style="font-size: 20px;"></i>
     </div>
 </div>
 
 <div class="header-image-container"><img src="logo.png" alt="SEP"></div>
-
 <div class="leyenda-superior">Subsecretaría de Educación Media Superior y Superior</div>
 
 <main>
@@ -134,7 +115,6 @@
         <input type="text" id="folioInput" placeholder="Ingrese el folio" onkeypress="if(event.key==='Enter') buscar()">
         <button class="btn-new btn-buscar" onclick="buscar()">Buscar</button>
         <button class="btn-new btn-limpiar" onclick="limpiar()">Restablecer</button>
-        <a href="https://www.gob.mx/sep/articulos/sabes-como-validar-tu-certificado-electronico-de-bachillerato" target="_blank" class="btn-new btn-ayuda">Ubica el folio en tu certificado</a>
     </div>
 
     <div id="errorContainer" style="display:none; text-align:center; color:var(--error-rojo); margin-top:20px; background: var(--error-bg); padding: 15px; border-radius: 6px;">
@@ -145,9 +125,6 @@
         <h2 style="font-weight:700; border-bottom: 2px solid var(--gob-oro); padding-bottom: 10px; margin-bottom: 20px;">Detalle del documento</h2>
         <div id="infoDetalle"></div>
         <div class="cards-flex-container" id="tarjetasContainer"></div>
-        <div class="leyenda-atencion-azul" style="margin-top: 30px; padding: 20px; border-radius: 4px; background-color: var(--bg-info-azul); border: 1px solid var(--border-info-azul); color: var(--texto-info-azul); font-size: 14px;">
-            <strong>¡Atención!</strong> La información mostrada es resultado de la integración enviada por las autoridades educativas competentes.
-        </div>
     </div>
 </main>
 
@@ -159,9 +136,6 @@
 <script src="folios.js"></script>
 
 <script>
-    function toggleMenu() { document.getElementById('navMenu').classList.toggle('show'); }
-    function toggleDgbMenu() { document.getElementById('menuDgb').classList.toggle('show'); }
-
     function limpiar() {
         document.getElementById('folioInput').value = "";
         document.getElementById('resultado').style.display = 'none';
@@ -172,34 +146,26 @@
         const inputFolio = document.getElementById('folioInput').value.trim().toUpperCase();
         const resDiv = document.getElementById('resultado');
         const errDiv = document.getElementById('errorContainer');
-        resDiv.style.display = 'none';
-        errDiv.style.display = 'none';
-
+        
         if (typeof baseDatos !== 'undefined' && baseDatos[inputFolio]) {
             const data = baseDatos[inputFolio];
             let listHTML = "";
             for (let clave in data) {
-                const keyUpper = clave.toUpperCase();
-                if (!['PROMEDIO', 'PROMEDIO_TEXTO', 'ESTATUS'].includes(keyUpper)) {
+                if (!['PROMEDIO', 'PROMEDIO_TEXTO', 'ESTATUS'].includes(clave.toUpperCase())) {
                     listHTML += `<div class="info-item"><span class="info-label">${clave.replace(/_/g, ' ')}:</span><span class="info-value">${data[clave]}</span></div>`;
                 }
             }
             document.getElementById('infoDetalle').innerHTML = listHTML;
             document.getElementById('tarjetasContainer').innerHTML = `
-                <div class="card-box card-verde"><b>PROMEDIO:</b><br><span style="font-size:22px; font-weight:500;">${data.PROMEDIO || data.promedio || '0.0'}</span><br><span style="font-size:10px; font-style:italic;">${data.PROMEDIO_TEXTO || ''}</span></div>
-                <div class="card-box card-azul"><b>ESTATUS:</b><br><span style="font-size:20px; font-weight:600;">${data.ESTATUS || data.estatus || 'REGISTRADO'}</span></div>`;
+                <div class="card-box card-verde"><b>PROMEDIO:</b><br><span style="font-size:22px;">${data.PROMEDIO || '0.0'}</span></div>
+                <div class="card-box card-azul"><b>ESTATUS:</b><br><span style="font-size:20px;">${data.ESTATUS || 'REGISTRADO'}</span></div>`;
             resDiv.style.display = 'block';
-            resDiv.scrollIntoView({ behavior: 'smooth' });
-        } else if (inputFolio !== "") {
+            errDiv.style.display = 'none';
+        } else {
             errDiv.style.display = 'block';
+            resDiv.style.display = 'none';
         }
     }
-
-    window.onload = function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const f = urlParams.get('folio');
-        if (f) { document.getElementById('folioInput').value = f; buscar(); }
-    };
 </script>
 </body>
 </html>
