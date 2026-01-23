@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     
+    <link href="https://framework-gb.cdn.gob.mx/gm/v3/assets/styles/main.css" rel="stylesheet">
     <link href="https://framework-gb.cdn.gob.mx/gm/accesibilidad/css/gobmx-accesibilidad.min.css" rel="stylesheet">
     
     <style>
@@ -26,10 +27,7 @@
             --error-bg: #F9E6E9;
         }
 
-        .grayscale-mode { filter: grayscale(100%); }
-        .high-contrast { background: #000 !important; color: #fff100 !important; }
-        .high-contrast * { background-color: #000 !important; color: #fff100 !important; border-color: #fff100 !important; }
-
+        /* RESET PARA EVITAR QUE EL FRAMEWORK DEL SEGUNDO HTML AFECTE TUS ESTILOS */
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
@@ -81,12 +79,10 @@
         main { flex: 1; max-width: 900px; margin: 10px auto 30px; padding: 0 15px; width: 100%; }
         .search-outer-box { background: #ffffff; border: 2px solid #D4C19C; border-radius: 10px; padding: 30px; max-width: 550px; margin: 0 auto 20px; text-align: center; }
         input[type="text"] { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 18px; margin-bottom: 15px; font-family: 'Lora', serif; text-align: center; }
-        .btn-new { width: 100%; padding: 14px; border: none; border-radius: 4px; font-size: 20px; cursor: pointer; margin-bottom: 10px; color: white; font-family: 'Montserrat'; font-weight: 500; text-decoration: none; display: block; }
+        .btn-new { width: 100%; padding: 14px; border: none; border-radius: 4px; font-size: 20px; cursor: pointer; margin-bottom: 10px; color: white !important; font-family: 'Montserrat'; font-weight: 500; text-decoration: none; display: block; }
         .btn-buscar { background-color: var(--btn-buscar-verde); }
         .btn-limpiar { background-color: var(--btn-limpiar-gris); }
-        .btn-ayuda { background-color: transparent; color: var(--gob-oro); border: 1px solid var(--gob-oro); font-size: 16px; margin-top: 5px; }
-
-        .info-box-blue-search { background-color: var(--bg-info-azul); border: 1px solid var(--border-info-azul); color: var(--texto-info-azul); padding: 20px; border-radius: 4px; max-width: 550px; margin: 20px auto; display: flex; align-items: center; gap: 15px; font-size: 14px; }
+        .btn-ayuda { background-color: transparent; color: var(--gob-oro) !important; border: 1px solid var(--gob-oro); font-size: 16px; margin-top: 5px; }
 
         #resultado { display: none; margin-top: 40px; background: white; padding: 35px; border-radius: 8px; border-left: 8px solid var(--estatus-verde); text-align: left; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
         .info-item { border-bottom: 1px solid #eee; padding: 12px 0; display: flex; flex-direction: column; }
@@ -98,15 +94,9 @@
         .card-verde { background: #E3F2E1; border-color: #B7D9B1; color: #3D7A34; }
         .card-azul { background: #D9F0F7; border-color: #ADE1F0; color: #316B8C; }
 
-        .leyenda-atencion-azul { margin-top: 30px; padding: 20px; border-radius: 4px; background-color: var(--bg-info-azul); border: 1px solid var(--border-info-azul); color: var(--texto-info-azul); line-height: 1.6; font-family: 'Montserrat', sans-serif; font-size: 14px; }
-
-        footer { background: var(--sep-rojo-obscuro); color: white; padding: 50px 30px 20px; margin-top: 50px; }
-        .footer-container { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
-        .footer-col h4 { margin-bottom: 20px; font-size: 16px; border-bottom: 1px solid var(--gob-oro); padding-bottom: 10px; display: inline-block; font-weight: 600; }
-        .footer-col a { color: white; text-decoration: none; display: block; margin-bottom: 12px; font-size: 13px; opacity: 0.8; }
-        .social-links { display: flex; gap: 20px; margin-top: 15px; }
-        .social-links a { color: white; font-size: 24px; opacity: 1; display: inline; }
-        .footer-bottom { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 11px; font-weight: 300; }
+        /* Ajustes finales para que el framework no duplique el header */
+        .sub-navbar { display: none !important; }
+        .main-footer .list-info { display: none !important; }
     </style>
 </head>
 <body>
@@ -130,7 +120,7 @@
     </div>
     <div id="menuDgb" class="menu-desplegable-dgb">
         <a href="https://www.gob.mx/sep">¿Quiénes somos?</a>
-        <a href="https://dgb.sep.gob.mx/quienes_somos">Consultas</a>
+        <a href="#">Consultas</a>
         <a href="https://www.gob.mx/privacidad">Aviso de Privacidad</a>
     </div>
 </div>
@@ -144,12 +134,7 @@
         <input type="text" id="folioInput" placeholder="Ingrese el folio" onkeypress="if(event.key==='Enter') buscar()">
         <button class="btn-new btn-buscar" onclick="buscar()">Buscar</button>
         <button class="btn-new btn-limpiar" onclick="limpiar()">Restablecer</button>
-        <a href="https://siged.sep.gob.mx/SIGED/archivos/UbicaFolio.pdf" target="_blank" class="btn-new btn-ayuda">Ubica el folio en tu certificado</a>
-    </div>
-
-    <div class="info-box-blue-search">
-        <i class="fas fa-info-circle" style="font-size: 24px;"></i>
-        <span>Los certificados estarán disponibles para su consulta un día después de su emisión.</span>
+        <a href="https://www.gob.mx/sep/articulos/sabes-como-validar-tu-certificado-electronico-de-bachillerato" target="_blank" class="btn-new btn-ayuda">Ubica el folio en tu certificado</a>
     </div>
 
     <div id="errorContainer" style="display:none; text-align:center; color:var(--error-rojo); margin-top:20px; background: var(--error-bg); padding: 15px; border-radius: 6px;">
@@ -160,53 +145,19 @@
         <h2 style="font-weight:700; border-bottom: 2px solid var(--gob-oro); padding-bottom: 10px; margin-bottom: 20px;">Detalle del documento</h2>
         <div id="infoDetalle"></div>
         <div class="cards-flex-container" id="tarjetasContainer"></div>
-        <div class="leyenda-atencion-azul">
+        <div class="leyenda-atencion-azul" style="margin-top: 30px; padding: 20px; border-radius: 4px; background-color: var(--bg-info-azul); border: 1px solid var(--border-info-azul); color: var(--texto-info-azul); font-size: 14px;">
             <strong>¡Atención!</strong> La información mostrada es resultado de la integración enviada por las autoridades educativas competentes.
         </div>
     </div>
 </main>
 
-<footer>
-    <div class="footer-container">
-        <div class="footer-col">
-            <img src="https://framework-gb.cdn.gob.mx/landing/img/logoheader.svg" width="180" style="filter: brightness(0) invert(1); margin-bottom: 20px;">
-            <p style="font-size: 13px; line-height: 1.6; opacity: 0.9;">
-                Secretaría de Educación Pública<br>
-                Dirección General del Bachillerato<br>
-                Ciudad de México, 2026.
-            </p>
-        </div>
-        <div class="footer-col">
-            <h4>Información Institucional</h4>
-            <a href="https://www.gob.mx/sep/que-hacemos">¿Qué hacemos?</a>
-            <a href="https://www.gob.mx/sep/documentos">Documentos</a>
-            <a href="https://www.gob.mx/sep/archivo/acciones_y_programas">Transparencia</a>
-            <a href="https://www.gob.mx/privacidad">Aviso de Privacidad</a>
-        </div>
-        <div class="footer-col">
-            <h4>Atención y Soporte</h4>
-            <a href="https://www.gob.mx/atencion">Atención Ciudadana</a>
-            <a href="mailto:controlescolar.estatal@sems.sidgbe.gob.mx">Soporte Técnico Certificación</a>
-            <a href="https://www.gob.mx/tramites">Directorio de Trámites</a>
-        </div>
-        <div class="footer-col">
-            <h4>Síguenos</h4>
-            <div class="social-links">
-                <a href="https://www.facebook.com/gobmexico" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://twitter.com/gobmx" target="_blank" title="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
-                <a href="https://www.instagram.com/gobmexico" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-            </div>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        &copy; 2026 Secretaría de Educación Pública - Algunos derechos reservados.
-    </div>
-</footer>
+<footer class="main-footer"></footer>
 
 <script src="https://siged.sep.gob.mx/SIGED/js/jquery-3.5.1.min.js"></script>
+<script src="https://framework-gb.cdn.gob.mx/gm/v3/assets/js/gobmx.js"></script>
 <script src="https://framework-gb.cdn.gob.mx/gm/accesibilidad/js/gobmx-accesibilidad.min.js"></script>
-
 <script src="folios.js"></script>
+
 <script>
     function toggleMenu() { document.getElementById('navMenu').classList.toggle('show'); }
     function toggleDgbMenu() { document.getElementById('menuDgb').classList.toggle('show'); }
