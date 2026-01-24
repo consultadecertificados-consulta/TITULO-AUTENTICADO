@@ -30,7 +30,7 @@
             text-transform: uppercase;
         }
 
-        /* DISEÑO TARJETA RESULTADO */
+        /* DISEÑO TARJETA RESULTADO (Estilo imagen enviada anteriormente) */
         #seccion-resultado { display: none; margin-bottom: 50px; }
         .card-documento {
             background: #fff; border: 1px solid #ddd; padding: 40px;
@@ -43,7 +43,7 @@
         /* Limpieza Footer solicitada */
         .main-footer .list-info { display: none !important; }
 
-        /* --- ESTILO DE ERROR SEGÚN IMAGEN --- */
+        /* --- ESTILO DE ERROR (Ajustado para que NO se vea al cargar) --- */
         #mensaje-error {
             display: none;
             background-color: #f2dede;
@@ -56,7 +56,6 @@
             font-size: 28px;
             font-weight: 300;
             clear: both;
-            position: relative;
         }
         .btn-regresar-error {
             display: block;
@@ -148,12 +147,12 @@
                                 </div>
                                 <button class="btn btn-primary pull-right" type="submit">Buscar</button>
                             </form>
-                        </div>
-
-                        <div id="mensaje-error">
-                            No se encontró registro.
-                            <button type="button" class="btn-regresar-error" onclick="location.reload()">Regresar</button>
-                            <div style="clear:both;"></div>
+                            
+                            <div id="mensaje-error">
+                                No se encontró registro.
+                                <button type="button" class="btn-regresar-error" onclick="location.reload()">Regresar</button>
+                                <div style="clear:both;"></div>
+                            </div>
                         </div>
 
                         <div id="seccion-resultado">
@@ -166,7 +165,7 @@
                                 <div class="card-label">Institución Emisora:</div><div id="res-institucion" class="card-value"></div>
                             </div>
                             <div class="text-center">
-                                <button class="btn btn-default" onclick="location.reload()">Nueva consulta</button>
+                                <button class="btn btn-default" onclick="location.href=window.location.pathname">Nueva consulta</button>
                             </div>
                         </div>
                     </div>
@@ -181,7 +180,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://framework-gb.cdn.gob.mx/gm/v3/assets/js/gobmx.js"></script>
     <script src="https://framework-gb.cdn.gob.mx/gm/accesibilidad/js/gobmx-accesibilidad.min.js"></script>
-    
     <script src="folios.js"></script>
 </body>
 </html>
