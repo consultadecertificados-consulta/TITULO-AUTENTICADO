@@ -17,10 +17,10 @@
         .nav > li { left: 0px !important; margin-left: -100px !important; position: relative; }
         .contenedor { margin-top: 50px; }
         .container-top { margin-top: -33vh; }
+        
         /* Leyendas en Negro Sólido */
         .hdr_title h3, .hdr_title h2 { color: #000 !important; font-weight: bold; text-shadow: none !important; }
         
-        /* Leyenda DGAIR (Mismo tamaño que TÍTULO AUTENTICADO) */
         #leyenda-dgair { 
             display: none; 
             font-size: 24px; 
@@ -30,7 +30,7 @@
             text-transform: uppercase;
         }
 
-        /* DISEÑO TARJETA RESULTADO (Estilo imagen enviada anteriormente) */
+        /* DISEÑO TARJETA RESULTADO */
         #seccion-resultado { display: none; margin-bottom: 50px; }
         .card-documento {
             background: #fff; border: 1px solid #ddd; padding: 40px;
@@ -40,8 +40,41 @@
         .card-label { font-weight: bold; color: #333; margin-top: 20px; font-size: 16px; }
         .card-value { color: #555; font-size: 15px; text-transform: uppercase; }
         
-        /* Limpieza Footer solicitada */
         .main-footer .list-info { display: none !important; }
+
+        /* --- NUEVOS ESTILOS PARA ERROR (ESTILO IMAGEN) --- */
+        #mensaje-error {
+            display: none;
+            background-color: #f2dede; /* Rosa pálido */
+            border: 1px solid #a94442; /* Borde rojo */
+            border-radius: 4px;
+            padding: 30px 20px;
+            margin-top: 20px;
+            text-align: center;
+            color: #555;
+            font-size: 28px;
+            font-weight: 300;
+            position: relative;
+            clear: both;
+        }
+
+        .btn-regresar {
+            display: inline-block;
+            margin-top: 15px;
+            background-color: #fff;
+            border: 1px solid #9d7c3c; /* Dorado/café */
+            color: #9d7c3c;
+            padding: 8px 25px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 4px;
+            float: right; /* Alineado a la derecha como en la imagen */
+        }
+
+        .btn-regresar:hover {
+            background-color: #f9f9f9;
+        }
+        /* ------------------------------------------------ */
     </style>
 </head>
 
@@ -52,20 +85,10 @@
         <nav class="navbar navbar-expand-xl navbar-dark bg-light sub-navbar navbar-fixed-top navbar-top-siged">
             <div class="container">
                 <a class="navbar-brand sub-navbar" href="#">SIGED</a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#subNavBarSIGED">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
                 <div class="collapse navbar-collapse" id="subNavBarSIGED">
                     <ul class="navbar-nav">
                         <li class="nav-item"><a class="nav-link subnav-link" href="#">¿Quiénes somos?</a></li>
                         <li class="nav-item"><a class="nav-link subnav-link" href="#">Consultas</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link subnav-link dropdown-toggle" href="#" data-toggle="dropdown">Aviso de Privacidad</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Simplificado</a>
-                                <a class="dropdown-item" href="#">Integral</a>
-                            </div>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -90,7 +113,6 @@
             <ol class="breadcrumb">
                 <li><a href="#">Inicio</a></li>
                 <li><a href="#">Consultas</a></li>
-                <li><a href="#">Documentos académicos electrónicos</a></li>
                 <li class="active">Título Autenticado</li>
             </ol>
             
@@ -98,7 +120,7 @@
                 <div class="row col-md-12">
                     <div id="leyenda-dgair">Consulta de títulos electrónicos autenticados por la DGAIR</div>
                     
-                    <div class="row">
+                    <div class="row" id="titulo-pagina">
                         <div class="col-md-10">
                             <h3>TÍTULO AUTENTICADO</h3>
                             <hr class="red">
@@ -113,16 +135,19 @@
 
                     <div class="tab-content">
                         <div class="tab-pane active" id="seccion-busqueda">
-                            <form role="form" onsubmit="return ejecutarBusqueda(event)">
+                            <form role="form" id="formBusqueda" onsubmit="return ejecutarBusqueda(event)">
                                 <div class="form-group">
                                     <label class="control-label" for="folioSEP">Folio Digital:</label>
-                                    <input class="form-control" id="folioSEP" placeholder="Folio Digital del Título Electrónico" type="text">
+                                    <input class="form-control" id="folioSEP" placeholder="Folio Digital del Título Electrónico" type="text" required>
                                 </div>
                                 <button class="btn btn-primary pull-right" type="submit">Buscar</button>
                             </form>
-                            <div id="mensaje-error" class="alert alert-danger text-center" style="display:none; clear:both; margin-top:20px;">
-                                <strong>Folio inválido.</strong>
-                            </div>
+                        </div>
+
+                        <div id="mensaje-error">
+                            No se encontró registro.
+                            <br>
+                            <button type="button" class="btn-regresar" onclick="location.reload()">Regresar</button>
                         </div>
 
                         <div id="seccion-resultado">
@@ -135,7 +160,7 @@
                                 <div class="card-label">Institución Emisora:</div><div id="res-institucion" class="card-value"></div>
                             </div>
                             <div class="text-center">
-                                <button class="btn btn-default" onclick="location.href=window.location.pathname">Nueva consulta</button>
+                                <button class="btn btn-default" onclick="location.reload()">Nueva consulta</button>
                             </div>
                         </div>
                     </div>
@@ -148,8 +173,51 @@
 
     <script src="https://siged.sep.gob.mx/SIGED/js/jquery-3.5.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="https://framework-gb.cdn.gob.mx/gm/v3/assets/js/gobmx.js"></script>
-    <script src="https://framework-gb.cdn.gob.mx/gm/accesibilidad/js/gobmx-accesibilidad.min.js"></script>
-    <script src="folios.js"></script>
+
+    <script>
+        function ejecutarBusqueda(event) {
+            event.preventDefault();
+            
+            const folioInput = document.getElementById('folioSEP').value.trim();
+            const seccionBusqueda = document.getElementById('seccion-busqueda');
+            const seccionResultado = document.getElementById('seccion-resultado');
+            const mensajeError = document.getElementById('mensaje-error');
+            const pestanas = document.getElementById('pestañas-originales');
+
+            // --- BASE DE DATOS DE EJEMPLO ---
+            const foliosValidos = {
+                "12345": {
+                    nombre: "JUAN PÉREZ LÓPEZ",
+                    carrera: "INGENIERÍA EN SISTEMAS",
+                    nivel: "LICENCIATURA",
+                    folio: "12345",
+                    institucion: "INSTITUTO TECNOLÓGICO DE MÉXICO"
+                }
+            };
+
+            // Ocultar elementos iniciales
+            seccionBusqueda.style.display = 'none';
+            pestanas.style.display = 'none';
+
+            if (foliosValidos[folioInput]) {
+                // EXITO: Llenar datos y mostrar tarjeta
+                const d = foliosValidos[folioInput];
+                document.getElementById('res-nombre').innerText = d.nombre;
+                document.getElementById('res-carrera').innerText = d.carrera;
+                document.getElementById('res-nivel').innerText = d.nivel;
+                document.getElementById('res-folio').innerText = d.folio;
+                document.getElementById('res-institucion').innerText = d.institucion;
+                
+                seccionResultado.style.display = 'block';
+                mensajeError.style.display = 'none';
+            } else {
+                // ERROR: Mostrar recuadro rosa estilo imagen
+                seccionResultado.style.display = 'none';
+                mensajeError.style.display = 'block';
+            }
+
+            return false;
+        }
+    </script>
 </body>
 </html>
