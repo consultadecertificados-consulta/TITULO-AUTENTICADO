@@ -14,13 +14,14 @@
     <link rel="stylesheet" type="text/css" href="https://siged.sep.gob.mx/SIGED/css/global_siged.css">
 
     <style>
+        /* Configuración de navegación y contenedores */
         .nav > li { left: 0px !important; margin-left: -100px !important; position: relative; }
         .contenedor { margin-top: 50px; }
-        .container-top { margin-top: -23vh; }
-        /* Leyendas en Negro Sólido */
+        .container-top { margin-top: -10vh !important; position: relative; z-index: 10; }
+        
+        /* Títulos en negro sólido */
         .hdr_title h3, .hdr_title h2 { color: #000 !important; font-weight: bold; text-shadow: none !important; }
         
-        /* Leyenda DGAIR */
         #leyenda-dgair { 
             display: none; 
             font-size: 24px; 
@@ -30,78 +31,66 @@
             text-transform: uppercase;
         }
 
-        /* DISEÑO MARCO (Expandido a todo el ancho) */
+        /* EL MARCO: Blanco y ancho total */
         #seccion-resultado { display: none; margin-bottom: 50px; }
-       <div class="card-documento">
-    <div class="header-card">Detalle del documento</div>
-    
-    <span class="glyphicon glyphicon-file hojita-icono"></span>
+        .card-documento {
+            background: #fff; 
+            border: 1px solid #ddd; 
+            padding: 60px 40px 30px 40px; 
+            width: 100%; 
+            margin: 40px 0 20px 0; 
+            position: relative; 
+        }
 
-    <div class="card-label">Nombre:</div>
-    <div id="res-nombre" class="card-value"></div>
-    ...
-
-        /* BARRA VERDE (Pegada a la esquina superior izquierda) */
+        /* LA BARRA VERDE: Pegada a la esquina superior izquierda */
         .header-card { 
             background: #1d4d3f; 
             color: #fff; 
-            padding: 6px 15px; 
-            display: inline-block; 
+            padding: 8px 15px; 
             position: absolute;
             top: -1px;
             left: -1px;
-            margin: 0;
-            font-size: 14px;
+            z-index: 10;
         }
 
-        /* Icono de hojita */
+        /* LA HOJITA: Grande y gris, justo como en tu imagen */
         .hojita-icono {
-            font-size: 55px;
+            font-size: 60px;
             color: #545454;
-            margin: 15px 0;
             display: block;
+            text-align: center;
+            margin: 0 auto 25px auto;
         }
 
-        .card-label { font-weight: bold; color: #333; margin-top: 25px; font-size: 18px; }
-       .card-value { 
-    color: #777; 
-    font-size: 17px; 
-    text-transform: uppercase; 
-    margin-top: 2px; 
-    display: block; 
-    border-bottom: 1px solid #e0e0e0; /* Esta es la línea que señalaste */
-    padding-bottom: 15px;            /* Espacio arriba de la línea */
-    margin-bottom: 15px;             /* Espacio debajo de la línea */
-}
-        
-        /* Limpieza Footer solicitada */
+        .card-label { font-weight: bold; color: #333; margin-top: 10px; font-size: 17px; }
+
+        /* LOS VALORES Y LA LÍNEA DELGADA (La que señalaste con rojo) */
+        .card-value { 
+            color: #777; 
+            font-size: 16px; 
+            text-transform: uppercase; 
+            margin-top: 2px; 
+            display: block; 
+            border-bottom: 1px solid #e0e0e0; /* Esta es la línea gris sutil */
+            padding-bottom: 15px;            /* Espacio antes de la línea */
+            margin-bottom: 15px;             /* Espacio después de la línea */
+        }
+
+        /* Quita la línea del último dato para que se vea limpio */
+        #res-institucion { border-bottom: none; }
+
+        /* Limpieza Footer */
         .main-footer .list-info { display: none !important; }
 
-        /* ESTILO DE ERROR */
+        /* Estilo de Error */
         #mensaje-error {
             display: none;
             background-color: #f2dede;
             border: 1px solid #a94442;
-            border-radius: 4px;
             padding: 45px 25px;
-            margin-top: 20px;
             text-align: center;
             color: #666;
-            font-size: 28px;
-            font-weight: 300;
-            clear: both;
-        }
-        .btn-regresar-error {
-            display: block;
-            margin-top: 20px;
-            background-color: #fff;
-            border: 1.5px solid #9d7c3c;
-            color: #9d7c3c;
-            padding: 10px 35px;
-            font-size: 20px;
-            cursor: pointer;
-            float: right;
-            border-radius: 4px;
+            font-size: 24px;
         }
     </style>
 </head>
