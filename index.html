@@ -16,8 +16,10 @@
     <style>
         .nav > li { left: 0px !important; margin-left: -100px !important; position: relative; }
         .contenedor { margin-top: 50px; }
-        /* Ajuste solicitado: Bajamos las leyendas */
+        
+        /* CAMBIO 1: Bajamos las leyendas de -33vh a -25vh */
         .container-top { margin-top: -25vh; } 
+        
         .hdr_title h3, .hdr_title h2 { color: #000 !important; font-weight: bold; text-shadow: none !important; }
         
         #leyenda-dgair { 
@@ -34,18 +36,41 @@
             background: #fff; border: 1px solid #ddd; padding: 40px;
             max-width: 750px; margin: 20px auto; box-shadow: 0 4px 8px rgba(0,0,0,0.05);
         }
-        
-        /* Mantenemos tu barra verde original */
         .header-card { background: #1d4d3f; color: #fff; padding: 10px 20px; display: inline-block; margin-bottom: 30px; }
         
-        /* Agregamos el icono de la hojita de la imagen */
+        /* Estilo para el icono de la hojita solicitado */
         .hojita-icon { text-align: center; margin-bottom: 20px; font-size: 70px; color: #545454; }
         
         .card-label { font-weight: bold; color: #333; margin-top: 20px; font-size: 16px; }
         .card-value { color: #555; font-size: 15px; text-transform: uppercase; }
         
         .main-footer .list-info { display: none !important; }
-        #mensaje-error { display: none; }
+
+        #mensaje-error {
+            display: none;
+            background-color: #f2dede;
+            border: 1px solid #a94442;
+            border-radius: 4px;
+            padding: 45px 25px;
+            margin-top: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 28px;
+            font-weight: 300;
+            clear: both;
+        }
+        .btn-regresar-error {
+            display: block;
+            margin-top: 20px;
+            background-color: #fff;
+            border: 1.5px solid #9d7c3c;
+            color: #9d7c3c;
+            padding: 10px 35px;
+            font-size: 20px;
+            cursor: pointer;
+            float: right;
+            border-radius: 4px;
+        }
     </style>
 </head>
 
@@ -63,6 +88,13 @@
                     <ul class="navbar-nav">
                         <li class="nav-item"><a class="nav-link subnav-link" href="#">¿Quiénes somos?</a></li>
                         <li class="nav-item"><a class="nav-link subnav-link" href="#">Consultas</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link subnav-link dropdown-toggle" href="#" data-toggle="dropdown">Aviso de Privacidad</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Simplificado</a>
+                                <a class="dropdown-item" href="#">Integral</a>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -87,6 +119,7 @@
             <ol class="breadcrumb">
                 <li><a href="#">Inicio</a></li>
                 <li><a href="#">Consultas</a></li>
+                <li><a href="#">Documentos académicos electrónicos</a></li>
                 <li class="active">Título Autenticado</li>
             </ol>
             
@@ -103,7 +136,7 @@
                     
                     <ul class="nav nav-tabs" id="pestañas-originales">
                         <li class="active">
-                            <a data-toggle="tab" href="#" class="nav-link active" style="color: white; background-color: #10312B; margin-left: 100px">Búsqueda</a>
+                            <a data-toggle="tab" href="#tab-01" class="nav-link active" style="color: white; background-color: #10312B; margin-left: 100px">Búsqueda</a>
                         </li>
                     </ul>
 
@@ -116,6 +149,12 @@
                                 </div>
                                 <button class="btn btn-primary pull-right" type="submit">Buscar</button>
                             </form>
+                            
+                            <div id="mensaje-error">
+                                No se encontró registro.
+                                <button type="button" class="btn-regresar-error" onclick="location.reload()">Regresar</button>
+                                <div style="clear:both;"></div>
+                            </div>
                         </div>
 
                         <div id="seccion-resultado">
@@ -131,7 +170,7 @@
                                 <div class="card-label">Institución Emisora:</div><div id="res-institucion" class="card-value"></div>
                             </div>
                             <div class="text-center">
-                                <button class="btn btn-default" onclick="location.reload()">Nueva consulta</button>
+                                <button class="btn btn-default" onclick="location.href=window.location.pathname">Nueva consulta</button>
                             </div>
                         </div>
                     </div>
@@ -144,6 +183,8 @@
 
     <script src="https://siged.sep.gob.mx/SIGED/js/jquery-3.5.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://framework-gb.cdn.gob.mx/gm/v3/assets/js/gobmx.js"></script>
+    <script src="https://framework-gb.cdn.gob.mx/gm/accesibilidad/js/gobmx-accesibilidad.min.js"></script>
     <script src="folios.js"></script>
 
     <script>
@@ -151,7 +192,7 @@
         if (event) event.preventDefault();
         const folioInput = document.getElementById("folioSEP").value.trim();
         
-        // Validación contra TU baseDeDatosFolios y REDIRECCIÓN solicitada
+        // CAMBIO 3: Validación contra baseDeDatosFolios y REDIRECCIÓN
         if (typeof baseDeDatosFolios !== 'undefined' && baseDeDatosFolios[folioInput]) {
             const data = baseDeDatosFolios[folioInput];
             document.getElementById("res-nombre").innerText = data.nombre;
@@ -165,7 +206,7 @@
             document.getElementById("leyenda-dgair").style.display = "block";
             document.getElementById("seccion-resultado").style.display = "block";
         } else {
-            // Folio inválido: Redirige al inicio (recarga limpia)
+            // Si el folio es inválido, redirige al inicio (recarga limpia)
             window.location.href = window.location.pathname;
         }
         return false;
