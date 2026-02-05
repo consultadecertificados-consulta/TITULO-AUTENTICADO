@@ -16,9 +16,9 @@
     <style>
         .nav > li { left: 0px !important; margin-left: -100px !important; position: relative; }
         .contenedor { margin-top: 50px; }
+        /* CAMBIO 1: Bajamos las leyendas de -33vh a -25vh */
+        .container-top { margin-top: -25vh; }
         
-        /* Ajuste de posición: bajamos las leyendas */
-        .container-top { margin-top: -25vh; } 
         .hdr_title h3, .hdr_title h2 { color: #000 !important; font-weight: bold; text-shadow: none !important; }
         
         #leyenda-dgair { 
@@ -36,17 +36,17 @@
             max-width: 750px; margin: 20px auto; box-shadow: 0 4px 8px rgba(0,0,0,0.05);
         }
 
-        /* MODIFICACIÓN: Barra verde delgada como la imagen */
+        /* CAMBIO 2: Barra verde delgada como en la imagen */
         .header-card { 
             background: #1d4d3f; 
             color: #fff; 
             padding: 4px 12px; 
             display: inline-block; 
-            margin-bottom: 20px; 
+            margin-bottom: 25px; 
             font-size: 14px;
         }
 
-        /* MODIFICACIÓN: Recuadro del icono estilo imagen */
+        /* CAMBIO 3: Recuadro del icono de la hojita */
         .contenedor-hojita {
             border: 1px solid #ccc;
             width: 100px;
@@ -57,21 +57,37 @@
             justify-content: center;
             background-color: #f9f9f9;
         }
-        
-        /* Aseguramos que el icono se vea usando un emoji o Glyphicon si carga */
-        .hojita-icon { font-size: 60px; color: #545454; }
 
-        .card-label { font-weight: bold; color: #333; margin-top: 25px; font-size: 20px; }
-        .card-value { 
-            color: #666; 
-            font-size: 18px; 
-            text-transform: uppercase; 
-            line-height: 1.4;
-            margin-top: 5px;
-        }
+        .card-label { font-weight: bold; color: #333; margin-top: 20px; font-size: 16px; }
+        .card-value { color: #555; font-size: 15px; text-transform: uppercase; }
         
         .main-footer .list-info { display: none !important; }
-        #mensaje-error { display: none; }
+
+        #mensaje-error {
+            display: none;
+            background-color: #f2dede;
+            border: 1px solid #a94442;
+            border-radius: 4px;
+            padding: 45px 25px;
+            margin-top: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 28px;
+            font-weight: 300;
+            clear: both;
+        }
+        .btn-regresar-error {
+            display: block;
+            margin-top: 20px;
+            background-color: #fff;
+            border: 1.5px solid #9d7c3c;
+            color: #9d7c3c;
+            padding: 10px 35px;
+            font-size: 20px;
+            cursor: pointer;
+            float: right;
+            border-radius: 4px;
+        }
     </style>
 </head>
 
@@ -150,6 +166,12 @@
                                 </div>
                                 <button class="btn btn-primary pull-right" type="submit">Buscar</button>
                             </form>
+                            
+                            <div id="mensaje-error">
+                                No se encontró registro.
+                                <button type="button" class="btn-regresar-error" onclick="location.reload()">Regresar</button>
+                                <div style="clear:both;"></div>
+                            </div>
                         </div>
 
                         <div id="seccion-resultado">
@@ -157,13 +179,13 @@
                                 <div class="header-card">Detalle del documento</div>
                                 
                                 <div class="contenedor-hojita">
-                                    <span class="glyphicon glyphicon-file hojita-icon">📄</span>
+                                    <span class="glyphicon glyphicon-file" style="font-size: 60px; color: #545454;"></span>
                                 </div>
-                                
+
                                 <div class="card-label">Nombre:</div><div id="res-nombre" class="card-value"></div>
                                 <div class="card-label">Carrera:</div><div id="res-carrera" class="card-value"></div>
                                 <div class="card-label">Nivel:</div><div id="res-nivel" class="card-value"></div>
-                                <div class="card-label">Folio Digital:</div><div id="res-folio" class="card-value" style="word-break: break-all;"></div>
+                                <div class="card-label">Folio Digital:</div><div id="res-folio" class="card-value"></div>
                                 <div class="card-label">Institución Emisora:</div><div id="res-institucion" class="card-value"></div>
                             </div>
                             <div class="text-center">
@@ -189,7 +211,7 @@
         if (event) event.preventDefault();
         const folioInput = document.getElementById("folioSEP").value.trim();
         
-        // Usamos TU baseDeDatosFolios y la REDIRECCIÓN solicitada
+        // Validación y Redirección solicitada
         if (typeof baseDeDatosFolios !== 'undefined' && baseDeDatosFolios[folioInput]) {
             const data = baseDeDatosFolios[folioInput];
             document.getElementById("res-nombre").innerText = data.nombre;
@@ -203,7 +225,7 @@
             document.getElementById("leyenda-dgair").style.display = "block";
             document.getElementById("seccion-resultado").style.display = "block";
         } else {
-            // Regresa al inicio si no existe
+            // SI EL FOLIO ES INCORRECTO: Redirige al inicio recargando la página
             window.location.href = window.location.pathname;
         }
         return false;
