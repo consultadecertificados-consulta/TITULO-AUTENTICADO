@@ -17,6 +17,7 @@
         .nav > li { left: 0px !important; margin-left: -100px !important; position: relative; }
         .contenedor { margin-top: 50px; }
         .container-top { margin-top: -33vh; }
+        
         .hdr_title h3, .hdr_title h2 { color: #000 !important; font-weight: bold; text-shadow: none !important; }
         
         #leyenda-dgair { 
@@ -30,35 +31,39 @@
 
         #seccion-resultado { display: none; margin-bottom: 50px; }
 
-        /* MARCO BLANCO: Expandido y con sombra como en tu foto */
+        /* EL MARCO: Ahora con el borde gris fino y sin sombra pesada como en tu foto */
         .card-documento {
             background: #fff; 
-            border: 1px solid #ddd; 
-            padding: 50px 60px;
+            border: 1px solid #ddd; /* La línea gris que mencionas */
+            padding: 40px 30px;
             width: 100%; 
-            margin: 60px 0 20px 0; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            position: relative; /* Para que la barra verde se pegue aquí */
+            margin: 40px 0 20px 0; 
+            position: relative; /* Para posicionar la barra verde */
         }
 
-        /* BARRA VERDE: Delgada y posicionada arriba del borde */
+        /* LA BARRA VERDE: Posicionada exactamente sobre la esquina */
         .header-card { 
             background: #1d4d3f; 
             color: #fff; 
-            padding: 6px 18px; 
+            padding: 6px 15px; 
             display: inline-block; 
             position: absolute;
-            top: -33px; /* La sube justo encima del borde */
-            left: -1px; /* La alinea con el borde izquierdo */
+            top: -1px;    /* Alineada al borde superior */
+            left: -1px;   /* Alineada al borde izquierdo */
             font-size: 14px;
+            z-index: 10;
         }
 
-        /* ESTILO DE TEXTOS IGUAL A LA FOTO */
+        /* AJUSTE DE TEXTOS E ICONO */
         .card-label { font-weight: bold; color: #333; margin-top: 25px; font-size: 18px; }
-        .card-value { color: #777; font-size: 17px; text-transform: uppercase; margin-top: 5px; }
+        .card-value { color: #777; font-size: 17px; text-transform: uppercase; margin-top: 2px; }
         
-        /* Icono de hojita */
-        .hojita-estilo { font-size: 55px; color: #545454; margin-bottom: 15px; display: block; }
+        .hojita-estilo { 
+            font-size: 60px; 
+            color: #545454; 
+            margin: 20px 0 10px 0; 
+            display: block; 
+        }
 
         .main-footer .list-info { display: none !important; }
 
@@ -66,14 +71,11 @@
             display: none;
             background-color: #f2dede;
             border: 1px solid #a94442;
-            border-radius: 4px;
             padding: 45px 25px;
             margin-top: 20px;
             text-align: center;
             color: #666;
             font-size: 28px;
-            font-weight: 300;
-            clear: both;
         }
         .btn-regresar-error {
             display: block;
@@ -166,7 +168,6 @@
                             <div id="mensaje-error">
                                 No se encontró registro.
                                 <button type="button" class="btn-regresar-error" onclick="location.reload()">Regresar</button>
-                                <div style="clear:both;"></div>
                             </div>
                         </div>
 
@@ -174,7 +175,9 @@
                             <div class="card-documento">
                                 <div class="header-card">Detalle del documento</div>
                                 
-                                <span class="glyphicon glyphicon-file hojita-estilo"></span>
+                                <div class="text-center">
+                                    <span class="glyphicon glyphicon-file hojita-estilo"></span>
+                                </div>
 
                                 <div class="card-label">Nombre:</div><div id="res-nombre" class="card-value"></div>
                                 <div class="card-label">Carrera:</div><div id="res-carrera" class="card-value"></div>
