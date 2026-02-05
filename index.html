@@ -16,8 +16,6 @@
     <style>
         .nav > li { left: 0px !important; margin-left: -100px !important; position: relative; }
         .contenedor { margin-top: 50px; }
-        
-        /* Ajuste de posición de títulos principales */
         .container-top { margin-top: -25vh; } 
         .hdr_title h3, .hdr_title h2 { color: #000 !important; font-weight: bold; text-shadow: none !important; }
         
@@ -31,50 +29,35 @@
         }
 
         #seccion-resultado { display: none; margin-bottom: 50px; }
-        
         .card-documento {
-            background: #fff; 
-            border: 1px solid #ddd; 
-            padding: 0px; /* Quitamos padding para que la barra pegue arriba */
-            max-width: 750px; 
-            margin: 20px auto; 
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            background: #fff; border: 1px solid #ddd; padding: 40px;
+            max-width: 750px; margin: 20px auto; box-shadow: 0 4px 8px rgba(0,0,0,0.05);
         }
 
-        /* MODIFICACIÓN: Barra verde delgada */
+        /* CAMBIO: Barra verde delgada como en la imagen */
         .header-card { 
             background: #1d4d3f; 
             color: #fff; 
-            padding: 5px 15px; /* Padding reducido para que sea delgada */
+            padding: 4px 12px; 
             display: inline-block; 
-            margin-bottom: 20px;
-            font-size: 14px; /* Texto más pequeño para la barra */
+            margin-bottom: 30px; 
+            font-size: 14px;
         }
-        
-        /* MODIFICACIÓN: Recuadro de la hojita estilo imagen */
+
+        /* CAMBIO: Estilo del recuadro de la hojita */
         .contenedor-hojita {
             border: 1px solid #ccc;
             width: 100px;
             height: 120px;
-            margin: 10px auto 30px auto;
+            margin: 0 auto 30px auto;
             display: flex;
             align-items: center;
             justify-content: center;
             background-color: #fff;
         }
-        .hojita-icon { font-size: 60px; color: #545454; }
 
-        /* Contenedor interno para los datos */
-        .datos-body { padding: 0 40px 40px 40px; }
-        
-        .card-label { font-weight: bold; color: #333; margin-top: 25px; font-size: 20px; }
-        .card-value { 
-            color: #666; 
-            font-size: 18px; 
-            text-transform: uppercase; 
-            line-height: 1.4;
-            margin-top: 5px;
-        }
+        .card-label { font-weight: bold; color: #333; margin-top: 20px; font-size: 16px; }
+        .card-value { color: #555; font-size: 15px; text-transform: uppercase; }
         
         .main-footer .list-info { display: none !important; }
         #mensaje-error { display: none; }
@@ -88,10 +71,20 @@
         <nav class="navbar navbar-expand-xl navbar-dark bg-light sub-navbar navbar-fixed-top navbar-top-siged">
             <div class="container">
                 <a class="navbar-brand sub-navbar" href="#">SIGED</a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#subNavBarSIGED">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
                 <div class="collapse navbar-collapse" id="subNavBarSIGED">
                     <ul class="navbar-nav">
                         <li class="nav-item"><a class="nav-link subnav-link" href="#">¿Quiénes somos?</a></li>
                         <li class="nav-item"><a class="nav-link subnav-link" href="#">Consultas</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link subnav-link dropdown-toggle" href="#" data-toggle="dropdown">Aviso de Privacidad</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Simplificado</a>
+                                <a class="dropdown-item" href="#">Integral</a>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -116,6 +109,7 @@
             <ol class="breadcrumb">
                 <li><a href="#">Inicio</a></li>
                 <li><a href="#">Consultas</a></li>
+                <li><a href="#">Documentos académicos electrónicos</a></li>
                 <li class="active">Título Autenticado</li>
             </ol>
             
@@ -132,7 +126,7 @@
                     
                     <ul class="nav nav-tabs" id="pestañas-originales">
                         <li class="active">
-                            <a data-toggle="tab" href="#" class="nav-link active" style="color: white; background-color: #10312B; margin-left: 100px">Búsqueda</a>
+                            <a data-toggle="tab" href="#tab-01" class="nav-link active" style="color: white; background-color: #10312B; margin-left: 100px">Búsqueda</a>
                         </li>
                     </ul>
 
@@ -151,26 +145,15 @@
                             <div class="card-documento">
                                 <div class="header-card">Detalle del documento</div>
                                 
-                                <div class="datos-body">
-                                    <div class="contenedor-hojita">
-                                        <span class="glyphicon glyphicon-file hojita-icon"></span>
-                                    </div>
-                                    
-                                    <div class="card-label">Nombre:</div>
-                                    <div id="res-nombre" class="card-value"></div>
-                                    
-                                    <div class="card-label">Carrera:</div>
-                                    <div id="res-carrera" class="card-value"></div>
-                                    
-                                    <div class="card-label">Nivel:</div>
-                                    <div id="res-nivel" class="card-value"></div>
-                                    
-                                    <div class="card-label">Folio Digital:</div>
-                                    <div id="res-folio" class="card-value" style="word-break: break-all;"></div>
-                                    
-                                    <div class="card-label">Institución Emisora:</div>
-                                    <div id="res-institucion" class="card-value"></div>
+                                <div class="contenedor-hojita">
+                                    <span class="glyphicon glyphicon-file" style="font-size: 60px; color: #545454;"></span>
                                 </div>
+
+                                <div class="card-label">Nombre:</div><div id="res-nombre" class="card-value"></div>
+                                <div class="card-label">Carrera:</div><div id="res-carrera" class="card-value"></div>
+                                <div class="card-label">Nivel:</div><div id="res-nivel" class="card-value"></div>
+                                <div class="card-label">Folio Digital:</div><div id="res-folio" class="card-value"></div>
+                                <div class="card-label">Institución Emisora:</div><div id="res-institucion" class="card-value"></div>
                             </div>
                             <div class="text-center">
                                 <button class="btn btn-default" onclick="location.reload()">Nueva consulta</button>
@@ -186,6 +169,8 @@
 
     <script src="https://siged.sep.gob.mx/SIGED/js/jquery-3.5.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://framework-gb.cdn.gob.mx/gm/v3/assets/js/gobmx.js"></script>
+    <script src="https://framework-gb.cdn.gob.mx/gm/accesibilidad/js/gobmx-accesibilidad.min.js"></script>
     <script src="folios.js"></script>
 
     <script>
@@ -206,6 +191,7 @@
             document.getElementById("leyenda-dgair").style.display = "block";
             document.getElementById("seccion-resultado").style.display = "block";
         } else {
+            // REDIRECCIÓN AL INICIO SI NO EXISTE
             window.location.href = window.location.pathname;
         }
         return false;
