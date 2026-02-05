@@ -181,5 +181,39 @@
     <script src="https://framework-gb.cdn.gob.mx/gm/v3/assets/js/gobmx.js"></script>
     <script src="https://framework-gb.cdn.gob.mx/gm/accesibilidad/js/gobmx-accesibilidad.min.js"></script>
     <script src="folios.js"></script>
+
+    <script>
+    function ejecutarBusqueda(event) {
+        event.preventDefault();
+
+        const folioInput = document.getElementById('folioSEP').value.trim();
+        const formulario = document.querySelector('#seccion-busqueda form');
+        const seccionResultado = document.getElementById('seccion-resultado');
+        const leyendaDgair = document.getElementById('leyenda-dgair');
+        const pestañas = document.getElementById('pestañas-originales');
+
+        // Se valida contra los datos cargados desde folios.js
+        if (typeof datosFolios !== 'undefined' && datosFolios[folioInput]) {
+            const data = datosFolios[folioInput];
+
+            document.getElementById('res-nombre').innerText = data.nombre;
+            document.getElementById('res-carrera').innerText = data.carrera;
+            document.getElementById('res-nivel').innerText = data.nivel;
+            document.getElementById('res-folio').innerText = folioInput;
+            document.getElementById('res-institucion').innerText = data.institucion;
+
+            // Ocultar búsqueda y mostrar resultados
+            formulario.style.display = 'none';
+            pestañas.style.display = 'none';
+            seccionResultado.style.display = 'block';
+            leyendaDgair.style.display = 'block';
+        } else {
+            // REDIRECCIÓN AL INICIO (Recarga la página actual limpia)
+            window.location.href = window.location.pathname;
+        }
+
+        return false;
+    }
+    </script>
 </body>
 </html>
