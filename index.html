@@ -17,7 +17,6 @@
         .nav > li { left: 0px !important; margin-left: -100px !important; position: relative; }
         .contenedor { margin-top: 50px; }
         .container-top { margin-top: -33vh; }
-        
         .hdr_title h3, .hdr_title h2 { color: #000 !important; font-weight: bold; text-shadow: none !important; }
         
         #leyenda-dgair { 
@@ -31,38 +30,40 @@
 
         #seccion-resultado { display: none; margin-bottom: 50px; }
 
-        /* EL MARCO: Ahora con el borde gris fino y sin sombra pesada como en tu foto */
+        /* EL MARCO: Ocupa todo el ancho con la línea gris fina de tus fotos */
         .card-documento {
             background: #fff; 
-            border: 1px solid #ddd; /* La línea gris que mencionas */
-            padding: 40px 30px;
+            border: 1px solid #d5d5d5; /* El color exacto de la línea gris */
+            padding: 60px 40px 40px 40px;
             width: 100%; 
             margin: 40px 0 20px 0; 
-            position: relative; /* Para posicionar la barra verde */
+            position: relative; /* Clave para la barra verde */
+            box-shadow: none; /* Quitamos sombras para que solo se vea la línea */
         }
 
-        /* LA BARRA VERDE: Posicionada exactamente sobre la esquina */
+        /* LA BARRA VERDE: Ajustada para que "pise" la esquina perfectamente */
         .header-card { 
             background: #1d4d3f; 
             color: #fff; 
-            padding: 6px 15px; 
+            padding: 10px 20px; 
             display: inline-block; 
             position: absolute;
-            top: -1px;    /* Alineada al borde superior */
-            left: -1px;   /* Alineada al borde izquierdo */
-            font-size: 14px;
-            z-index: 10;
+            top: -1px;    /* Alineación exacta con el borde superior */
+            left: -1px;   /* Alineación exacta con el borde izquierdo */
+            font-size: 15px;
+            margin: 0;
         }
 
-        /* AJUSTE DE TEXTOS E ICONO */
-        .card-label { font-weight: bold; color: #333; margin-top: 25px; font-size: 18px; }
-        .card-value { color: #777; font-size: 17px; text-transform: uppercase; margin-top: 2px; }
+        /* TEXTOS: Color gris y tipografía limpia de la imagen */
+        .card-label { font-weight: bold; color: #333; margin-top: 30px; font-size: 18px; }
+        .card-value { color: #757575; font-size: 17px; text-transform: uppercase; margin-top: 5px; line-height: 1.4; }
         
+        /* Icono de la hojita */
         .hojita-estilo { 
-            font-size: 60px; 
+            font-size: 65px; 
             color: #545454; 
-            margin: 20px 0 10px 0; 
-            display: block; 
+            margin: 10px 0 20px 0; 
+            display: inline-block;
         }
 
         .main-footer .list-info { display: none !important; }
@@ -77,42 +78,19 @@
             color: #666;
             font-size: 28px;
         }
-        .btn-regresar-error {
-            display: block;
-            margin-top: 20px;
-            background-color: #fff;
-            border: 1.5px solid #9d7c3c;
-            color: #9d7c3c;
-            padding: 10px 35px;
-            font-size: 20px;
-            cursor: pointer;
-            float: right;
-            border-radius: 4px;
-        }
     </style>
 </head>
 
 <body>
     <div id="accessibility-menu"></div>
-
     <header>
         <nav class="navbar navbar-expand-xl navbar-dark bg-light sub-navbar navbar-fixed-top navbar-top-siged">
             <div class="container">
                 <a class="navbar-brand sub-navbar" href="#">SIGED</a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#subNavBarSIGED">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
                 <div class="collapse navbar-collapse" id="subNavBarSIGED">
                     <ul class="navbar-nav">
                         <li class="nav-item"><a class="nav-link subnav-link" href="#">¿Quiénes somos?</a></li>
                         <li class="nav-item"><a class="nav-link subnav-link" href="#">Consultas</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link subnav-link dropdown-toggle" href="#" data-toggle="dropdown">Aviso de Privacidad</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Simplificado</a>
-                                <a class="dropdown-item" href="#">Integral</a>
-                            </div>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -122,8 +100,8 @@
     <div><img src="https://siged.sep.gob.mx/SIGED/images/bnr_alumnos.png" style="width: 100%;"></div>
 
     <div class="container container-top">
-        <div class="row align-items-center">
-            <div class="column col-lg-12 hdr_title">
+        <div class="row">
+            <div class="col-lg-12 hdr_title">
                 <h3>Sistema de Información y Gestión Educativa</h3>
                 <h2 class="mt-1">Consulta de documentos académicos electrónicos</h2>
             </div>
@@ -134,7 +112,6 @@
         <div class="container contenedor">
             <ol class="breadcrumb">
                 <li><a href="#">Inicio</a></li>
-                <li><a href="#">Consultas</a></li>
                 <li class="active">Título Autenticado</li>
             </ol>
             
@@ -142,16 +119,11 @@
                 <div class="row col-md-12">
                     <div id="leyenda-dgair">Consulta de títulos electrónicos autenticados por la DGAIR</div>
                     
-                    <div class="row">
-                        <div class="col-md-10">
-                            <h3>TÍTULO AUTENTICADO</h3>
-                            <hr class="red">
-                        </div>
-                    </div>
+                    <div class="row"><div class="col-md-12"><h3>TÍTULO AUTENTICADO</h3><hr class="red"></div></div>
                     
                     <ul class="nav nav-tabs" id="pestañas-originales">
                         <li class="active">
-                            <a data-toggle="tab" href="#tab-01" class="nav-link active" style="color: white; background-color: #10312B; margin-left: 100px">Búsqueda</a>
+                            <a data-toggle="tab" href="#" class="nav-link active" style="color: white; background-color: #10312B; margin-left: 100px">Búsqueda</a>
                         </li>
                     </ul>
 
@@ -164,20 +136,13 @@
                                 </div>
                                 <button class="btn btn-primary pull-right" type="submit">Buscar</button>
                             </form>
-                            
-                            <div id="mensaje-error">
-                                No se encontró registro.
-                                <button type="button" class="btn-regresar-error" onclick="location.reload()">Regresar</button>
-                            </div>
                         </div>
 
                         <div id="seccion-resultado">
                             <div class="card-documento">
                                 <div class="header-card">Detalle del documento</div>
                                 
-                                <div class="text-center">
-                                    <span class="glyphicon glyphicon-file hojita-estilo"></span>
-                                </div>
+                                <div style="width: 100%;"><span class="glyphicon glyphicon-file hojita-estilo"></span></div>
 
                                 <div class="card-label">Nombre:</div><div id="res-nombre" class="card-value"></div>
                                 <div class="card-label">Carrera:</div><div id="res-carrera" class="card-value"></div>
@@ -195,12 +160,8 @@
         </div>
     </main>
 
-    <footer class="main-footer"></footer>
-
     <script src="https://siged.sep.gob.mx/SIGED/js/jquery-3.5.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="https://framework-gb.cdn.gob.mx/gm/v3/assets/js/gobmx.js"></script>
-    <script src="https://framework-gb.cdn.gob.mx/gm/accesibilidad/js/gobmx-accesibilidad.min.js"></script>
     <script src="folios.js"></script>
 
     <script>
