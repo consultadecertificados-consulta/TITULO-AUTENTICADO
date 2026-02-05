@@ -16,11 +16,12 @@
     <style>
         .nav > li { left: 0px !important; margin-left: -100px !important; position: relative; }
         .contenedor { margin-top: 50px; }
-        .container-top { margin-top: -25vh; }
-        /* Leyendas en Negro Sólido */
+        
+        /* Ajuste solicitado: Bajamos las leyendas cambiando de -33vh a -25vh */
+        .container-top { margin-top: -25vh; } 
+
         .hdr_title h3, .hdr_title h2 { color: #000 !important; font-weight: bold; text-shadow: none !important; }
         
-        /* Leyenda DGAIR (Mismo tamaño que TÍTULO AUTENTICADO) */
         #leyenda-dgair { 
             display: none; 
             font-size: 24px; 
@@ -30,7 +31,6 @@
             text-transform: uppercase;
         }
 
-        /* DISEÑO TARJETA RESULTADO (Estilo imagen enviada anteriormente) */
         #seccion-resultado { display: none; margin-bottom: 50px; }
         .card-documento {
             background: #fff; border: 1px solid #ddd; padding: 40px;
@@ -40,35 +40,9 @@
         .card-label { font-weight: bold; color: #333; margin-top: 20px; font-size: 16px; }
         .card-value { color: #555; font-size: 15px; text-transform: uppercase; }
         
-        /* Limpieza Footer solicitada */
         .main-footer .list-info { display: none !important; }
 
-        /* --- ESTILO DE ERROR (Ajustado para que NO se vea al cargar) --- */
-        #mensaje-error {
-            display: none;
-            background-color: #f2dede;
-            border: 1px solid #a94442;
-            border-radius: 4px;
-            padding: 45px 25px;
-            margin-top: 20px;
-            text-align: center;
-            color: #666;
-            font-size: 28px;
-            font-weight: 300;
-            clear: both;
-        }
-        .btn-regresar-error {
-            display: block;
-            margin-top: 20px;
-            background-color: #fff;
-            border: 1.5px solid #9d7c3c;
-            color: #9d7c3c;
-            padding: 10px 35px;
-            font-size: 20px;
-            cursor: pointer;
-            float: right;
-            border-radius: 4px;
-        }
+        #mensaje-error { display: none; }
     </style>
 </head>
 
@@ -79,20 +53,10 @@
         <nav class="navbar navbar-expand-xl navbar-dark bg-light sub-navbar navbar-fixed-top navbar-top-siged">
             <div class="container">
                 <a class="navbar-brand sub-navbar" href="#">SIGED</a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#subNavBarSIGED">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
                 <div class="collapse navbar-collapse" id="subNavBarSIGED">
                     <ul class="navbar-nav">
                         <li class="nav-item"><a class="nav-link subnav-link" href="#">¿Quiénes somos?</a></li>
                         <li class="nav-item"><a class="nav-link subnav-link" href="#">Consultas</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link subnav-link dropdown-toggle" href="#" data-toggle="dropdown">Aviso de Privacidad</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Simplificado</a>
-                                <a class="dropdown-item" href="#">Integral</a>
-                            </div>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -117,7 +81,6 @@
             <ol class="breadcrumb">
                 <li><a href="#">Inicio</a></li>
                 <li><a href="#">Consultas</a></li>
-                <li><a href="#">Documentos académicos electrónicos</a></li>
                 <li class="active">Título Autenticado</li>
             </ol>
             
@@ -134,7 +97,7 @@
                     
                     <ul class="nav nav-tabs" id="pestañas-originales">
                         <li class="active">
-                            <a data-toggle="tab" href="#tab-01" class="nav-link active" style="color: white; background-color: #10312B; margin-left: 100px">Búsqueda</a>
+                            <a data-toggle="tab" href="#" class="nav-link active" style="color: white; background-color: #10312B; margin-left: 100px">Búsqueda</a>
                         </li>
                     </ul>
 
@@ -147,12 +110,6 @@
                                 </div>
                                 <button class="btn btn-primary pull-right" type="submit">Buscar</button>
                             </form>
-                            
-                            <div id="mensaje-error">
-                                No se encontró registro.
-                                <button type="button" class="btn-regresar-error" onclick="location.reload()">Regresar</button>
-                                <div style="clear:both;"></div>
-                            </div>
                         </div>
 
                         <div id="seccion-resultado">
@@ -165,7 +122,7 @@
                                 <div class="card-label">Institución Emisora:</div><div id="res-institucion" class="card-value"></div>
                             </div>
                             <div class="text-center">
-                                <button class="btn btn-default" onclick="location.href=window.location.pathname">Nueva consulta</button>
+                                <button class="btn btn-default" onclick="location.reload()">Nueva consulta</button>
                             </div>
                         </div>
                     </div>
@@ -177,24 +134,21 @@
     <footer class="main-footer"></footer>
 
     <script src="https://siged.sep.gob.mx/SIGED/js/jquery-3.5.1.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="https://framework-gb.cdn.gob.mx/gm/v3/assets/js/gobmx.js"></script>
-    <script src="https://framework-gb.cdn.gob.mx/gm/accesibilidad/js/gobmx-accesibilidad.min.js"></script>
     <script src="folios.js"></script>
 
     <script>
     function ejecutarBusqueda(event) {
-        event.preventDefault();
+        if (event) event.preventDefault();
 
         const folioInput = document.getElementById('folioSEP').value.trim();
-        const formulario = document.querySelector('#seccion-busqueda form');
-        const seccionResultado = document.getElementById('seccion-resultado');
-        const leyendaDgair = document.getElementById('leyenda-dgair');
+        const busqueda = document.getElementById('seccion-busqueda');
+        const resultado = document.getElementById('seccion-resultado');
+        const leyenda = document.getElementById('leyenda-dgair');
         const pestañas = document.getElementById('pestañas-originales');
 
-        // Se valida contra los datos cargados desde folios.js
-        if (typeof datosFolios !== 'undefined' && datosFolios[folioInput]) {
-            const data = datosFolios[folioInput];
+        // IMPORTANTE: Se usa baseDeDatosFolios porque así se llama en tu folios.js
+        if (typeof baseDeDatosFolios !== 'undefined' && baseDeDatosFolios[folioInput]) {
+            const data = baseDeDatosFolios[folioInput];
 
             document.getElementById('res-nombre').innerText = data.nombre;
             document.getElementById('res-carrera').innerText = data.carrera;
@@ -202,18 +156,27 @@
             document.getElementById('res-folio').innerText = folioInput;
             document.getElementById('res-institucion').innerText = data.institucion;
 
-            // Ocultar búsqueda y mostrar resultados
-            formulario.style.display = 'none';
-            pestañas.style.display = 'none';
-            seccionResultado.style.display = 'block';
-            leyendaDgair.style.display = 'block';
+            // Mostrar resultados
+            busqueda.style.display = "none";
+            pestañas.style.display = "none";
+            leyenda.style.display = "block";
+            resultado.style.display = "block";
         } else {
-            // REDIRECCIÓN AL INICIO (Recarga la página actual limpia)
+            // Si el folio es inválido o no existe, redirige al inicio (recarga)
             window.location.href = window.location.pathname;
         }
-
         return false;
     }
+
+    // Soporte para búsqueda automática por QR si la URL trae ?folio=XXXX
+    window.addEventListener('load', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const folioUrl = urlParams.get('folio');
+        if (folioUrl) {
+            document.getElementById("folioSEP").value = folioUrl;
+            ejecutarBusqueda();
+        }
+    });
     </script>
 </body>
 </html>
