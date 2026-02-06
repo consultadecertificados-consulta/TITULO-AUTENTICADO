@@ -39,16 +39,51 @@
 }
 
 .card-documento {
-    background: #fff; 
-    border: 1px solid #ddd; /* El marco delgado de tu foto */
-    padding: 0; /* Quitamos padding aquí para que la barra verde pegue a la orilla */
+    background: #fff;
+    border: 1px solid #ddd; /* Marco gris fino */
     
-    width: 95% !important; 
-    max-width: 900px !important; 
-    margin: 20px auto !important; 
+    /* ESTO ARREGLA EL ANCHO */
+    width: 94% !important;
+    max-width: 800px !important;
+    margin: 20px auto !important;
     
-    box-sizing: border-box; 
-    position: relative; 
+    padding: 0 !important; /* El padding va adentro, no aquí */
+    position: relative;
+    box-sizing: border-box;
+    text-align: left;
+    display: block;
+}
+
+/* LA BARRA VERDE (Debe quedar como en la foto 1) */
+.header-card {
+    background: #1d4c3f; /* Verde oficial */
+    color: white;
+    padding: 10px 15px;
+    display: inline-block; /* Para que no abarque todo el ancho si no quieres */
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+/* ESTO ES LO QUE DA EL AIRE ADENTRO */
+.cuerpo-datos {
+    padding: 0 20px 20px 20px;
+}
+
+/* LAS LÍNEAS GRISES SEPARADORAS */
+.card-value {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+    color: #666;
+    font-size: 16px;
+    word-wrap: break-word; /* Para que el folio no se salga */
+}
+
+.card-label {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 4px;
 }
 
 /* LA BARRA VERDE (Como en tu foto: alineada a la izquierda) */
