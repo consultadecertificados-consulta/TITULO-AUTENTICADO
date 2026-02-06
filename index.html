@@ -40,26 +40,36 @@
 
 /* ESTO AJUSTA LA BARRA VERDE AL 25% (LA MITAD DE LA MITAD) */
 /* EFECTO DE BARRA AFUERA DEL MARCO */
+/* BARRA VERDE TIPO PESTAÑA FUERA DEL MARCO */
 .header-card {
     background: #1d4d3f !important;
     color: #fff !important;
-    padding: 10px 15px !important;
-    font-size: 16px !important;
-    font-weight: normal !important;
+    padding: 8px 15px !important;
+    font-size: 14px !important;
+    font-weight: bold !important;
     text-align: center;
+    white-space: nowrap; /* ¡OBLIGATORIO: Mantiene el texto en una sola línea! */
 
-    /* TAMAÑO (LA MITAD DE LA MITAD) */
-    width: 25% !important;
-    display: block !important;
-
-    /* POSICIONAMIENTO HACIA AFUERA */
+    /* AJUSTE DE ANCHO: "La mitad de la mitad" visual */
+    width: auto !important;       /* Deja que el texto mande */
+    min-width: 120px !important;  /* Le da un cuerpo mínimo */
+    max-width: 45% !important;    /* Evita que crezca demasiado */
+    
+    /* POSICIONAMIENTO PARA SALIR DEL MARCO */
     position: absolute !important;
-    top: -15px !important;   /* Sube un poco para salir del marco */
-    left: -20px !important;  /* Mueve a la izquierda para salir del marco */
+    top: 20px !important;    /* Baja un poco desde el borde superior */
+    left: -15px !important;  /* ESTO LA SACA HACIA LA IZQUIERDA DEL MARCO */
     z-index: 100;
     
-    /* OPCIONAL: Sombra para que se note que está encima */
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    /* EFECTO DE SOMBRA PARA DAR RELEVE */
+    box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+}
+
+/* AJUSTE DEL MARCO BLANCO PARA QUE NO SE CORTE */
+.card-documento {
+    position: relative !important;
+    margin-left: 25px !important; /* Espacio extra a la izquierda para que quepa la pestaña */
+    padding-top: 60px !important; /* Baja el contenido para que la barra no tape el nombre */
 }
 
 /* AJUSTE OBLIGATORIO DEL MARCO BLANCO */
