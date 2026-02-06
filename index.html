@@ -12,32 +12,30 @@
     <link rel="stylesheet" type="text/css" href="https://siged.sep.gob.mx/SIGED/css/global_siged.css">
 
     <style>
-    /* Mantenemos tus ajustes de posición originales */
+    /* Mantiene tus ajustes de navegación */
     .nav > li { left: 0px !important; margin-left: -100px !important; position: relative; }
-    .contenedor { margin-top: 50px; }
     
-    /* Configuración para que los títulos floten sobre la imagen */
+    /* Esto sube los títulos sobre la imagen sin cambiar su tamaño */
     .container-top {
         position: relative;
         z-index: 10;
-        /* Subimos los títulos sobre la foto sin afectar su tamaño */
-        margin-top: -280px !important; 
+        margin-top: -300px !important; /* Ajusta este número para subir/bajar las letras */
     }
 
+    /* Forzamos el color original y quitamos sombras */
     .hdr_title h3, .hdr_title h2 {
-        color: #000 !important; /* Negro original */
+        color: #000 !important;
         text-shadow: none !important;
-        /* No añadimos font-size para que se quede el original */
     }
 
-    /* Ajuste para que el buscador no tape la foto */
-    .tab-content {
-        background-color: #f9f9f9;
-        margin-top: 180px; /* Espacio para que luzca la foto abajo */
+    /* Espacio para que el buscador no se encime con la imagen */
+    .contenedor {
+        margin-top: 250px !important;
     }
 
-    #leyenda-dgair { font-weight: bold; margin-bottom: 20px; color: #333; display: none; }
-    #mensaje-error { display: none; background-color: #f2dede; border: 1px solid #a94442; padding: 45px 25px; text-align: center; color: #a94442; font-size: 24px; }
+    /* Estilos base para que no choquen con la tarjeta original */
+    #leyenda-dgair { font-weight: bold; margin-bottom: 20px; display: none; }
+    #mensaje-error { display: none; background-color: #f2dede; border: 1px solid #a94442; padding: 45px 25px; text-align: center; color: #a94442; }
 </style>
 </head>
 
@@ -68,7 +66,7 @@
         </nav>
     </header>
 
-    <img src="logo.png" style="width: 100% !important; height: 400px !important; object-fit: cover; display: block; margin-top: -50px; position: relative; z-index: 1;">
+    <img src="logo.png" style="width: 100% !important; height: 420px !important; object-fit: cover; display: block; margin-top: -50px; position: relative; z-index: 1;">
     <div class="container container-top">
         <div class="row">
             <div class="col-lg-12 hdr_title">
