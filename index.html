@@ -7,19 +7,28 @@
     <title>SIGED - Consulta de Documento Electrónico de Titulación</title>
 
     <link href="https://framework-gb.cdn.gob.mx/gm/v3/assets/styles/main.css" rel="stylesheet">
-    <link href="https://framework-gb.cdn.gob.mx/gm/v3/assets/images/favicon.ico" rel="shortcut icon">
-    <link href="https://framework-gb.cdn.gob.mx/gm/accesibilidad/css/gobmx-accesibilidad.min.css" rel="stylesheet">
-    
-    <link rel="stylesheet" type="text/css" href="https://siged.sep.gob.mx/SIGED/css/navbar-settings.css">
-    <link rel="stylesheet" type="text/css" href="https://siged.sep.gob.mx/SIGED/css/global_siged.css">
+    <link href="https://siged.sep.gob.mx/SIGED/css/navbar-settings.css" rel="stylesheet">
+    <link href="https://siged.sep.gob.mx/SIGED/css/global_siged.css" rel="stylesheet">
 
     <style>
         .nav > li { left: 0px !important; margin-left: -100px !important; position: relative; }
-        .tab-content { padding-bottom: 15vh; }
         .contenedor { margin-top: 50px; }
         .container-top { margin-top: -33vh; }
+        .hdr_title h3, .hdr_title h2 { color: #000 !important; font-weight: bold; text-shadow: none !important; }
+        
+        /* Leyenda DGAIR que aparece solo en resultados */
+        #leyenda-dgair { 
+            display: none; 
+            font-size: 24px; 
+            font-weight: bold; 
+            color: #545454; 
+            margin-bottom: 5px; 
+            text-transform: uppercase;
+        }
 
-        /* --- NUEVO ESTILO DE TARJETA DE RESULTADO --- */
+        /* --- DISEÑO DE LA TARJETA (Solo aparece al buscar) --- */
+        #seccion-resultado { display: none; margin-bottom: 50px; }
+        
         .card-documento {
             background: #fff;
             border: 1px solid #ddd;
@@ -30,6 +39,7 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
+        /* Esta es la ÚNICA barra verde que debe salir en el resultado */
         .header-card-interna { 
             background: #1d4d3f; 
             color: #fff; 
@@ -42,9 +52,7 @@
             font-weight: bold;
         }
 
-        .cuerpo-tarjeta {
-            padding: 60px 40px 30px 40px;
-        }
+        .cuerpo-tarjeta { padding: 60px 40px 30px 40px; }
 
         .hojita-icono {
             font-size: 60px;
@@ -54,24 +62,31 @@
             margin: 0 auto 30px auto;
         }
 
-        .card-label { 
-            font-weight: bold; 
-            color: #333; 
-            margin-top: 10px; 
-            font-size: 16px; 
-        }
+        .card-label { font-weight: bold; color: #333; margin-top: 10px; font-size: 16px; }
 
         .card-value { 
             color: #777; 
             font-size: 15px; 
             text-transform: uppercase; 
             display: block; 
-            border-bottom: 1px solid #eee; /* Línea gris divisoria */
+            border-bottom: 1px solid #eee; 
             padding-bottom: 12px;
             margin-bottom: 15px;
             word-break: break-all;
         }
         .card-value:last-child { border-bottom: none; }
+
+        /* Estilo de Error */
+        #mensaje-error {
+            display: none;
+            background-color: #f2dede;
+            border: 1px solid #a94442;
+            padding: 45px 25px;
+            text-align: center;
+            color: #666;
+            font-size: 24px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 
@@ -79,34 +94,24 @@
     <header>
         <nav class="navbar navbar-expand-xl navbar-dark bg-light sub-navbar navbar-fixed-top navbar-top-siged">
             <div class="container">
-                <a class="navbar-brand sub-navbar" href="https://siged.sep.gob.mx/SIGED/">SIGED</a>
+                <a class="navbar-brand sub-navbar" href="#">SIGED</a>
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#subNavBarSIGED">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
                 <div class="collapse navbar-collapse" id="subNavBarSIGED">
                     <ul class="navbar-nav">
                         <li class="nav-item"><a class="nav-link subnav-link" href="#">¿Quiénes somos?</a></li>
                         <li class="nav-item"><a class="nav-link subnav-link" href="#">Consultas</a></li>
-                        <li class="nav-item"><a class="nav-link subnav-link" href="#">Estadística Educativa</a></li>
-                        <li class="nav-item"><a class="nav-link subnav-link" href="#">Datos abiertos</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link subnav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown">Aviso de Privacidad</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Simplificado</a>
-                                <a class="dropdown-item" href="#">Integral</a>
-                            </div>
-                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
 
-    <div><img class="img-background" src="https://siged.sep.gob.mx/SIGED/images/bnr_alumnos.png" style="width:100%"></div>
+    <div><img src="https://siged.sep.gob.mx/SIGED/images/bnr_alumnos.png" style="width: 100%;"></div>
 
     <div class="container container-top">
-        <div class="row align-items-center">
+        <div class="row">
             <div class="column col-lg-12 hdr_title">
                 <h3>Sistema de Información y Gestión Educativa</h3>
                 <h2 class="mt-1">Consulta de documentos académicos electrónicos</h2>
@@ -119,65 +124,111 @@
             <ol class="breadcrumb">
                 <li><a href="#">Inicio</a></li>
                 <li><a href="#">Consultas</a></li>
-                <li><a href="#">Documentos académicos electrónicos</a></li>		
-                <li class="active"><strong>Título Autenticado</strong></li>
-                <li><strong>Detalle</strong></li>
+                <li id="bread-dynamic" class="active">Título Autenticado</li>
             </ol>
-
-            <div class="row">
-                <div class="col-md-11">
-                    <h3>Consulta de títulos electrónicos autenticados por la DGAIR</h3>
-                    <br>
-                </div>
-            </div>
-
-            <div class="row">
+            
+            <div class="row col-md-12">
+                <div id="leyenda-dgair">Consulta de títulos electrónicos autenticados por la DGAIR</div>
+                
                 <div class="col-md-10">
-                    <h3>Título Autenticado</h3>
+                    <h3>TÍTULO AUTENTICADO</h3>
                     <hr class="red">
                 </div>
-            </div>
 
-            <ul class="nav nav-tabs">
-                <li class="active"><a data-bs-toggle="tab" href="#tab-02" class="nav-link active" style="color: white; background-color: #10312B; margin-left: 100px">Detalle del documento</a></li>
-            </ul>
+                <ul class="nav nav-tabs" id="nav-busqueda">
+                    <li class="active">
+                        <a data-toggle="tab" href="#" class="nav-link active" style="color: white; background-color: #10312B; margin-left: 100px">Búsqueda</a>
+                    </li>
+                </ul>
 
-            <div class="tab-content">                        
-                <div class="tab-pane active" id="tab-02">                            
-                    
-                    <div class="card-documento">
-                        <div class="header-card-interna">Detalle del documento</div>
-                        
-                        <div class="cuerpo-tarjeta">
-                            <span class="glyphicon glyphicon-file hojita-icono"></span>
-
-                            <div class="row">
-                                <div class="col-md-10 col-md-offset-1">
-                                    <div class="card-label">Nombre:</div>
-                                    <div class="card-value">BELEN CAROLINA OLIVARES ALVAREZ</div>
-
-                                    <div class="card-label">Carrera:</div>
-                                    <div class="card-value">LICENCIATURA EN PSICOLOGÍA</div>
-
-                                    <div class="card-label">Nivel:</div>
-                                    <div class="card-value">LICENCIATURA</div>
-
-                                    <div class="card-label">Folio Digital:</div>
-                                    <div class="card-value">8d2ef0b6-efb2-4461-9971-2de64eaa5777</div>
-
-                                    <div class="card-label">Institución Emisora:</div>
-                                    <div class="card-value">UNIVERSIDAD LATINOAMERICANA CAMPUS VALLE</div>
-                                </div>
+                <div class="tab-content">
+                    <div id="contenedor-busqueda">
+                        <form role="form" onsubmit="return ejecutarBusqueda(event)">
+                            <div class="form-group">
+                                <label class="control-label" for="folioSEP">Folio Digital:</label>
+                                <input class="form-control" id="folioSEP" placeholder="Folio Digital del Título Electrónico" type="text">
                             </div>
+                            <button class="btn btn-primary pull-right" type="submit">Buscar</button>
+                        </form>
+                        
+                        <div id="mensaje-error">
+                            No se encontró registro.
+                            <button type="button" class="btn btn-default pull-right" onclick="location.reload()">Regresar</button>
                         </div>
                     </div>
+
+                    <div id="seccion-resultado">
+                        <div class="card-documento">
+                            <div class="header-card-interna">Detalle del documento</div>
+                            
+                            <div class="cuerpo-tarjeta">
+                                <span class="glyphicon glyphicon-file hojita-icono"></span>
+                                
+                                <div class="card-label">Nombre:</div>
+                                <div id="res-nombre" class="card-value"></div>
+                                
+                                <div class="card-label">Carrera:</div>
+                                <div id="res-carrera" class="card-value"></div>
+                                
+                                <div class="card-label">Nivel:</div>
+                                <div id="res-nivel" class="card-value"></div>
+                                
+                                <div class="card-label">Folio Digital:</div>
+                                <div id="res-folio" class="card-value"></div>
+                                
+                                <div class="card-label">Institución Emisora:</div>
+                                <div id="res-institucion" class="card-value" style="border-bottom: none;"></div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-default" onclick="location.reload()">Nueva consulta</button>
+                        </div>
                     </div>
+                </div>
             </div>
         </div>
     </main>
 
     <script src="https://siged.sep.gob.mx/SIGED/js/jquery-3.5.1.min.js"></script>
-    <script src="https://framework-gb.cdn.gob.mx/gm/v3/assets/js/gobmx.js"></script>
-    <script src="https://framework-gb.cdn.gob.mx/gm/accesibilidad/js/gobmx-accesibilidad.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="folios.js"></script>
+
+    <script>
+    function ejecutarBusqueda(event) {
+        event.preventDefault();
+        const folioInput = document.getElementById("folioSEP").value.trim();
+        
+        // Simulación o carga desde folios.js
+        if (typeof baseDeDatosFolios !== 'undefined' && baseDeDatosFolios[folioInput]) {
+            const data = baseDeDatosFolios[folioInput];
+            
+            document.getElementById("res-nombre").innerText = data.nombre;
+            document.getElementById("res-carrera").innerText = data.carrera;
+            document.getElementById("res-nivel").innerText = data.nivel;
+            document.getElementById("res-folio").innerText = folioInput;
+            document.getElementById("res-institucion").innerText = data.institucion;
+
+            // OCULTAR BUSCADOR Y PESTAÑA
+            document.getElementById("contenedor-busqueda").style.display = "none";
+            document.getElementById("nav-busqueda").style.display = "none";
+            
+            // MOSTRAR RESULTADO Y LEYENDA
+            document.getElementById("leyenda-dgair").style.display = "block";
+            document.getElementById("seccion-resultado").style.display = "block";
+            
+            // Actualizar Breadcrumb
+            document.getElementById("bread-dynamic").innerHTML = '<a href="#" onclick="location.reload()">Título Autenticado</a>';
+            const bread = document.querySelector(".breadcrumb");
+            const li = document.createElement("li");
+            li.innerHTML = "<strong>Detalle</strong>";
+            bread.appendChild(li);
+
+        } else {
+            document.querySelector("#contenedor-busqueda form").style.display = "none";
+            document.getElementById("mensaje-error").style.display = "block";
+        }
+        return false;
+    }
+    </script>
 </body>
 </html>
