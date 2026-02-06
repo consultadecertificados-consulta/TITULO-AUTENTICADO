@@ -17,17 +17,9 @@
         .container-top { margin-top: -33vh; }
         .hdr_title h3, .hdr_title h2 { color: #000 !important; font-weight: bold; text-shadow: none !important; }
 
-        /* Estilo de la Tarjeta Blanca */
-        #seccion-resultado { display: none; }
-        .card-documento {
-            background: #fff;
-            border: 1px solid #ddd;
-            margin: 0 auto 50px auto;
-            max-width: 950px;
-            padding: 40px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
+        /* Estilo del Resultado Integrado (Sin tarjeta blanca) */
+        #seccion-resultado { display: none; padding-top: 20px; }
+        
         .hojita-icono {
             font-size: 65px;
             color: #545454;
@@ -49,19 +41,21 @@
         }
         .card-value:last-child { border-bottom: none; }
 
-        #leyenda-dgair { font-weight: bold; margin-bottom: 20px; font-size: 18px; color: #333; }
+        /* Leyenda DGAIR oculta por defecto */
+        #leyenda-dgair { display: none; font-weight: bold; margin-bottom: 20px; font-size: 18px; color: #333; }
+        
         #mensaje-error { display: none; background-color: #f2dede; border: 1px solid #a94442; padding: 45px 25px; text-align: center; color: #a94442; font-size: 24px; }
     </style>
 </head>
 
 <body>
-    <div id="accessibility-menu"></div>
+    <div id="gobmx-accesibilidad"></div>
 
     <header>
         <nav class="navbar navbar-expand-xl navbar-dark bg-light sub-navbar navbar-fixed-top navbar-top-siged">
             <div class="container">
                 <a class="navbar-brand sub-navbar" href="#">SIGED</a>
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#subNavBarSIGED">
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#subNavBarSIGED">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="subNavBarSIGED">
@@ -69,7 +63,7 @@
                         <li class="nav-item"><a class="nav-link subnav-link" href="#">¿Quiénes somos?</a></li>
                         <li class="nav-item"><a class="nav-link subnav-link" href="#">Consultas</a></li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link subnav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Aviso de Privacidad</a>
+                            <a class="nav-link subnav-link dropdown-toggle" href="#" data-toggle="dropdown">Aviso de Privacidad</a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="#">Simplificado</a>
                                 <a class="dropdown-item" href="#">Integral</a>
@@ -131,16 +125,14 @@
                 </div>
 
                 <div id="seccion-resultado">
-                    <div class="card-documento">
-                        <span class="glyphicon glyphicon-file hojita-icono"></span>
-                        <div class="row">
-                            <div class="col-md-10 col-md-offset-1">
-                                <div class="card-label">Nombre:</div><div id="res-nombre" class="card-value"></div>
-                                <div class="card-label">Carrera:</div><div id="res-carrera" class="card-value"></div>
-                                <div class="card-label">Nivel:</div><div id="res-nivel" class="card-value"></div>
-                                <div class="card-label">Folio Digital:</div><div id="res-folio" class="card-value"></div>
-                                <div class="card-label">Institución Emisora:</div><div id="res-institucion" class="card-value"></div>
-                            </div>
+                    <span class="glyphicon glyphicon-file hojita-icono"></span>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <div class="card-label">Nombre:</div><div id="res-nombre" class="card-value"></div>
+                            <div class="card-label">Carrera:</div><div id="res-carrera" class="card-value"></div>
+                            <div class="card-label">Nivel:</div><div id="res-nivel" class="card-value"></div>
+                            <div class="card-label">Folio Digital:</div><div id="res-folio" class="card-value"></div>
+                            <div class="card-label">Institución Emisora:</div><div id="res-institucion" class="card-value"></div>
                         </div>
                     </div>
                 </div>
@@ -166,6 +158,9 @@
             document.getElementById("res-folio").innerText = folio;
             document.getElementById("res-institucion").innerText = d.institucion;
 
+            // Mostrar la leyenda DGAIR
+            document.getElementById("leyenda-dgair").style.display = "block";
+            
             // Cambiar texto de la pestaña y mostrar resultado
             document.getElementById("texto-pestaña").innerText = "Detalle del documento";
             document.getElementById("seccion-buscador").style.display = "none";
