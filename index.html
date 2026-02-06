@@ -43,27 +43,42 @@
 /* BARRA VERDE TIPO PESTAÑA FUERA DEL MARCO */
 /* LA BARRA VERDE: Corta, horizontal y hacia afuera */
 /* LA BARRA VERDE: Efecto pestaña que sale del marco */
+/* 1. LA BARRA VERDE: Más arriba y afuera */
 .header-card {
     background: #1d4d3f !important;
     color: #fff !important;
-    padding: 10px 18px !important;
+    padding: 10px 20px !important;
     font-size: 15px !important;
     font-weight: bold !important;
     text-align: center;
+    white-space: nowrap !important;
     
-    /* Mantiene el texto en una sola línea horizontal */
-    white-space: nowrap !important; 
     width: auto !important; 
     display: inline-block !important;
 
-    /* POSICIONAMIENTO FUERA DEL MARCO */
+    /* POSICIONAMIENTO */
     position: absolute !important;
-    top: -18px !important;   /* La sube por encima del borde superior */
-    left: -15px !important;  /* La saca hacia la izquierda del borde lateral */
+    top: -30px !important;   /* MÁS ARRIBA: Aumentamos de -18 a -30 */
+    left: -15px !important;  /* Mantenemos la salida a la izquierda */
     z-index: 100;
     
-    /* Sombra para que se vea por encima del marco blanco */
     box-shadow: 4px 4px 8px rgba(0,0,0,0.3) !important;
+}
+
+/* 2. EL CUADRO DE INFORMACIÓN: Más ancho */
+.card-documento {
+    position: relative !important;
+    
+    /* ANCHO DEL CUADRO */
+    width: 98% !important;        /* Ocupa casi todo el ancho disponible */
+    max-width: 100% !important;   /* Asegura que no se pase del borde de la pantalla */
+    margin: 50px auto 20px auto !important; /* Lo centra y da espacio arriba para la barra */
+    
+    /* AJUSTES INTERNOS */
+    padding: 45px 15px 20px 15px !important; /* Más espacio arriba para no chocar con la barra */
+    background: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Sombra suave para el cuadro */
 }
 
 /* EL MARCO BLANCO: Ajuste de márgenes para la pestaña */
