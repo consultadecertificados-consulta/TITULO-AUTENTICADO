@@ -14,23 +14,22 @@
     <link rel="stylesheet" type="text/css" href="https://siged.sep.gob.mx/SIGED/css/global_siged.css">
 
     <style>
-        /* Estilos de posición del original */
         .nav > li { left: 0px !important; margin-left: -100px !important; position: relative; }
         .contenedor { margin-top: 50px; }
         .container-top { margin-top: -33vh; }
         .hdr_title h3, .hdr_title h2 { color: #000 !important; font-weight: bold; text-shadow: none !important; }
         
-        /* Contenedor del resultado dentro del marco */
+        /* Estilo del resultado integrado */
         #seccion-resultado { display: none; padding-top: 20px; }
-        .cuerpo-resultado { padding: 20px 0; }
         .hojita-icono { font-size: 55px; color: #545454; display: block; text-align: center; margin-bottom: 25px; }
         .card-label { font-weight: bold; color: #333; margin-top: 15px; font-size: 16px; }
         .card-value { color: #777; font-size: 15px; text-transform: uppercase; display: block; border-bottom: 1px solid #eee; padding-bottom: 12px; margin-bottom: 15px; word-break: break-all; }
         .card-value:last-child { border-bottom: none; }
 
-        #leyenda-dgair { font-weight: bold; margin-bottom: 20px; font-size: 18px; color: #333; }
-        #mensaje-error { display: none; background-color: #f2dede; border: 1px solid #a94442; padding: 45px 25px; text-align: center; color: #a94442; font-size: 24px; }
+        /* Leyenda DGAIR (oculta inicialmente) */
+        #leyenda-dgair { display: none; font-weight: bold; margin-bottom: 20px; font-size: 18px; color: #333; }
         
+        #mensaje-error { display: none; background-color: #f2dede; border: 1px solid #a94442; padding: 45px 25px; text-align: center; color: #a94442; font-size: 24px; }
         .tab-content { border: 1px solid #ddd; border-top: none; padding: 40px; background-color: #f9f9f9; }
     </style>
 </head>
@@ -43,12 +42,12 @@
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#subNavBarSIGED" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
+                        <span class="sr-only">Desplegar menú</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="https://siged.sep.gob.mx/SIGED/">SIGED</a>
+                    <a class="navbar-brand" href="#">SIGED</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="subNavBarSIGED">
@@ -146,12 +145,18 @@
         const folio = document.getElementById("folioSEP").value.trim();
         if (typeof baseDeDatosFolios !== 'undefined' && baseDeDatosFolios[folio]) {
             const d = baseDeDatosFolios[folio];
+            
+            // Llenar datos
             document.getElementById("res-nombre").innerText = d.nombre;
             document.getElementById("res-carrera").innerText = d.carrera;
             document.getElementById("res-nivel").innerText = d.nivel;
             document.getElementById("res-folio").innerText = folio;
             document.getElementById("res-institucion").innerText = d.institucion;
+
+            // Mostrar leyenda DGAIR solo aquí
+            document.getElementById("leyenda-dgair").style.display = "block";
             
+            // Cambiar interfaz
             document.getElementById("texto-pestaña").innerText = "Detalle del documento";
             document.getElementById("seccion-buscador").style.display = "none";
             document.getElementById("seccion-resultado").style.display = "block";
@@ -161,7 +166,6 @@
         }
     }
 
-    // Auto-ejecución por QR
     window.onload = function() {
         const params = new URLSearchParams(window.location.search);
         const f = params.get('folio') || params.get('folioSEP');
