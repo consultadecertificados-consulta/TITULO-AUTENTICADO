@@ -19,65 +19,38 @@
         .container-top { margin-top: -33vh; }
         .hdr_title h3, .hdr_title h2 { color: #000 !important; font-weight: bold; text-shadow: none !important; }
         
-        /* Contenedor del resultado dentro del marco */
         #seccion-resultado { display: none; padding-top: 20px; }
-        
-        .cuerpo-resultado {
-            padding: 20px 0;
-        }
-
-        .hojita-icono {
-            font-size: 55px;
-            color: #545454;
-            display: block;
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
+        .cuerpo-resultado { padding: 20px 0; }
+        .hojita-icono { font-size: 55px; color: #545454; display: block; text-align: center; margin-bottom: 25px; }
         .card-label { font-weight: bold; color: #333; margin-top: 15px; font-size: 16px; }
-        
-        .card-value { 
-            color: #777; 
-            font-size: 15px; 
-            text-transform: uppercase; 
-            display: block; 
-            border-bottom: 1px solid #eee; /* Líneas grises divisorias */
-            padding-bottom: 12px;
-            margin-bottom: 15px;
-            word-break: break-all;
-        }
+        .card-value { color: #777; font-size: 15px; text-transform: uppercase; display: block; border-bottom: 1px solid #eee; padding-bottom: 12px; margin-bottom: 15px; word-break: break-all; }
         .card-value:last-child { border-bottom: none; }
-
         #leyenda-dgair { font-weight: bold; margin-bottom: 20px; font-size: 18px; color: #333; }
         #mensaje-error { display: none; background-color: #f2dede; border: 1px solid #a94442; padding: 45px 25px; text-align: center; color: #a94442; font-size: 24px; }
         
-        /* Ajuste para que el tab-content se vea como un marco integrado */
-        .tab-content {
-            border: 1px solid #ddd;
-            border-top: none;
-            padding: 40px;
-            background-color: #f9f9f9; /* Un tono muy leve para diferenciar el fondo */
-        }
+        .tab-content { border: 1px solid #ddd; border-top: none; padding: 40px; background-color: #f9f9f9; }
     </style>
 </head>
 
 <body>
-    <div id="accessibility-menu"></div>
+    <div id="gobmx-accesibilidad"></div>
 
     <header>
         <nav class="navbar navbar-expand-xl navbar-dark bg-light sub-navbar navbar-fixed-top navbar-top-siged">
             <div class="container">
                 <a class="navbar-brand sub-navbar" href="#">SIGED</a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#subNavBarSIGED">
+                
+                <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#subNavBarSIGED" aria-expanded="false">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="collapse navbar-collapse" id="subNavBarSIGED">
                     <ul class="navbar-nav">
                         <li class="nav-item"><a class="nav-link subnav-link" href="#">¿Quiénes somos?</a></li>
                         <li class="nav-item"><a class="nav-link subnav-link" href="#">Consultas</a></li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link subnav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Aviso de Privacidad</a>
-                            <div class="dropdown-menu">
+                            <a class="nav-link subnav-link dropdown-toggle" href="#" id="avisoPrivacidad" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Aviso de Privacidad</a>
+                            <div class="dropdown-menu" aria-labelledby="avisoPrivacidad">
                                 <a class="dropdown-item" href="#">Simplificado</a>
                                 <a class="dropdown-item" href="#">Integral</a>
                             </div>
@@ -155,9 +128,9 @@
         </div>
     </main>
 
-    <script src="https://siged.sep.gob.mx/SIGED/js/jquery-3.5.1.min.js"></script>
+    <script src="https://framework-gb.cdn.gob.mx/gm/v3/assets/js/jquery.js"></script>
     <script src="https://framework-gb.cdn.gob.mx/gm/v3/assets/js/gobmx.js"></script>
-    <script src="https://framework-gb.cdn.gob.mx/gm/accesibilidad/js/gobmx-accessibility.min.js"></script>
+    <script src="https://framework-gb.cdn.gob.mx/gm/accesibilidad/js/gobmx-accesibilidad.min.js"></script>
     <script src="folios.js"></script>
 
     <script>
@@ -173,7 +146,6 @@
             document.getElementById("res-folio").innerText = folio;
             document.getElementById("res-institucion").innerText = d.institucion;
 
-            // Cambiar texto de pestaña y mostrar contenido dentro del marco
             document.getElementById("texto-pestaña").innerText = "Detalle del documento";
             document.getElementById("seccion-buscador").style.display = "none";
             document.getElementById("seccion-resultado").style.display = "block";
