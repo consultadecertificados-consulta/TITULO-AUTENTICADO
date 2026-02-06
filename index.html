@@ -52,19 +52,20 @@
     box-sizing: border-box;
 }
 /* LA BARRA VERDE (Debe quedar como en la foto 1) */
+/* AJUSTE PARA LA BARRA VERDE INTERNA (25% del ancho) */
 .header-card {
-    background: #1d4d3f; /* El color verde oficial */
+    background: #1d4d3f;
     color: #fff;
-    padding: 10px 20px;  /* Espacio interno: arriba/abajo y lados */
-    font-size: 6px;
-    font-weight: bold;
+    padding: 12px;
+    text-align: center;
+    font-size: 1.2em;
     
-    /* LA CLAVE: Esto hace que no abarque todo el ancho */
-    display: inline-block; 
-    
-    /* Ajuste de posición */
-    margin-top: 0;      /* Pegada al borde superior del cuadro */
-    margin-left: 0;     /* Pegada al borde izquierdo */
+    /* CAMBIO CLAVE AQUÍ */
+    width: 25%;           /* La mitad de la mitad */
+    display: block;       
+    position: absolute;   /* Para que se pegue arriba a la izquierda */
+    top: -1px;
+    left: -1px;
 }
 
 /* ESTO ES LO QUE DA EL AIRE ADENTRO */
