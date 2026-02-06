@@ -40,19 +40,38 @@
 
 .card-documento {
     background: #fff; 
-    border: 1px solid #ddd; 
     
-    /* CONTROL DE ANCHO Y CENTRADO */
-    width: 95% !important;        /* Ocupa casi todo el ancho */
-    max-width: 2000px !important;  /* No deja que se estire infinito en PC */
-    margin: 30px auto !important;  /* 'auto' lo centra horizontalmente */
+    /* EL MARCO GRUESO Y OSCURO */
+    border: 12px solid #444; /* Grosor y color del marco exterior */
+    border-radius: 25px;      /* Esquinas bien redondeadas como en tu foto */
     
-    /* MARGEN INTERNO (Para que el texto no toque el borde) */
-    padding: 60px 20px 30px 20px; 
+    /* CONTROL DE ANCHO */
+    width: 95% !important; 
+    max-width: 800px !important; 
+    margin: 30px auto !important; 
     
-    box-sizing: border-box; /* IMPORTANTE: evita que el padding "infle" la caja */
+    /* ESPACIO INTERNO */
+    padding: 0; /* Quitamos padding para que la barra verde pegue arriba */
+    box-sizing: border-box; 
     position: relative; 
-    display: block; 
+    overflow: hidden; /* Esto hace que la barra verde respete las curvas */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2); /* Sombra para profundidad */
+}
+
+/* AJUSTE PARA LA BARRA VERDE INTERNA */
+.header-card {
+    background: #1d4d3f;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+    font-size: 1.2em;
+    width: 100%;
+    display: block;
+}
+
+/* PARA LOS DATOS DENTRO DEL MARCO */
+.datos-interior {
+    padding: 20px; /* Este espacio separa el texto del marco grueso */
 }
 
 /* ESTILO PARA LA HOJITA */
