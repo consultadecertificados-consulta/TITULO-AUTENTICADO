@@ -41,6 +41,7 @@
 /* ESTO AJUSTA LA BARRA VERDE AL 25% (LA MITAD DE LA MITAD) */
 /* EFECTO DE BARRA AFUERA DEL MARCO */
 /* BARRA VERDE TIPO PESTAÑA FUERA DEL MARCO */
+/* LA BARRA VERDE: Corta, horizontal y hacia afuera */
 .header-card {
     background: #1d4d3f !important;
     color: #fff !important;
@@ -48,21 +49,30 @@
     font-size: 14px !important;
     font-weight: bold !important;
     text-align: center;
-    white-space: nowrap; /* ¡OBLIGATORIO: Mantiene el texto en una sola línea! */
-
-    /* AJUSTE DE ANCHO: "La mitad de la mitad" visual */
-    width: auto !important;       /* Deja que el texto mande */
-    min-width: 120px !important;  /* Le da un cuerpo mínimo */
-    max-width: 45% !important;    /* Evita que crezca demasiado */
     
-    /* POSICIONAMIENTO PARA SALIR DEL MARCO */
+    /* ESTO EVITA QUE EL TEXTO SE AMONTONE HACIA ABAJO */
+    white-space: nowrap !important; 
+    width: auto !important; 
+    display: inline-block !important;
+
+    /* POSICIONAMIENTO FUERA DEL MARCO */
     position: absolute !important;
-    top: 20px !important;    /* Baja un poco desde el borde superior */
-    left: -15px !important;  /* ESTO LA SACA HACIA LA IZQUIERDA DEL MARCO */
+    top: 15px !important;    /* Ajusta qué tan arriba queda */
+    left: -12px !important;  /* ESTO LA SACA HACIA LA IZQUIERDA DEL MARCO */
     z-index: 100;
     
-    /* EFECTO DE SOMBRA PARA DAR RELEVE */
-    box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+    /* SOMBRA PARA EFECTO "ENCIMA" */
+    box-shadow: 3px 3px 5px rgba(0,0,0,0.3) !important;
+}
+
+/* EL MARCO BLANCO: Ajuste para que no se corte la barra */
+.card-documento {
+    position: relative !important;
+    margin-left: 20px !important; /* Espacio para que la barra no choque con el borde de la pantalla */
+    margin-right: 10px !important;
+    padding-top: 50px !important; /* Espacio arriba para que la barra no tape el nombre */
+    background: #fff;
+    border: 1px solid #ddd;
 }
 
 /* AJUSTE DEL MARCO BLANCO PARA QUE NO SE CORTE */
