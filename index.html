@@ -42,27 +42,38 @@
 /* EFECTO DE BARRA AFUERA DEL MARCO */
 /* BARRA VERDE TIPO PESTAÑA FUERA DEL MARCO */
 /* LA BARRA VERDE: Corta, horizontal y hacia afuera */
+/* LA BARRA VERDE: Efecto pestaña que sale del marco */
 .header-card {
     background: #1d4d3f !important;
     color: #fff !important;
-    padding: 8px 15px !important;
-    font-size: 14px !important;
+    padding: 10px 18px !important;
+    font-size: 15px !important;
     font-weight: bold !important;
     text-align: center;
     
-    /* ESTO EVITA QUE EL TEXTO SE AMONTONE HACIA ABAJO */
+    /* Mantiene el texto en una sola línea horizontal */
     white-space: nowrap !important; 
     width: auto !important; 
     display: inline-block !important;
 
     /* POSICIONAMIENTO FUERA DEL MARCO */
     position: absolute !important;
-    top: 15px !important;    /* Ajusta qué tan arriba queda */
-    left: -12px !important;  /* ESTO LA SACA HACIA LA IZQUIERDA DEL MARCO */
+    top: -18px !important;   /* La sube por encima del borde superior */
+    left: -15px !important;  /* La saca hacia la izquierda del borde lateral */
     z-index: 100;
     
-    /* SOMBRA PARA EFECTO "ENCIMA" */
-    box-shadow: 3px 3px 5px rgba(0,0,0,0.3) !important;
+    /* Sombra para que se vea por encima del marco blanco */
+    box-shadow: 4px 4px 8px rgba(0,0,0,0.3) !important;
+}
+
+/* EL MARCO BLANCO: Ajuste de márgenes para la pestaña */
+.card-documento {
+    position: relative !important;
+    margin-top: 40px !important;  /* Espacio extra arriba para que la barra no choque */
+    margin-left: 25px !important; /* Espacio a la izquierda para que la barra no se corte con la pantalla */
+    padding-top: 45px !important; /* Baja el contenido (Nombre, etc.) para que no lo tape la barra */
+    background: #fff;
+    border: 1px solid #ddd;
 }
 
 /* EL MARCO BLANCO: Ajuste para que no se corte la barra */
