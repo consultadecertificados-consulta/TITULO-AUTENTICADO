@@ -14,7 +14,18 @@
     <style>
         .nav > li { left: 0px !important; margin-left: -100px !important; position: relative; }
         .contenedor { margin-top: 50px; }
-        .container-top { margin-top: -20vh; }
+        /* Contenedor de los títulos */
+.container-top {
+    position: relative; /* Permite moverlo sobre la imagen */
+    z-index: 10;        /* Lo pone al frente */
+    margin-top: -380px !important; /* Sube los títulos para que queden SOBRE la foto */
+    text-align: center; /* Opcional: centra los textos sobre la imagen */
+}
+
+.hdr_title h3, .hdr_title h2 {
+    color: #ffffff !important; /* Cambiamos a blanco para que resalte sobre la imagen */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8) !important; /* Sombra negra para leer mejor */
+}
         .hdr_title h3, .hdr_title h2 { color: #000 !important; font-weight: bold; text-shadow: none !important; }
 
         /* Estilo del Resultado Integrado (Sin tarjeta blanca) */
