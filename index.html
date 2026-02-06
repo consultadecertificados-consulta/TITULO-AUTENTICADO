@@ -40,24 +40,48 @@
 
 .card-documento {
     background: #fff; 
+    /* Un borde delgado y elegante, no uno gordo */
+    border: 1px solid #d0d0d0; 
+    border-radius: 8px; /* Curva suave, no exagerada */
     
-    /* EL MARCO GRUESO Y OSCURO */
-    border: 12px solid #444; /* Grosor y color del marco exterior */
-    border-radius: 25px;      /* Esquinas bien redondeadas como en tu foto */
-    
-    /* CONTROL DE ANCHO */
+    /* El ancho que querías */
     width: 95% !important; 
-    max-width: 800px !important; 
+    max-width: 900px !important; 
     margin: 30px auto !important; 
     
-    /* ESPACIO INTERNO */
-    padding: 0; /* Quitamos padding para que la barra verde pegue arriba */
-    box-sizing: border-box; 
-    position: relative; 
-    overflow: hidden; /* Esto hace que la barra verde respete las curvas */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2); /* Sombra para profundidad */
+    position: relative;
+    box-sizing: border-box;
+    overflow: hidden;
+    /* Una sombra ligera para que se vea moderno */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+    padding-bottom: 20px;
 }
 
+.header-card {
+    background: #1d4d3f; /* El verde oficial */
+    color: #fff;
+    padding: 12px 20px;
+    font-weight: bold;
+    font-size: 18px;
+    border-bottom: 1px solid #14362d;
+}
+
+/* Las líneas grises que separan los datos */
+.card-value {
+    border-bottom: 1px solid #eee; 
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    margin-left: 20px;
+    margin-right: 20px;
+    color: #555;
+}
+
+.card-label {
+    margin-left: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 15px;
+}
 /* AJUSTE PARA LA BARRA VERDE INTERNA */
 .header-card {
     background: #1d4d3f;
