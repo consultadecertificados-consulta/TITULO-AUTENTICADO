@@ -41,16 +41,18 @@
 .card-documento {
     background: #fff; 
     border: 1px solid #ddd; 
-    padding: 60px 25px 30px 25px; 
     
-    /* ANCHO CONTROLADO */
-    width: 95vw !important;   /* Ocupa el máximo posible del contenedor */
-    max-width: 200% !important; /* Deja un pequeño aire a los lados para que no choque */
-    margin: 10px auto !important; /* El 'auto' la centra perfectamente */
+    /* CONTROL DE ANCHO Y CENTRADO */
+    width: 95% !important;        /* Ocupa casi todo el ancho */
+    max-width: 1000px !important;  /* No deja que se estire infinito en PC */
+    margin: 30px auto !important;  /* 'auto' lo centra horizontalmente */
     
-    box-sizing: border-box; 
+    /* MARGEN INTERNO (Para que el texto no toque el borde) */
+    padding: 60px 20px 30px 20px; 
+    
+    box-sizing: border-box; /* IMPORTANTE: evita que el padding "infle" la caja */
     position: relative; 
-    border-radius: 4px; /* Un toque sutil en las esquinas */
+    display: block; 
 }
 
 /* ESTILO PARA LA HOJITA */
