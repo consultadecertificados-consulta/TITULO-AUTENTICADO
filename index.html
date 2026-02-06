@@ -32,15 +32,45 @@
         }
 
         /* EL MARCO: Blanco y ancho total */
-        #seccion-resultado { display: none; margin-bottom: 50px; }
-        .card-documento {
-            background: #fff; 
-            border: 1px solid #ddd; 
-            padding: 60px 40px 30px 40px; 
-            width: 100%; 
-            margin: 40px 0 20px 0; 
-            position: relative; 
-        }
+       #seccion-resultado { 
+    display: none; 
+    margin-bottom: 50px; 
+    width: 100%; 
+}
+
+.card-documento {
+    background: #fff; 
+    border: 1px solid #ddd; 
+    padding: 70px 20px 30px 20px; /* Ajustado para que respire mejor en móvil */
+    
+    /* CAMBIOS PARA EL ANCHO TOTAL */
+    width: 100% !important; 
+    max-width: none !important; 
+    box-sizing: border-box; 
+    
+    margin: 40px 0 20px 0; 
+    position: relative; 
+}
+
+/* ESTILO PARA LA HOJITA */
+.hojita-icono {
+    font-size: 60px;
+    color: #545454;
+    display: block;
+    text-align: center;
+    margin: 0 auto 25px auto;
+}
+
+/* ESTILO PARA LA LÍNEA GRIS DELGADA */
+.card-value { 
+    color: #777; 
+    font-size: 16px; 
+    text-transform: uppercase; 
+    display: block; 
+    border-bottom: 1px solid #e0e0e0; /* La línea que señalaste */
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
 
         /* LA BARRA VERDE: Pegada a la esquina superior izquierda */
         .header-card { 
