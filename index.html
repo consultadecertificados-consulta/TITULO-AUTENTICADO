@@ -40,23 +40,49 @@
 
 .card-documento {
     background: #fff; 
-    /* Un borde delgado y elegante, no uno gordo */
-    border: 1px solid #d0d0d0; 
-    border-radius: 8px; /* Curva suave, no exagerada */
+    border: 1px solid #ddd; /* El marco delgado de tu foto */
+    padding: 0; /* Quitamos padding aquí para que la barra verde pegue a la orilla */
     
-    /* El ancho que querías */
     width: 95% !important; 
     max-width: 900px !important; 
-    margin: 30px auto !important; 
+    margin: 20px auto !important; 
     
-    position: relative;
-    box-sizing: border-box;
-    overflow: hidden;
-    /* Una sombra ligera para que se vea moderno */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
-    padding-bottom: 20px;
+    box-sizing: border-box; 
+    position: relative; 
 }
 
+/* LA BARRA VERDE (Como en tu foto: alineada a la izquierda) */
+.header-card {
+    background: #1d4d3f;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 18px;
+    display: inline-block; /* Esto hace que solo mida lo que mide el texto */
+    margin-bottom: 20px;
+}
+
+/* EL CONTENEDOR DE LOS DATOS (Para darles margen interno) */
+.cuerpo-tarjeta {
+    padding: 20px;
+}
+
+/* LAS LÍNEAS GRISES QUE SEÑALASTE */
+.card-value { 
+    color: #777; 
+    font-size: 16px; 
+    text-transform: uppercase; 
+    display: block; 
+    border-bottom: 1px solid #e0e0e0; /* La línea gris de tu imagen */
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    word-break: break-all; /* Para que el Folio Digital no se salga */
+}
+
+.card-label {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
 .header-card {
     background: #1d4d3f; /* El verde oficial */
     color: #fff;
