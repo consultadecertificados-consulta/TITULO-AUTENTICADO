@@ -14,21 +14,22 @@
     <link rel="stylesheet" type="text/css" href="https://siged.sep.gob.mx/SIGED/css/global_siged.css">
 
     <style>
+        /* Ajustes para que la barra no tape el contenido */
+        body { padding-top: 100px; } 
         .nav > li { left: 0px !important; margin-left: -100px !important; position: relative; }
         .contenedor { margin-top: 50px; }
         .container-top { margin-top: -33vh; }
         .hdr_title h3, .hdr_title h2 { color: #000 !important; font-weight: bold; text-shadow: none !important; }
         
-        /* Estilo del resultado integrado */
+        /* Estilos de los resultados */
         #seccion-resultado { display: none; padding-top: 20px; }
         .hojita-icono { font-size: 55px; color: #545454; display: block; text-align: center; margin-bottom: 25px; }
         .card-label { font-weight: bold; color: #333; margin-top: 15px; font-size: 16px; }
         .card-value { color: #777; font-size: 15px; text-transform: uppercase; display: block; border-bottom: 1px solid #eee; padding-bottom: 12px; margin-bottom: 15px; word-break: break-all; }
         .card-value:last-child { border-bottom: none; }
 
-        /* Leyenda DGAIR (oculta inicialmente) */
+        /* Leyenda DGAIR */
         #leyenda-dgair { display: none; font-weight: bold; margin-bottom: 20px; font-size: 18px; color: #333; }
-        
         #mensaje-error { display: none; background-color: #f2dede; border: 1px solid #a94442; padding: 45px 25px; text-align: center; color: #a94442; font-size: 24px; }
         .tab-content { border: 1px solid #ddd; border-top: none; padding: 40px; background-color: #f9f9f9; }
     </style>
@@ -37,35 +38,55 @@
 <body>
     <div id="gobmx-accesibilidad"></div>
 
-    <header>
-        <nav class="navbar navbar-inverse navbar-fixed-top sub-navbar">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#subNavBarSIGED" aria-expanded="false">
-                        <span class="sr-only">Desplegar menú</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">SIGED</a>
-                </div>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarMain" aria-expanded="false">
+            <span class="sr-only">Desplegar menú</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="https://www.gob.mx/">
+            <img src="https://framework-gb.cdn.gob.mx/gm/v3/assets/images/logo-header.svg" width="128" height="48" alt="Página de inicio, Gobierno de México">
+          </a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarMain">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://www.gob.mx/tramites">Trámites</a></li>
+            <li><a href="https://www.gob.mx/gobierno">Gobierno</a></li>
+            <li><a href="https://www.gob.mx/busqueda"><span class="sr-only">Búsqueda</span><i class="icon-search"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-                <div class="collapse navbar-collapse" id="subNavBarSIGED">
-                    <ul class="nav navbar-nav">
-                        <li><a href="#">¿Quiénes somos?</a></li>
-                        <li><a href="#">Consultas</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Aviso de Privacidad <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Simplificado</a></li>
-                                <li><a href="#">Integral</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
+    <nav class="navbar navbar-inverse navbar-fixed-top sub-navbar">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#subNavBarSIGED" aria-expanded="false">
+                    <span class="sr-only">Desplegar menú SIGED</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">SIGED</a>
             </div>
-        </nav>
-    </header>
+            <div class="collapse navbar-collapse" id="subNavBarSIGED">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">¿Quiénes somos?</a></li>
+                    <li><a href="#">Consultas</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Aviso de Privacidad <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Simplificado</a></li>
+                            <li><a href="#">Integral</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
     <img src="https://siged.sep.gob.mx/SIGED/images/bnr_alumnos.png" style="width: 100%;">
 
@@ -145,18 +166,12 @@
         const folio = document.getElementById("folioSEP").value.trim();
         if (typeof baseDeDatosFolios !== 'undefined' && baseDeDatosFolios[folio]) {
             const d = baseDeDatosFolios[folio];
-            
-            // Llenar datos
             document.getElementById("res-nombre").innerText = d.nombre;
             document.getElementById("res-carrera").innerText = d.carrera;
             document.getElementById("res-nivel").innerText = d.nivel;
             document.getElementById("res-folio").innerText = folio;
             document.getElementById("res-institucion").innerText = d.institucion;
-
-            // Mostrar leyenda DGAIR solo aquí
             document.getElementById("leyenda-dgair").style.display = "block";
-            
-            // Cambiar interfaz
             document.getElementById("texto-pestaña").innerText = "Detalle del documento";
             document.getElementById("seccion-buscador").style.display = "none";
             document.getElementById("seccion-resultado").style.display = "block";
