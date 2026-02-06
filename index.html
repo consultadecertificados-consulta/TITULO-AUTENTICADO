@@ -8,11 +8,13 @@
 
     <link href="https://framework-gb.cdn.gob.mx/gm/v3/assets/styles/main.css" rel="stylesheet">
     <link href="https://framework-gb.cdn.gob.mx/gm/v3/assets/images/favicon.ico" rel="shortcut icon">
+    <link href="https://framework-gb.cdn.gob.mx/gm/accesibilidad/css/gobmx-accesibilidad.min.css" rel="stylesheet">
     
     <link rel="stylesheet" type="text/css" href="https://siged.sep.gob.mx/SIGED/css/navbar-settings.css">
     <link rel="stylesheet" type="text/css" href="https://siged.sep.gob.mx/SIGED/css/global_siged.css">
 
     <style>
+        /* Mantenemos tu configuración original de navegación */
         .nav > li { left: 0px !important; margin-left: -100px !important; position: relative; }
         .contenedor { margin-top: 50px; }
         .container-top { margin-top: -10vh !important; position: relative; z-index: 10; }
@@ -20,55 +22,90 @@
         
         #leyenda-dgair { 
             display: none; 
-            font-size: 22px; 
+            font-size: 24px; 
             font-weight: bold; 
             color: #545454; 
-            margin-bottom: 20px; 
+            margin-bottom: 5px; 
             text-transform: uppercase;
         }
 
-        /* --- ESTILO DE LA TARJETA SOLICITADO --- */
-        #seccion-resultado { display: none; margin-bottom: 50px; width: 100%; }
-
-        .card-documento {
-            position: relative !important;
-            width: 98% !important;         /* MARCO ANCHO */
-            margin: 80px auto 30px auto !important;
-            padding: 60px 25px 30px 25px !important;
-            background: #fff;
-            border: 1px solid #ddd;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        #seccion-resultado { 
+            display: none; 
+            margin-bottom: 50px; 
+            width: 100%; 
         }
 
+        /* --- ESTA ES LA CONFIGURACIÓN FINAL DE LA TARJETA --- */
+        
+        /* EL MARCO BLANCO: Ancho y con espacio para la barra */
+        .card-documento {
+            position: relative !important;
+            width: 98% !important; 
+            max-width: 100% !important;
+            margin: 80px auto 20px auto !important;
+            padding: 60px 20px 20px 20px !important;
+            background: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* LA BARRA VERDE: Pestaña que flota afuera */
         .header-card {
             background: #1d4d3f !important;
             color: #fff !important;
             padding: 10px 20px !important;
             font-size: 16px !important;
             font-weight: bold !important;
+            text-align: center;
+            white-space: nowrap !important;
+            
             position: absolute !important;
-            top: -35px !important;   /* MÁS ARRIBA */
-            left: -15px !important;  /* HACIA AFUERA */
+            top: -35px !important;   /* Flota arriba */
+            left: -15px !important;  /* Sale a la izquierda */
             z-index: 100;
+            width: auto !important;
+            display: inline-block !important;
             box-shadow: 4px 4px 8px rgba(0,0,0,0.3) !important;
         }
 
+        /* LA HOJITA GRIS */
         .hojita-icono {
-            font-size: 60px; color: #545454; display: block;
-            text-align: center; margin: 0 auto 20px auto;
+            font-size: 60px;
+            color: #545454;
+            display: block;
+            text-align: center;
+            margin: 0 auto 25px auto;
         }
 
-        .card-label { font-weight: bold; color: #333; margin-top: 15px; font-size: 17px; }
+        /* ETIQUETAS Y VALORES (Con la línea gris que pediste) */
+        .card-label { 
+            font-weight: bold; 
+            color: #333; 
+            margin-top: 10px; 
+            font-size: 17px; 
+        }
 
         .card-value { 
-            color: #777; font-size: 16px; text-transform: uppercase; 
-            display: block; border-bottom: 1px solid #e0e0e0; 
-            padding-bottom: 12px; margin-bottom: 15px; word-break: break-all;
+            color: #777; 
+            font-size: 16px; 
+            text-transform: uppercase; 
+            display: block; 
+            border-bottom: 1px solid #e0e0e0; /* Línea gris delgada */
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+            word-break: break-all;
         }
 
+        #res-institucion { border-bottom: none !important; }
+
         #mensaje-error {
-            display: none; background-color: #f2dede; border: 1px solid #a94442;
-            padding: 20px; text-align: center; color: #a94442; margin-top: 20px;
+            display: none;
+            background-color: #f2dede;
+            border: 1px solid #a94442;
+            padding: 45px 25px;
+            text-align: center;
+            color: #666;
+            font-size: 24px;
         }
     </style>
 </head>
@@ -94,8 +131,8 @@
     <div><img src="https://siged.sep.gob.mx/SIGED/images/bnr_alumnos.png" style="width: 100%;"></div>
 
     <div class="container container-top">
-        <div class="row">
-            <div class="col-lg-12 hdr_title">
+        <div class="row align-items-center">
+            <div class="column col-lg-12 hdr_title">
                 <h3>Sistema de Información y Gestión Educativa</h3>
                 <h2 class="mt-1">Consulta de documentos académicos electrónicos</h2>
             </div>
@@ -110,45 +147,52 @@
                 <li class="active">Título Autenticado</li>
             </ol>
             
-            <div id="leyenda-dgair">Consulta de títulos electrónicos autenticados por la DGAIR</div>
-
-            <div id="seccion-busqueda">
-                <div class="row">
-                    <div class="col-md-10">
-                        <h3>TÍTULO AUTENTICADO</h3>
-                        <hr class="red">
-                    </div>
-                </div>
-                
-                <ul class="nav nav-tabs">
-                    <li class="active"><a href="#" class="nav-link active" style="color: white; background-color: #10312B; margin-left: 100px">Búsqueda</a></li>
-                </ul>
-
-                <div class="tab-content" style="padding: 20px; border: 1px solid #ddd; border-top: none;">
-                    <form onsubmit="return ejecutarBusqueda(event)">
-                        <div class="form-group">
-                            <label class="control-label">Folio Digital:</label>
-                            <input class="form-control" id="folioSEP" placeholder="Ingresa el folio digital" type="text">
+            <div class="form-group">
+                <div class="row col-md-12">
+                    <div id="leyenda-dgair">Consulta de títulos electrónicos autenticados por la DGAIR</div>
+                    
+                    <div id="seccion-busqueda">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <h3>TÍTULO AUTENTICADO</h3>
+                                <hr class="red">
+                            </div>
                         </div>
-                        <button class="btn btn-primary pull-right" type="submit">Buscar</button>
-                    </form>
-                    <div id="mensaje-error">No se encontró registro con ese folio.</div>
-                </div>
-            </div>
+                        
+                        <ul class="nav nav-tabs" id="pestañas-originales">
+                            <li class="active">
+                                <a data-toggle="tab" href="#tab-01" class="nav-link active" style="color: white; background-color: #10312B; margin-left: 100px">Búsqueda</a>
+                            </li>
+                        </ul>
 
-            <div id="seccion-resultado">
-                <div class="card-documento">
-                    <div class="header-card">Detalle del documento</div>
-                    <span class="glyphicon glyphicon-file hojita-icono"></span>
+                        <div class="tab-content">
+                            <div class="tab-pane active">
+                                <form role="form" onsubmit="return ejecutarBusqueda(event)">
+                                    <div class="form-group">
+                                        <label class="control-label" for="folioSEP">Folio Digital:</label>
+                                        <input class="form-control" id="folioSEP" placeholder="Folio Digital del Título Electrónico" type="text">
+                                    </div>
+                                    <button class="btn btn-primary pull-right" type="submit">Buscar</button>
+                                </form>
+                                <div id="mensaje-error">No se encontró registro.</div>
+                            </div>
+                        </div>
+                    </div>
 
-                    <div class="card-label">Nombre:</div><div id="res-nombre" class="card-value"></div>
-                    <div class="card-label">Carrera:</div><div id="res-carrera" class="card-value"></div>
-                    <div class="card-label">Nivel:</div><div id="res-nivel" class="card-value"></div>
-                    <div class="card-label">Folio Digital:</div><div id="res-folio" class="card-value"></div>
-                    <div class="card-label">Institución Emisora:</div><div id="res-institucion" class="card-value" style="border:none"></div>
-                </div>
-                <div class="text-center">
-                    <button class="btn btn-default" onclick="location.reload()">Nueva consulta</button>
+                    <div id="seccion-resultado">
+                        <div class="card-documento">
+                            <div class="header-card">Detalle del documento</div>
+                            <span class="glyphicon glyphicon-file hojita-icono"></span>
+                            <div class="card-label">Nombre:</div><div id="res-nombre" class="card-value"></div>
+                            <div class="card-label">Carrera:</div><div id="res-carrera" class="card-value"></div>
+                            <div class="card-label">Nivel:</div><div id="res-nivel" class="card-value"></div>
+                            <div class="card-label">Folio Digital:</div><div id="res-folio" class="card-value"></div>
+                            <div class="card-label">Institución Emisora:</div><div id="res-institucion" class="card-value"></div>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-default" onclick="location.reload()">Nueva consulta</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -163,7 +207,6 @@
         if (event) event.preventDefault();
         const folioInput = document.getElementById("folioSEP").value.trim();
         
-        // Verifica si el folio existe en tu archivo folios.js
         if (typeof baseDeDatosFolios !== 'undefined' && baseDeDatosFolios[folioInput]) {
             const data = baseDeDatosFolios[folioInput];
             document.getElementById("res-nombre").innerText = data.nombre;
