@@ -41,14 +41,15 @@
 .card-documento {
     background: #fff; 
     border: 1px solid #ddd; 
-    padding: 70px 20px 30px 20px; /* Ajustado para que respire mejor en móvil */
+    padding: 70px 20px 30px 20px; 
     
-    /* CAMBIOS PARA EL ANCHO TOTAL */
-    width: 100% !important; 
+    /* ESTO FUERZA EL ANCHO TOTAL DE LADO A LADO */
+    width: 100vw !important;    /* 100vw es el ancho total de la pantalla */
+    margin-left: 50% !important; 
+    transform: translateX(-50%); /* Estos dos centran el bloque de nuevo */
+    
     max-width: none !important; 
     box-sizing: border-box; 
-    
-    margin: 40px 0 20px 0; 
     position: relative; 
 }
 
