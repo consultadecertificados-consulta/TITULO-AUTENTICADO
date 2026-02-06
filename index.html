@@ -41,16 +41,16 @@
 .card-documento {
     background: #fff; 
     border: 1px solid #ddd; 
-    padding: 70px 20px 30px 20px; 
+    padding: 60px 25px 30px 25px; 
     
-    /* ESTO FUERZA EL ANCHO TOTAL DE LADO A LADO */
-    width: 100vw !important;    /* 100vw es el ancho total de la pantalla */
-    margin-left: 50% !important; 
-    transform: translateX(-50%); /* Estos dos centran el bloque de nuevo */
+    /* ANCHO CONTROLADO */
+    width: 100% !important;   /* Ocupa el máximo posible del contenedor */
+    max-width: 95% !important; /* Deja un pequeño aire a los lados para que no choque */
+    margin: 40px auto !important; /* El 'auto' la centra perfectamente */
     
-    max-width: none !important; 
     box-sizing: border-box; 
     position: relative; 
+    border-radius: 4px; /* Un toque sutil en las esquinas */
 }
 
 /* ESTILO PARA LA HOJITA */
