@@ -4,71 +4,76 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SIGED - Consulta de Documento Electrónico de Titulación</title>
+    <title>SIGED - Detalle de Título</title>
 
     <link href="https://framework-gb.cdn.gob.mx/gm/v3/assets/styles/main.css" rel="stylesheet">
-    <link href="https://framework-gb.cdn.gob.mx/gm/v3/assets/images/favicon.ico" rel="shortcut icon">
-    <link href="https://framework-gb.cdn.gob.mx/gm/accesibilidad/css/gobmx-accesibilidad.min.css" rel="stylesheet">
-    
-    <link rel="stylesheet" type="text/css" href="https://siged.sep.gob.mx/SIGED/css/navbar-settings.css">
-    <link rel="stylesheet" type="text/css" href="https://siged.sep.gob.mx/SIGED/css/global_siged.css">
+    <link href="https://siged.sep.gob.mx/SIGED/css/navbar-settings.css" rel="stylesheet">
+    <link href="https://siged.sep.gob.mx/SIGED/css/global_siged.css" rel="stylesheet">
 
     <style>
-        /* Estilos base del sitio */
-        .nav > li { left: 0px !important; margin-left: -100px !important; position: relative; }
-        .contenedor { margin-top: 50px; }
-        .container-top { margin-top: -33vh; }
-
-        /* --- ESTILO DE LA TARJETA DE RESULTADO (Copiado) --- */
+        /* Ajustes de Layout */
+        .container-top { margin-top: -25vh; position: relative; z-index: 5; }
+        .contenedor-principal { margin-top: 60px; margin-bottom: 50px; }
+        
+        /* TARJETA DE RESULTADOS */
         .card-documento {
             background: #fff;
             border: 1px solid #ddd;
             position: relative;
-            padding: 40px 20px 20px 20px; /* Espacio para la barra verde */
-            margin-bottom: 30px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin: 20px 0;
+            padding: 0; /* Quitamos padding general para que la barra pegue */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
         }
 
-        .header-card { 
-            background: #1d4d3f; 
-            color: #fff; 
-            padding: 8px 15px; 
-            position: absolute;
-            top: -1px;
-            left: -1px;
-            z-index: 10;
+        /* BARRA VERDE INTERNA (Solo una) */
+        .header-card-interna {
+            background: #1d4d3f;
+            color: #fff;
+            padding: 10px 20px;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 16px;
+            display: inline-block; /* Estilo etiqueta */
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .cuerpo-tarjeta {
+            padding: 60px 30px 30px 30px; /* Espacio para la barra superior */
         }
 
         .hojita-icono {
-            font-size: 60px;
+            font-size: 55px;
             color: #545454;
             display: block;
             text-align: center;
-            margin: 10px auto 25px auto;
+            margin-bottom: 30px;
         }
 
-        .card-label { 
-            font-weight: bold; 
-            color: #333; 
-            margin-top: 10px; 
-            font-size: 16px; 
+        /* LÍNEAS GRISES DIVISORIAS */
+        .card-label {
+            font-weight: bold;
+            color: #333;
+            font-size: 15px;
+            margin-bottom: 5px;
         }
 
-        .card-value { 
-            color: #777; 
-            font-size: 15px; 
-            text-transform: uppercase; 
-            display: block; 
-            border-bottom: 1px solid #e0e0e0; /* Línea gris divisoria */
-            padding-bottom: 10px;
-            margin-bottom: 15px;
+        .card-value {
+            color: #6f7271;
+            font-size: 15px;
+            text-transform: uppercase;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 12px;
+            margin-bottom: 18px;
             word-break: break-all;
         }
 
-        /* Quitar línea al último elemento */
-        .card-value:last-child { border-bottom: none; }
+        .card-value:last-child {
+            border-bottom: none;
+        }
+
+        /* Ajuste de Banner */
+        .img-background { width: 100%; height: auto; min-height: 200px; object-fit: cover; }
     </style>
 </head>
 
@@ -76,81 +81,86 @@
     <nav class="navbar navbar-expand-xl navbar-dark bg-light sub-navbar navbar-fixed-top navbar-top-siged">
         <div class="container">
             <a class="navbar-brand sub-navbar" href="#">SIGED</a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#subNavBarSIGED" aria-label="Menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
             <div class="collapse navbar-collapse" id="subNavBarSIGED">
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link subnav-link" href="#">¿Quiénes somos?</a></li>
                     <li class="nav-item"><a class="nav-link subnav-link" href="#">Consultas</a></li>
+                    <li class="nav-item"><a class="nav-link subnav-link" href="#">Estadística</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div><img class="img-background" src="https://siged.sep.gob.mx/SIGED/images/bnr_alumnos.png" style="width: 100%;"></div>
+    <header>
+        <img class="img-background" src="https://siged.sep.gob.mx/SIGED/images/bnr_alumnos.png">
+    </header>
 
     <div class="container container-top">
-        <div class="row align-items-center">
-            <div class="column col-lg-12 hdr_title">
-                <h3>Sistema de Información y Gestión Educativa</h3>
-                <h2 class="mt-1">Consulta de documentos académicos electrónicos</h2>
+        <div class="row">
+            <div class="col-lg-12 hdr_title">
+                <h3 style="text-shadow: none; color: #000;">Sistema de Información y Gestión Educativa</h3>
+                <h2 style="text-shadow: none; color: #000; font-weight: bold;">Consulta de documentos académicos electrónicos</h2>
             </div>
         </div>
     </div>
 
-    <main class="page">
-        <div class="container contenedor">
-            <ol class="breadcrumb">
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Consultas</a></li>
-                <li class="active">Título Autenticado</li>
-                <li><strong>Detalle</strong></li>
-            </ol>
+    <main class="container contenedor-principal">
+        <ol class="breadcrumb">
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Consultas</a></li>
+            <li class="active">Detalle</li>
+        </ol>
 
-            <div class="row">
-                <div class="col-md-10">
-                    <h3>Título Autenticado</h3>
-                    <hr class="red">
-                </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="mt-4">Título Autenticado</h3>
+                <hr class="red">
             </div>
+        </div>
 
-            <ul class="nav nav-tabs">
-                <li class="active">
-                    <a data-bs-toggle="tab" href="#tab-02" class="nav-link active" style="color: white; background-color: #10312B; margin-left: 100px">Detalle del documento</a>
-                </li>
-            </ul>
-
-            <div class="tab-content">
-                <div class="tab-pane active" id="tab-02">
-                    <br>
-                    <div class="card-documento">
-                        <div class="header-card">Detalle del documento</div>
-                        
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="card-documento">
+                    <div class="header-card-interna">Detalle del documento</div>
+                    
+                    <div class="cuerpo-tarjeta">
                         <span class="glyphicon glyphicon-file hojita-icono"></span>
 
                         <div class="row">
-                            <div class="col-md-10 col-md-offset-1">
+                            <div class="col-md-6">
                                 <div class="card-label">Nombre:</div>
                                 <div class="card-value">BELEN CAROLINA OLIVARES ALVAREZ</div>
-
+                                
                                 <div class="card-label">Carrera:</div>
                                 <div class="card-value">LICENCIATURA EN PSICOLOGÍA</div>
-
+                                
                                 <div class="card-label">Nivel:</div>
                                 <div class="card-value">LICENCIATURA</div>
-
+                            </div>
+                            <div class="col-md-6">
                                 <div class="card-label">Folio Digital:</div>
                                 <div class="card-value">8d2ef0b6-efb2-4461-9971-2de64eaa5777</div>
-
+                                
                                 <div class="card-label">Institución Emisora:</div>
-                                <div class="card-value" style="border-bottom: none;">UNIVERSIDAD LATINOAMERICANA CAMPUS VALLE</div>
+                                <div class="card-value">UNIVERSIDAD LATINOAMERICANA CAMPUS VALLE</div>
                             </div>
                         </div>
                     </div>
-                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <button class="btn btn-default" onclick="window.history.back()">Regresar a la búsqueda</button>
+                </div>
             </div>
         </div>
     </main>
 
     <script src="https://siged.sep.gob.mx/SIGED/js/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://framework-gb.cdn.gob.mx/gm/v3/assets/js/gobmx.js"></script>
 </body>
 </html>
