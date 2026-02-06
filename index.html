@@ -39,21 +39,18 @@
 }
 
 .card-documento {
-    background: #fff;
-    border: 1px solid #ddd; /* Marco gris fino */
-    
-    /* ESTO ARREGLA EL ANCHO */
-    width: 94% !important;
-    max-width: 800px !important;
-    margin: 20px auto !important;
-    
-    padding: 0 !important; /* El padding va adentro, no aquí */
+    width: 95vw !important;      /* El ancho que desees */
     position: relative;
+    
+    /* ESTO ES LO QUE LO CENTRA */
+    left: 50% !important;
+    right: 50% !important;
+    margin-left: -47.5vw !important; /* Es la MITAD del width (95 / 2) */
+    
+    background: #fff;
+    border: 1px solid #ddd;
     box-sizing: border-box;
-    text-align: left;
-    display: block;
 }
-
 /* LA BARRA VERDE (Debe quedar como en la foto 1) */
 .header-card {
     background: #1d4c3f; /* Verde oficial */
