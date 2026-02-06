@@ -38,18 +38,32 @@
     width: 100%; 
 }
 
+/* ESTO AJUSTA LA BARRA VERDE AL 25% (LA MITAD DE LA MITAD) */
+.header-card { 
+    background: #1d4d3f !important; /* Verde oficial */
+    color: #fff !important; 
+    padding: 10px 15px !important; 
+    font-size: 18px !important;
+    font-weight: normal !important;
+    text-align: center;
+    
+    /* CONTROL DE ANCHO */
+    width: 25% !important;        /* Aquí ajustas el tamaño exacto */
+    display: inline-block !important; 
+    
+    /* POSICIONAMIENTO TIPO ETIQUETA */
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    z-index: 20;
+}
+
+/* AJUSTE PARA QUE EL CONTENIDO NO SE AMONTONE BAJO LA BARRA */
 .card-documento {
-    width: 95vw !important;      /* El ancho que desees */
-    position: relative;
-    
-    /* ESTO ES LO QUE LO CENTRA */
-    left: 50% !important;
-    right: 50% !important;
-    margin-left: -47.5vw !important; /* Es la MITAD del width (95 / 2) */
-    
-    background: #fff;
+    position: relative; /* Necesario para que la barra se pegue al cuadro */
+    padding-top: 50px !important; /* Da espacio para que la barra no tape el nombre */
     border: 1px solid #ddd;
-    box-sizing: border-box;
+    background: #fff;
 }
 /* LA BARRA VERDE (Debe quedar como en la foto 1) */
 /* AJUSTE PARA LA BARRA VERDE INTERNA (25% del ancho) */
