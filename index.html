@@ -39,23 +39,34 @@
 }
 
 /* ESTO AJUSTA LA BARRA VERDE AL 25% (LA MITAD DE LA MITAD) */
-.header-card { 
-    background: #1d4d3f !important; /* Verde oficial */
-    color: #fff !important; 
-    padding: 10px 15px !important; 
-    font-size: 18px !important;
+/* EFECTO DE BARRA AFUERA DEL MARCO */
+.header-card {
+    background: #1d4d3f !important;
+    color: #fff !important;
+    padding: 10px 15px !important;
+    font-size: 16px !important;
     font-weight: normal !important;
     text-align: center;
-    
-    /* CONTROL DE ANCHO */
-    width: 50% !important;        /* Aquí ajustas el tamaño exacto */
-    display: inline-block !important; 
-    
-    /* POSICIONAMIENTO TIPO ETIQUETA */
+
+    /* TAMAÑO (LA MITAD DE LA MITAD) */
+    width: 25% !important;
+    display: block !important;
+
+    /* POSICIONAMIENTO HACIA AFUERA */
     position: absolute !important;
-    top: 0;
-    left: 0;
-    z-index: 20;
+    top: -15px !important;   /* Sube un poco para salir del marco */
+    left: -20px !important;  /* Mueve a la izquierda para salir del marco */
+    z-index: 100;
+    
+    /* OPCIONAL: Sombra para que se note que está encima */
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+}
+
+/* AJUSTE OBLIGATORIO DEL MARCO BLANCO */
+.card-documento {
+    position: relative !important; /* Base para que la barra se mueva */
+    padding-top: 40px !important;  /* Espacio para que la barra no tape el nombre */
+    margin-left: 20px !important;  /* Margen para que la barra no choque con el borde de la pantalla */
 }
 
 /* AJUSTE PARA QUE EL CONTENIDO NO SE AMONTONE BAJO LA BARRA */
