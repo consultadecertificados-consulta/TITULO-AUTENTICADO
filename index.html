@@ -6,21 +6,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>SIGED - Consulta de Documento Electrónico de Titulación</title>
 
-        <script type="text/javascript">
-            function validate(searchForm) {
-                var _tipoEducativo = "DEC"; // Valor por defecto para títulos electrónicos
-                var _folioSEP = searchForm.folioSEP.value;
-
-                if (_folioSEP == "" || _folioSEP == null) {
-                    alert("Debes capturar un folio.");
-                    return false;
-                }
-                // Si prefieres que el formulario envíe a una URL específica:
-                // searchForm.action = "/siged_consulta_dec" + "/" + _tipoEducativo + "/" + _folioSEP;
-                return true;
-            }
-        </script>
-
         <link href="https://framework-gb.cdn.gob.mx/gm/v3/assets/styles/main.css" rel="stylesheet">
 		<link href="https://framework-gb.cdn.gob.mx/gm/v3/assets/images/favicon.ico" rel="shortcut icon">
         <link href="https://framework-gb.cdn.gob.mx/gm/accesibilidad/css/gobmx-accesibilidad.min.css" rel="stylesheet">
@@ -35,52 +20,93 @@
             .container-top { margin-top: -33vh; }
             .hdr_title h3, .hdr_title h2 { color: #000 !important; font-weight: bold; text-shadow: none !important; }
 
-            /* ESTILO DE LA TARJETA SOLICITADO */
+            /* --- ESTILO DE TARJETA EXACTO --- */
             #seccion-resultado { display: none; }
             .card-documento {
-                background: #fff; border: 1px solid #ddd; position: relative;
-                margin: 20px auto; max-width: 900px; padding: 0;
+                background: #fff;
+                border: 1px solid #ddd;
+                position: relative;
+                margin: 20px auto;
+                max-width: 950px;
+                padding: 0;
                 box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             }
+            /* La barra verde que pediste copiar */
             .header-card-interna { 
-                background: #1d4d3f; color: #fff; padding: 8px 20px; 
-                position: absolute; top: -1px; left: -1px; z-index: 10;
-                font-size: 16px; font-weight: bold;
+                background: #1d4d3f; 
+                color: #fff; 
+                padding: 10px 25px; 
+                position: absolute;
+                top: -1px;
+                left: -1px;
+                z-index: 10;
+                font-size: 16px;
+                font-weight: bold;
             }
-            .cuerpo-tarjeta { padding: 60px 40px 30px 40px; }
+            .cuerpo-tarjeta { padding: 70px 40px 30px 40px; }
             .hojita-icono {
-                font-size: 60px; color: #545454; display: block;
-                text-align: center; margin: 0 auto 30px auto;
+                font-size: 65px;
+                color: #545454;
+                display: block;
+                text-align: center;
+                margin: 0 auto 30px auto;
             }
-            .card-label { font-weight: bold; color: #333; margin-top: 10px; font-size: 16px; }
+            .card-label { font-weight: bold; color: #333; margin-top: 15px; font-size: 16px; text-align: left; }
             .card-value { 
-                color: #777; font-size: 15px; text-transform: uppercase; 
-                display: block; border-bottom: 1px solid #eee; 
-                padding-bottom: 12px; margin-bottom: 15px; word-break: break-all;
+                color: #777; 
+                font-size: 15px; 
+                text-transform: uppercase; 
+                display: block; 
+                border-bottom: 1px solid #eee; 
+                padding-bottom: 12px;
+                margin-bottom: 15px;
+                word-break: break-all;
             }
             .card-value:last-child { border-bottom: none; }
 
             #mensaje-error {
-                display: none; background-color: #f2dede; border: 1px solid #a94442;
-                padding: 45px 25px; text-align: center; color: #666; font-size: 24px;
+                display: none;
+                background-color: #f2dede;
+                border: 1px solid #a94442;
+                padding: 45px 25px;
+                text-align: center;
+                color: #a94442;
+                font-size: 24px;
             }
         </style>
     </head>
 
 <body>
-    <nav class="navbar navbar-expand-xl navbar-dark bg-light sub-navbar navbar-fixed-top navbar-top-siged">
-        <div class="container">
-            <a class="navbar-brand sub-navbar" href="https://siged.sep.gob.mx/SIGED/">SIGED</a>
-            <div class="collapse navbar-collapse" id="subNavBarSIGED">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link subnav-link" href="#">¿Quiénes somos?</a></li>
-                    <li class="nav-item"><a class="nav-link subnav-link" href="#">Consultas</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <div id="accessibility-menu"></div>
 
-    <div><img class="img-background" src="https://siged.sep.gob.mx/SIGED/images/bnr_alumnos.png" style="width:100%"></div>
+    <header>
+        <nav class="navbar navbar-expand-xl navbar-dark bg-light sub-navbar navbar-fixed-top navbar-top-siged">
+            <div class="container">
+                <a class="navbar-brand sub-navbar" href="https://siged.sep.gob.mx/SIGED/">SIGED</a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#subNavBarSIGED" 
+                        aria-controls="subNavBarSIGED" aria-expanded="false" aria-label="Mostrar / Ocultar Menú">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="subNavBarSIGED">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link subnav-link" href="#">¿Quiénes somos?</a></li>
+                        <li class="nav-item"><a class="nav-link subnav-link" href="#">Consultas</a></li>
+                        <li class="nav-item"><a class="nav-link subnav-link" href="#">Estadística Educativa</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link subnav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown">Aviso de Privacidad</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Simplificado</a>
+                                <a class="dropdown-item" href="#">Integral</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div><img class="img-background" src="https://siged.sep.gob.mx/SIGED/images/bnr_alumnos.png" style="width: 100%;"></div>
 
     <div class="container container-top">
         <div class="row align-items-center">
@@ -93,52 +119,57 @@
 
     <main class="page">
         <div class="container contenedor">
-            <ol class="breadcrumb">
+            <ol class="breadcrumb" id="breadcrumb-list">
                 <li><a href="#">Inicio</a></li>
                 <li><a href="#">Consultas</a></li>
-                <li class="active" id="bread-step">Búsqueda</li>
+                <li class="active" id="bread-last">Búsqueda</li>
             </ol>
 
-            <div class="row col-md-12">
-                <h3 id="main-title">TÍTULO AUTENTICADO</h3>
-                <hr class="red">
+            <div class="row">
+                <div class="col-md-10">
+                    <h3 id="titulo-pagina">TÍTULO AUTENTICADO</h3>
+                    <hr class="red">
+                </div>
+            </div>
 
-                <ul class="nav nav-tabs" id="pestañas-busqueda">
-                    <li class="active">
-                        <a data-toggle="tab" href="#" class="nav-link active" style="color: white; background-color: #10312B; margin-left: 100px">Búsqueda</a>
-                    </li>
-                </ul>
+            <ul class="nav nav-tabs" id="pestaña-verde">
+                <li class="active"><a data-toggle="tab" href="#" class="nav-link active" style="color: white; background-color: #10312B; margin-left: 100px">Búsqueda</a></li>
+            </ul>
 
-                <div class="tab-content">
-                    <div id="seccion-buscador">
-                        <form role="form" onsubmit="return ejecutarBusqueda(event)">
-                            <div class="form-group">
-                                <label class="control-label" for="folioSEP">Folio Digital:</label>
-                                <input class="form-control" id="folioSEP" name="folioSEP" placeholder="Folio Digital del Título Electrónico" type="text">
+            <div class="tab-content">                        
+                <div id="seccion-buscador">
+                    <form role="form" id="searchForm" onsubmit="return ejecutarBusqueda(event)">
+                        <div class="form-group">
+                            <label class="control-label" for="folioSEP">Folio Digital:</label>
+                            <input class="form-control" id="folioSEP" name="folioSEP" placeholder="Folio Digital del Título Electrónico" type="text">
+                        </div>
+                        <button class="btn btn-primary pull-right" type="submit">Buscar</button>
+                    </form>
+                    
+                    <div id="mensaje-error">
+                        No se encontró registro.
+                        <button type="button" class="btn btn-default pull-right" onclick="window.location.reload()">Regresar</button>
+                    </div>
+                </div>
+
+                <div id="seccion-resultado">
+                    <div class="card-documento">
+                        <div class="header-card-interna">Detalle del documento</div>
+                        <div class="cuerpo-tarjeta">
+                            <span class="glyphicon glyphicon-file hojita-icono"></span>
+                            <div class="row">
+                                <div class="col-md-10 col-md-offset-1">
+                                    <div class="card-label">Nombre:</div><div id="res-nombre" class="card-value"></div>
+                                    <div class="card-label">Carrera:</div><div id="res-carrera" class="card-value"></div>
+                                    <div class="card-label">Nivel:</div><div id="res-nivel" class="card-value"></div>
+                                    <div class="card-label">Folio Digital:</div><div id="res-folio" class="card-value"></div>
+                                    <div class="card-label">Institución Emisora:</div><div id="res-institucion" class="card-value"></div>
+                                </div>
                             </div>
-                            <button class="btn btn-primary pull-right" type="submit">Buscar</button>
-                        </form>
-                        <div id="mensaje-error">
-                            No se encontró registro.
-                            <button type="button" class="btn btn-default pull-right" onclick="location.reload()">Regresar</button>
                         </div>
                     </div>
-
-                    <div id="seccion-resultado">
-                        <div class="card-documento">
-                            <div class="header-card-interna">Detalle del documento</div>
-                            <div class="cuerpo-tarjeta">
-                                <span class="glyphicon glyphicon-file hojita-icono"></span>
-                                <div class="card-label">Nombre:</div><div id="res-nombre" class="card-value"></div>
-                                <div class="card-label">Carrera:</div><div id="res-carrera" class="card-value"></div>
-                                <div class="card-label">Nivel:</div><div id="res-nivel" class="card-value"></div>
-                                <div class="card-label">Folio Digital:</div><div id="res-folio" class="card-value"></div>
-                                <div class="card-label">Institución Emisora:</div><div id="res-institucion" class="card-value"></div>
-                            </div>
-                        </div>
-                        <div class="text-center">
-                            <button class="btn btn-default" onclick="location.reload()">Nueva consulta</button>
-                        </div>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-default" onclick="window.location.reload()">Nueva consulta</button>
                     </div>
                 </div>
             </div>
@@ -147,6 +178,7 @@
 
     <script src="https://siged.sep.gob.mx/SIGED/js/jquery-3.5.1.min.js"></script>
     <script src="https://framework-gb.cdn.gob.mx/gm/v3/assets/js/gobmx.js"></script>
+    <script src="https://framework-gb.cdn.gob.mx/gm/accesibilidad/js/gobmx-accesibilidad.min.js"></script>
     <script src="folios.js"></script>
 
     <script>
@@ -162,22 +194,26 @@
             document.getElementById("res-folio").innerText = folio;
             document.getElementById("res-institucion").innerText = d.institucion;
 
+            // Cambiar vistas
             document.getElementById("seccion-buscador").style.display = "none";
-            document.getElementById("pestañas-busqueda").style.display = "none";
+            document.getElementById("pestaña-verde").style.display = "none";
             document.getElementById("seccion-resultado").style.display = "block";
-            document.getElementById("bread-step").innerHTML = 'Título Autenticado';
+            
+            // Actualizar Breadcrumb
+            document.getElementById("bread-last").innerHTML = '<a href="#" onclick="window.location.reload()">Título Autenticado</a>';
+            $("#breadcrumb-list").append('<li class="active"><strong>Detalle</strong></li>');
         } else if (folio !== "") {
-            document.querySelector("#seccion-buscador form").style.display = "none";
+            document.getElementById("searchForm").style.display = "none";
             document.getElementById("mensaje-error").style.display = "block";
         }
     }
 
-    // Lógica para QR (detectar folio en URL)
+    // Lógica automática para QR
     window.onload = function() {
-        const params = new URLSearchParams(window.location.search);
-        const f = params.get('folio') || params.get('folioSEP');
-        if (f) {
-            document.getElementById("folioSEP").value = f;
+        const urlParams = new URLSearchParams(window.location.search);
+        const folioQR = urlParams.get('folio') || urlParams.get('folioSEP');
+        if (folioQR) {
+            document.getElementById("folioSEP").value = folioQR;
             ejecutarBusqueda();
         }
     };
