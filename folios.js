@@ -1,10 +1,11 @@
-// --- BASE DE DATOS DE FOLIOS (Sin límite de extensión) ---
+// --- BASE DE DATOS ACTUALIZADA ---
 const baseDeDatosFolios = {
     "8D2EF0B6-EFB2-4461-9971-2DE64EAA5777": { nombre: "HURIEL ANTONIO ALVAREZ GALLEGOS", carrera: "MAESTRIA EN LOGISTICA Y CADENA DE SUMINISTRO", nivel: "MAESTRIA", institucion: "UNIVERSIDAD AUTONOMA DE NUEVO LEON" },
     "4F9A2B1C-3D4E-5F6G-7H8I-9J0K1L2M3N4O": { nombre: "JORGE LUIS LOPEZ CRUZ", carrera: "LICENCIATURA EN ARQUITECTURA", nivel: "LICENCIATURA", institucion: "INSTITUTO TECNOLÓGICO DE MÉXICO" },
-    "1A2B3C4D-5E6F-7G8H-9I0J-1K2L3M4N5O6P": { nombre: "CYNTHYA YZBETH CAVAZOS GARCIA", carrera: "LICENCIATURA EN ENFERMERIA", nivel: "LICENCIATURA", institucion: "UNIVERSIDAD AUTONOMA DE NUEVO LEON" },
+    "1A2B3C4D-5E6F-7G8H-9I0J-1K2L3M4N5O6P": { nombre: "CYNTHYA YZBETH CAVAZOS GARCIA", carrera: "LICENCIATURA EN ENFERMERIA", nivel: "LICENCIATURA", institucion: "UNIVERSIDAD AUTOMA DE NUEVO LEON" },
     "A1B2C3D4-E5F6-G7H8-I9J0-K1L2M3N4O5P6": { nombre: "MARISOL PEREZ IBARRA", carrera: "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS", nivel: "LICENCIATURA", institucion: "UNITEC CAMPUS LOS REYES" },
-    "Z9Y8X7W6-V5U4-T3S2-R1Q0-P9O8N7M6L5K4": { nombre: "SARA ESTHELA BLANCO PEÑA", carrera: "LICENCIATURA EN ENFERMERÍA", nivel: "LICENCIATURA", institucion: "UNIVERSIDAD AUTÓNOMA DE GUADALAJARA" },
+    // FOLIO ACTUALIZADO AQUÍ:
+    "Z9Y8X7W6-V5U4-T3S2-R1Q0-P9O8N7M6L5K4": { nombre: "RICARDO ISRAEL OLIVO ACOSTA", carrera: "LICENCIATURA EN ENSEÑANZA Y APRENDIZAJE DE LAS MATEMATICAS EN EDUCACIÓN SECUNDARIA", nivel: "LICENCIATURA", institucion: "ESCUELA NORMAL SUPERIOR \"PROFR. MOISES SAENZ GARZA\"" },
     "B2C3D4E5-F6G7-H8I9-J0K1-L2M3N4O5P6Q7": { nombre: "DANIEL ALEJANDRO SOTO MARIN", carrera: "INGENIERÍA EN SISTEMAS", nivel: "LICENCIATURA", institucion: "INSTITUTO POLITÉCNICO NACIONAL" },
     "C3D4E5F6-G7H8-I9J0-K1L2-M3N4O5P6Q7R8": { nombre: "ANDREA PAOLA REYES SILVA", carrera: "LICENCIATURA EN PEDAGOGÍA", nivel: "LICENCIATURA", institucion: "UNIVERSIDAD PEDAGÓGICA NACIONAL" },
     "D4E5F6G7-H8I9-J0K1-L2M3-N4O5P6Q7R8S9": { nombre: "GABRIEL OMAR TORRES LUNA", carrera: "LICENCIATURA EN CONTADURÍA", nivel: "LICENCIATURA", institucion: "UNIVERSIDAD AUTÓNOMA DEL ESTADO DE MÉXICO" },
@@ -52,7 +53,7 @@ const baseDeDatosFolios = {
     "T0U1V2W3-JJJJ-X4Y5-Z6A1-B2C3D4E5F6G7": { nombre: "MARCO ANTONIO VEGA LARA", carrera: "INGENIERÍA CIVIL", nivel: "LICENCIATURA", institucion: "FACULTAD DE INGENIERÍA" }
 };
 
-// --- Lógica de Búsqueda Mejorada ---
+// --- LÓGICA DE BÚSQUEDA ROBUSTA ---
 function ejecutarBusqueda(event) {
     if (event) {
         event.preventDefault();
@@ -60,52 +61,41 @@ function ejecutarBusqueda(event) {
     }
 
     const input = document.getElementById("folioSEP");
-    if (!input) return false;
-
-    // Normalizamos la entrada (espacios y mayúsculas)
     const folioInput = input.value.trim().toUpperCase();
+    
     const busqueda = document.getElementById("seccion-busqueda");
     const resultado = document.getElementById("seccion-resultado");
     const leyenda = document.getElementById("leyenda-dgair");
 
-    // Usamos hasOwnProperty para búsquedas seguras y rápidas
-    if (Object.prototype.hasOwnProperty.call(baseDeDatosFolios, folioInput)) {
+    if (baseDeDatosFolios[folioInput]) {
         const data = baseDeDatosFolios[folioInput];
-
-        // Llenamos los datos (usamos innerHTML para soportar textos largos con formato)
-        document.getElementById("res-nombre").innerHTML = data.nombre || "";
-        document.getElementById("res-carrera").innerHTML = data.carrera || "";
-        document.getElementById("res-nivel").innerHTML = data.nivel || "";
+        
+        // Usamos .innerHTML para asegurar que textos largos no se corten
+        document.getElementById("res-nombre").innerHTML = data.nombre;
+        document.getElementById("res-carrera").innerHTML = data.carrera;
+        document.getElementById("res-nivel").innerHTML = data.nivel;
         document.getElementById("res-folio").innerHTML = folioInput;
-        document.getElementById("res-institucion").innerHTML = data.institucion || "";
+        document.getElementById("res-institucion").innerHTML = data.institucion;
 
-        // Cambios de interfaz
-        if(busqueda) busqueda.style.display = "none";
+        // Mostrar resultados
+        busqueda.style.display = "none";
         if(leyenda) leyenda.style.display = "block";
-        if(resultado) resultado.style.display = "block";
-
+        resultado.style.display = "block";
     } else if (folioInput !== "") {
-        alert("El folio no se encuentra registrado.");
+        alert("Folio no encontrado");
     }
     return false;
 }
 
-// --- Soporte para Códigos QR ---
-window.addEventListener('DOMContentLoaded', function() {
+// Escuchar carga de URL (para QR)
+window.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const folioUrl = urlParams.get('folio');
     if (folioUrl) {
-        const input = document.getElementById("folioSEP");
-        if (input) {
-            input.value = folioUrl.trim();
-            ejecutarBusqueda();
-        }
+        document.getElementById("folioSEP").value = folioUrl;
+        ejecutarBusqueda();
     }
 });
-
-
-
-
 
 
 
