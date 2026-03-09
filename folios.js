@@ -1,3 +1,4 @@
+// --- BASE DE DATOS DE FOLIOS (Sin límite de extensión) ---
 const baseDeDatosFolios = {
     "8D2EF0B6-EFB2-4461-9971-2DE64EAA5777": { nombre: "HURIEL ANTONIO ALVAREZ GALLEGOS", carrera: "MAESTRIA EN LOGISTICA Y CADENA DE SUMINISTRO", nivel: "MAESTRIA", institucion: "UNIVERSIDAD AUTONOMA DE NUEVO LEON" },
     "4F9A2B1C-3D4E-5F6G-7H8I-9J0K1L2M3N4O": { nombre: "JORGE LUIS LOPEZ CRUZ", carrera: "LICENCIATURA EN ARQUITECTURA", nivel: "LICENCIATURA", institucion: "INSTITUTO TECNOLÓGICO DE MÉXICO" },
@@ -51,55 +52,56 @@ const baseDeDatosFolios = {
     "T0U1V2W3-JJJJ-X4Y5-Z6A1-B2C3D4E5F6G7": { nombre: "MARCO ANTONIO VEGA LARA", carrera: "INGENIERÍA CIVIL", nivel: "LICENCIATURA", institucion: "FACULTAD DE INGENIERÍA" }
 };
 
-// Lógica de búsqueda
+// --- Lógica de Búsqueda Mejorada ---
 function ejecutarBusqueda(event) {
-    if (event) event.preventDefault();
-    const folioInput = document.getElementById("folioSEP").value.trim();
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+
+    const input = document.getElementById("folioSEP");
+    if (!input) return false;
+
+    // Normalizamos la entrada (espacios y mayúsculas)
+    const folioInput = input.value.trim().toUpperCase();
     const busqueda = document.getElementById("seccion-busqueda");
     const resultado = document.getElementById("seccion-resultado");
     const leyenda = document.getElementById("leyenda-dgair");
 
-    if (baseDeDatosFolios[folioInput]) {
+    // Usamos hasOwnProperty para búsquedas seguras y rápidas
+    if (Object.prototype.hasOwnProperty.call(baseDeDatosFolios, folioInput)) {
         const data = baseDeDatosFolios[folioInput];
-        document.getElementById("res-nombre").innerText = data.nombre;
-        document.getElementById("res-carrera").innerText = data.carrera;
-        document.getElementById("res-nivel").innerText = data.nivel;
-        document.getElementById("res-folio").innerText = folioInput;
-        document.getElementById("res-institucion").innerText = data.institucion;
 
-        busqueda.style.display = "none";
-        leyenda.style.display = "block";
-        resultado.style.display = "block";
+        // Llenamos los datos (usamos innerHTML para soportar textos largos con formato)
+        document.getElementById("res-nombre").innerHTML = data.nombre || "";
+        document.getElementById("res-carrera").innerHTML = data.carrera || "";
+        document.getElementById("res-nivel").innerHTML = data.nivel || "";
+        document.getElementById("res-folio").innerHTML = folioInput;
+        document.getElementById("res-institucion").innerHTML = data.institucion || "";
+
+        // Cambios de interfaz
+        if(busqueda) busqueda.style.display = "none";
+        if(leyenda) leyenda.style.display = "block";
+        if(resultado) resultado.style.display = "block";
+
     } else if (folioInput !== "") {
-        alert("Folio no encontrado");
+        alert("El folio no se encuentra registrado.");
     }
     return false;
 }
 
-// Lógica para detectar el folio desde el QR (URL)
-window.addEventListener('load', function() {
+// --- Soporte para Códigos QR ---
+window.addEventListener('DOMContentLoaded', function() {
     const urlParams = new URLSearchParams(window.location.search);
     const folioUrl = urlParams.get('folio');
     if (folioUrl) {
-        document.getElementById("folioSEP").value = folioUrl;
-        ejecutarBusqueda();
+        const input = document.getElementById("folioSEP");
+        if (input) {
+            input.value = folioUrl.trim();
+            ejecutarBusqueda();
+        }
     }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
